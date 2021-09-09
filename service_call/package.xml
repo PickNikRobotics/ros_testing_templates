@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>service_call</name>
+  <version>0.0.0</version>
+  <description>
+    Example of how to use Dependency Injection with ROS service calls.
+  </description>
+  <author email="griswald.brooks@gmail.com">Griswald Brooks</author>
+  <maintainer email="griswald.brooks@gmail.com">Griswald Brooks</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>roscpp</depend>
+  <depend>injection_messages</depend>
+
+  <test_depend>rosunit</test_depend>
+</package>
