@@ -1,27 +1,24 @@
-
 ROSCon 2022 Talk Proposal
-Talk proposals must be submitted by 2022-06-09 here
-Apr 1, 2022
+Talk proposals must be submitted by 2022-06-09
 
 <!-- Title (maximum 70 characters) -->
 # Getting ROS out of your robot, or how I learned to love dependency injection
 
-Presenter(s)
+## Presenter
 Griswald Brooks - PickNik Robotics
 
 ## Desired talk length
 30 minutes
 
 ## Summary - for public consumption, used in the program schedule (maximum 100 words)
-- Problem statement
-Robust software needs testing, but testing is hard.
-- Motivation
-Integration testing has many drawbacks, but the naive way to use ros makes
-everything an integration test
-- Release
-`PickNikRobotics/ros_testing_templates`
-- Intent/to be presented
-Describe the problem with testing, mocking, dependency injection, results?
+ROS solves **many** problems for robot software developers, but naive use of it
+can make true (or some other term to rebutts the idea that all tests in ros are "unit test")
+unit testing challenging. A layered testing approach, with unit
+tests that cannot be flaky (need a less awkward way to phrase this) as the base,
+are essential to writing maintainable software. This talk will present the
+dependency injection software design pattern, as it pertains to ROS, to convert
+naive ROS tests into mocked unit tests. We have also released `ros_testing_templates`,
+a repository of testing examples which demonstrates this pattern.
 
 ## Description, for review by the program committee
 Please be sure to include enough information in your proposal for the program committee to evaluate the above review criteria.
@@ -38,9 +35,9 @@ Please be sure to include enough information in your proposal for the program co
 
 ### brief summary
 - Relevance to the ROS Community
-  - Talk is focused on how to use ros... responsibly.
-  - Is applicable to all scales of project, but discusses a pattern to improve
-    maintainability, by lowering unit test friction
+  - Talk is focused on how to use ROS... responsibly.
+  - Is applicable to all scales of project
+  - Discusses a pattern to improve maintainability, by lowering unit test friction
 - Quality of Content/Impact
   - di'ing your code -> increasing testing -> 10x your quality
 - Quality of Presentation
@@ -55,6 +52,7 @@ Please be sure to include enough information in your proposal for the program co
     it can be easily cloned and tried
 
 ### outline
+- Describe the problem with testing, mocking, dependency injection, results?
 - Define unit, integration, simulation, onrobot testing
 - what is mocking?
 - dependency injection is not a new technique, but it's a design pattern that
@@ -65,7 +63,7 @@ Please be sure to include enough information in your proposal for the program co
 - Pitfalls
   - limit di to one level (ie, as shallow as possible), deep di (service locator?)
     can make chasing down regressions confusing
-  - treat di as capturing the other public interface of your code (ie return   statements), capturing side effects (but the actual ones). Don't use it like
+  - treat di as capturing the other public interface of your code (ie return statements), capturing side effects (but the actual ones). Don't use it like
   member variables that hold state
   - Composed/custom di vs reusable di
   - `auto` makes this nice...
@@ -76,7 +74,7 @@ Please be sure to include enough information in your proposal for the program co
 - `development-container` shoutout
 
 ## Audio abstract - All talk proposals must include a (maximum) one minute recording of the presenter describing the content of the talk. It should be a single-take, responding as if a colleague asked what the talk was about. Please use either the mp3 or ogg file format. Used only for review by the Program Committee (not made public).
-
+I am best speak well
 
 ## Key URL/Twitter handles - Optionally include a single link/Twitter handles to be associated with talk in publicity materials.
 https://twitter.com/picknikrobotics
@@ -84,16 +82,3 @@ https://github.com/PickNikRobotics/ros_testing_templates
 
 ## (NEW) In-person vs. remote: We prefer in-person presentations, but we will consider allowing remote presentations as needed.
 In-person
-
-## Review Criteria
-All submissions will be reviewed by the program committee to evaluate:
-
-- Relevance to the ROS Community - The proposed content should use ROS in a substantial way, but beyond that, the work must also be relevant and compelling to a general ROS audience. Writing a ROS driver for a specific piece of hardware is an excellent contribution to the community, but describing the intricacies of its firmware may not be relevant to this audience. Furthermore, content should be relevant to a global and diverse community.
-
-- Quality of Content/Impact - We encourage proposals to contain big ideas with high impact. Proposals should have a demonstrable quality as opposed to being purely theoretical.
-
-- Quality of Presentation - Articulating your ideas clearly and grammatically is a key prerequisite for giving a compelling live presentation.
-
-- Originality/Novelty - Content should be original and not something that has already been heard before. Will this be the 41st talk on a particular topic at ROSCon? Or are you presenting something new?
-
-- Open Source Availability - Because we are an open-source community, proposals for which the underlying code and other content is available under an open source license have a greater chance of being accepted. It is not a hard requirement, but proposals focused on proprietary systems should contribute in some other way to the community. Promises of future release are difficult to evaluate, so having your content released at the time of proposal submission is preferred.
