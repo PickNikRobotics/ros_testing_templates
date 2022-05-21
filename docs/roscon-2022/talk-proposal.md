@@ -1,8 +1,8 @@
 ROSCon 2022 Talk Proposal
 Talk proposals must be submitted by 2022-06-09
 
-<!-- Title (maximum 70 characters) -->
-# Getting ROS out of your robot, or how I learned to love dependency injection
+# Title (maximum 70 characters)
+Getting ROS out of your robot, or how I learned to love dependency injection
 
 ## Presenter
 Griswald Brooks - PickNik Robotics
@@ -23,23 +23,34 @@ a repository of testing examples which demonstrates this pattern.
 ## Description, for review by the program committee
 Please be sure to include enough information in your proposal for the program committee to evaluate the above review criteria.
 
-- goals
-  - describe the benefits of unit testing over integration testing
-  - mention that composition is good, `friend` is bad
-  - show dependency injection pattern and it's use with mocking
-    - SOLID (separation of concerns, portability?), reduce testing scope
-  - Something about BDD? Short tests? Parameterized tests?
-  - present `ros_testing_templates`
-- intended audience and what they can expect to learn
-  - developers in a production environment, learning a pattern to improve software quality
+### Goals
+- "Make people aware" of the problem with testing side effect oriented code
+  - Side Effect Oriented Programming
+- Review testing techniques that require changes to design
+  - Seems like this would dovetail into a TDD/BDD/"write tests first" discussions
+  - Don't discuss what makes a good tests in depth but DI supports this by
+    allowing/forcing(?) you to write more focused tests
+- Discuss mocking (test doubles)
+- Describe the dependency injection design pattern
+  - "D" in SOLID, seperation of concerns, supports composition
+- Show di ros2 examples
+- Show some metrics (don't have these atm)
+  - Metrics would be like, time to run n number of tests, mocked/non-mocked
+  - Best metric would be able to show flaky ci test metrics
+- Introduce `ros_testing_templates`
 
-### brief summary
+### Intended audience and what they can expect to learn
+  - developers in a production environment
+  - learning a pattern to improve software quality
+
+### Review Criteria
 - Relevance to the ROS Community
-  - Talk is focused on how to use ROS... responsibly.
+  - Talk discusses a way to use ROS and support unit testing
   - Is applicable to all scales of project
+    - Has been used in large and small projects (bossanova, picknik)
   - Discusses a pattern to improve maintainability, by lowering unit test friction
 - Quality of Content/Impact
-  - di'ing your code -> increasing testing -> 10x your quality
+  - di'ing your code -> increasing testing -> 10x your quality, large impact
 - Quality of Presentation
   - I am best at present
 - Originality/Novelty
@@ -58,11 +69,16 @@ Please be sure to include enough information in your proposal for the program co
 - dependency injection is not a new technique, but it's a design pattern that
   requires forethought, best done in the beginning of a project
   - reference C++ talks/links on DI, gmock, anti-singleton talk, `boost::di`
-- (ros has many subtle ways to weave itself into your code, making unit testing hard)
-- (pub/sub, actions, service, parameters, time, rate, ros::ok)
+  - plenty of youtube videos, popular in Java iirc? I think web stuff has
+    service locators by default
+- ros has many subtle ways to weave itself into your code, making unit testing hard
+  - pub/sub, actions, service, parameters, time, rate, ros::ok
 - Pitfalls
   - limit di to one level (ie, as shallow as possible), deep di (service locator?)
     can make chasing down regressions confusing
+    - maybe a service locator isn't "deep di", but taking a di object, which takes a di object...
+    - can you di with rust "easily" with borrow semantics and a mocking library or
+      does it require as much forethought and design as C++?
   - treat di as capturing the other public interface of your code (ie return statements), capturing side effects (but the actual ones). Don't use it like
   member variables that hold state
   - Composed/custom di vs reusable di
