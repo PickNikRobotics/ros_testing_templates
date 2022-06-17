@@ -1,0 +1,10 @@
+{
+    "build": {
+        "en-tsan": {
+            "cmake-args": [
+                "--no-warn-unused-cli",
+                "-DENABLE_SANITIZER_THREAD=ON",
+            ]
+        }
+    }
+}

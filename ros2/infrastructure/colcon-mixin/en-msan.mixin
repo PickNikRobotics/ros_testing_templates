@@ -1,0 +1,10 @@
+{
+    "build": {
+        "en-msan": {
+            "cmake-args": [
+                "--no-warn-unused-cli",
+                "-DENABLE_SANITIZER_MEMORY=ON",
+            ]
+        }
+    }
+}

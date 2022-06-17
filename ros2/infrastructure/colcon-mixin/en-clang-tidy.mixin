@@ -1,0 +1,10 @@
+{
+    "build": {
+        "en-clang-tidy": {
+            "cmake-args": [
+                "--no-warn-unused-cli",
+                "-DENABLE_CLANG_TIDY=ON",
+            ]
+        }
+    }
+}

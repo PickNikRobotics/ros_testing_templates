@@ -1,0 +1,12 @@
+{
+    "build": {
+        "en-alu-san": {
+            "cmake-args": [
+                "--no-warn-unused-cli",
+                "-DENABLE_SANITIZER_ADDRESS=ON",
+                "-DENABLE_SANITIZER_LEAK=ON",
+                "-DENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON",
+            ]
+        }
+    }
+}
