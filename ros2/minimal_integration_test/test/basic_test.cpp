@@ -3,7 +3,7 @@
 #include <rclcpp/rclcpp.hpp>
 
 #include <gtest/gtest.h>
-#include <stdlib.h>
+#include <memory>
 
 namespace minimal_integration_test {
 class TaskPlanningFixture : public testing::Test {
@@ -20,7 +20,7 @@ class TaskPlanningFixture : public testing::Test {
   }
 
   void TearDown() override {
-    std::cout << "DONE WITH TEARDOWN" << std::endl;
+    RCLCPP_ERROR_STREAM(node_->get_logger(), "DONE WITH TEARDOWN!!");
   }
 
  protected:
@@ -28,7 +28,7 @@ class TaskPlanningFixture : public testing::Test {
 };
 
 TEST_F(TaskPlanningFixture, TrueIsTrueTest) {
-  std::cout << "TEST BEGINNING!!" << std::endl;
+  RCLCPP_ERROR_STREAM(node_->get_logger(), "TESTING!!");
   EXPECT_TRUE(true);
 }
 }  // namespace minimal_integration_test
@@ -38,6 +38,6 @@ int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   int result = RUN_ALL_TESTS();
   rclcpp::shutdown();
-  std::cout << "DONE SHUTTING DOWN ROS" << std::endl;
+  RCLCPP_ERROR_STREAM(rclcpp::get_logger("basic_test"), "DONE SHUTTING DOWN ROS!!");
   return result;
 }

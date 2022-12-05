@@ -5,7 +5,7 @@
   <version>0.0.0</version>
   <description>Minimal integration test</description>
   <maintainer email="zelenak@picknik.ai">Andy Zelenak</maintainer>
-  <license>Proprietary</license>
+  <license>MIT</license>
 
   <buildtool_depend>ament_cmake_ros</buildtool_depend>
 
