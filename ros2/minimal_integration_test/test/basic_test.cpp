@@ -8,17 +8,26 @@
 namespace minimal_integration_test {
 class TaskPlanningFixture : public testing::Test {
  public:
+  // Setup things that should occur before every test instance should go here
+  // https://google.github.io/googletest/faq.html#CtorVsSetUp
   TaskPlanningFixture()
       : node_(std::make_shared<rclcpp::Node>("basic_test"))
   {
     RCLCPP_ERROR_STREAM(node_->get_logger(), "DONE WITH CONSTRUCTOR!!");
   }
 
+  // Things that can't be done in the ctor should go here, such as calling
+  // ASSERT_XX macros in the fixture vs the TEST_F
   void SetUp() override {
-    // Setup things that should occur before every test instance should go here
     RCLCPP_ERROR_STREAM(node_->get_logger(), "DONE WITH SETUP!!");
   }
 
+  // Place most cleanup actions here, if needed
+  ~TaskPlanningFixture() {
+    RCLCPP_ERROR_STREAM(node_->get_logger(), "DONE WITH DESTRUCTOR!!");
+  }
+
+  // Cleanup actions that could throw an exception
   void TearDown() override {
     RCLCPP_ERROR_STREAM(node_->get_logger(), "DONE WITH TEARDOWN!!");
   }
