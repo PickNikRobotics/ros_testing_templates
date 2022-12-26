@@ -2,15 +2,20 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>functional_programming_tests</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="bilal.gill@picknik.ai">bilal</maintainer>
-  <license>TODO: License declaration</license>
+  <version>0.0.1</version>
+  <description>Various examples of ROS tests using functional programming</description>
+  <maintainer email="bilal.gill@picknik.ai">Bilal Gill</maintainer>
+  <license>MIT</license>
+  <author>Bilal Gill</author>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
+  <depend>rclcpp</depend>
+
+  <test_depend>ament_cmake_gtest</test_depend>
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
+  <test_depend>ros_testing</test_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
