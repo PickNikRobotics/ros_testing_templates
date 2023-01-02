@@ -4,8 +4,12 @@ from their host machine while allowing them to use familiar development tools.
 
 # TL;DR
 Build a new development image
+
+**Note**: The `REPO` variable is defined in `.env`
+
 ```
-mkdir -p ~/.development-container/ccache
+source .env
+mkdir -p ~/.${REPO}/ccache
 export UIDGID=$(id -u):$(id -g)
 docker compose -f compose.dev.yml build
 ```
@@ -44,7 +48,7 @@ not persistent, we need to map the cache to the host so it can be reused in
 subsequent instantiations of the container.
 On the host, create the cache directory
 ```
-mkdir -p ~/.development-container/ccache
+mkdir -p ~/.${REPO}/ccache
 ```
 This will then be mapped to `/home/username/.ccache` in the container.
 
@@ -208,6 +212,6 @@ to rerun the command using the offset number given from `history`
 Likely, the host ccache directory in your [home directory](#ccache) was not created properly.
 Ensure that the directory is created and owned by the host user.
 ```
-mkdir -p ~/.development-container/ccache
-sudo chown -R $(id -u):$(id -g) ~/.development-container/ccache
+mkdir -p ~/.${REPO}/ccache
+sudo chown -R $(id -u):$(id -g) ~/.${REPO}/ccache
 ```
