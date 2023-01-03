@@ -5,10 +5,6 @@ FROM ros:${ROS_DISTRO}-ros-base AS upstream
 ARG ROS_DISTRO
 ARG REPO
 
-# fail build if args are missing
-RUN if [ -z "$UIDGID" ]; then echo '\nERROR: UIDGID not set. Run \n\n \texport UIDGID=$(id -u):$(id -g) \n\n on host before building Dockerfile.\n'; exit 1; fi
-RUN if [ -z "$USER" ]; then echo '\nERROR: USER not set. Run \n\n \texport USER=$(whoami) \n\n on host before building Dockerfile.\n'; exit 1; fi
-
 # prevent interactive messages in apt install
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -73,7 +69,13 @@ RUN . /opt/upstream/install/setup.sh \
     && rm -rf /ws
 
 FROM upstream AS development
+
 ARG UIDGID
 ARG USER
+
+# fail build if args are missing
+RUN if [ -z "$UIDGID" ]; then echo '\nERROR: UIDGID not set. Run \n\n \texport UIDGID=$(id -u):$(id -g) \n\n on host before building Dockerfile.\n'; exit 1; fi
+RUN if [ -z "$USER" ]; then echo '\nERROR: USER not set. Run \n\n \texport USER=$(whoami) \n\n on host before building Dockerfile.\n'; exit 1; fi
+
 # chown working directory to user
 RUN mkdir -p /home/${USER}/ws && chown -R ${UIDGID} /home/${USER}
