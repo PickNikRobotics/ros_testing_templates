@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ros2
-          file: Dockerfile
+          file: ros2/Dockerfile
           push: true
           target: upstream
           build-args: ROS_DISTRO=${{ matrix.ros_distro }}
