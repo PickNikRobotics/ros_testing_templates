@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 ARG ROS_DISTRO="foxy"
-FROM ros:${ROS_DISTRO}-ros-base
+FROM ros:${ROS_DISTRO}-ros-base AS upstream
 # Restate for later use
 ARG ROS_DISTRO
 ARG UIDGID
@@ -73,6 +73,8 @@ RUN . /opt/upstream/install/setup.sh \
 RUN . /opt/upstream/install/setup.sh \
     && colcon build --mixin release lld \
     && rm -rf /ws
+
+FROM upstream AS development
 
 # chown working directory to user
 RUN mkdir -p /home/${USER}/ws && chown -R ${UIDGID} /home/${USER}
