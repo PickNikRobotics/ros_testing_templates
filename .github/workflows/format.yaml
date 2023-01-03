@@ -1,7 +1,4 @@
-# This is a format job. Pre-commit has a first-party GitHub action, so we use
-# that: https://github.com/pre-commit/action
-
-name: Format
+name: format
 
 on:
   workflow_dispatch:
@@ -13,16 +10,10 @@ on:
 jobs:
   pre-commit:
     name: pre-commit
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - name: Install clang-format-10
-        run: sudo apt-get install clang-format-10
-      - uses: pre-commit/action@v2.0.3
-        id: precommit
-      - name: Upload pre-commit changes
-        if: failure() && steps.precommit.outcome == 'failure'
-        uses: rhaschke/upload-git-patch-action@main
-        with:
-          name: pre-commit
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - name: Install clang-format
+        run: sudo apt-get install clang-format
+      - uses: pre-commit/action@v3.0.0
