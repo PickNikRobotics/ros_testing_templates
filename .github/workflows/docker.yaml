@@ -37,7 +37,9 @@ jobs:
           file: ros2/Dockerfile
           push: true
           target: upstream
-          build-args: ROS_DISTRO=${{ matrix.ros_distro }}
+          build-args:
+            ROS_DISTRO=${{ matrix.ros_distro }}
+            REPO=ros_testing_templates
           tags: ghcr.io/picknikrobotics/ros_testing_templates:upstream-${{ matrix.ros_distro }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
