@@ -3,8 +3,6 @@ ARG ROS_DISTRO="foxy"
 FROM ros:${ROS_DISTRO}-ros-base AS upstream
 # Restate for later use
 ARG ROS_DISTRO
-ARG UIDGID
-ARG USER
 ARG REPO
 
 # fail build if args are missing
@@ -75,6 +73,7 @@ RUN . /opt/upstream/install/setup.sh \
     && rm -rf /ws
 
 FROM upstream AS development
-
+ARG UIDGID
+ARG USER
 # chown working directory to user
 RUN mkdir -p /home/${USER}/ws && chown -R ${UIDGID} /home/${USER}
