@@ -13,13 +13,13 @@ RUN apt-get update \
     && apt-get install -q -y --no-install-recommends \
         apt-utils \
         ccache \
-        clang-10 \
+        clang \
         clang-format \
         clang-tidy \
         cmake \
         git \
         lld \
-        llvm-10 \
+        llvm \
         python3-colcon-common-extensions \
         python3-colcon-mixin \
         python3-pip \
