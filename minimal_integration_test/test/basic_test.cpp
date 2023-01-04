@@ -47,6 +47,6 @@ int main(int argc, char** argv) {
   int result = RUN_ALL_TESTS();
   rclcpp::shutdown();
   RCLCPP_INFO_STREAM(rclcpp::get_logger("basic_test"),
-                      "DONE SHUTTING DOWN ROS WITH RESULT " << result << "!!");
+                     "DONE SHUTTING DOWN ROS WITH RESULT " << result << "!!");
   return result;
 }
