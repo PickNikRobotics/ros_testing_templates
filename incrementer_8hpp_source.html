@@ -105,21 +105,25 @@ $(function() {
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> *********************************************************************/</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;rclcpp/rclcpp.hpp&gt;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;std_msgs/msg/int64.hpp&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;rclcpp/rclcpp.hpp&gt;</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classIncrementer.html">   41</a></span>&#160;<span class="keyword">class </span><a class="code" href="classIncrementer.html">Incrementer</a> {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="classIncrementer.html#afa6b533c84426143ed8f6e14a107b1c3">Incrementer</a>(std::shared_ptr&lt;rclcpp::Node&gt; node, std::string <span class="keyword">const</span>&amp; in_topic, std::string <span class="keyword">const</span>&amp; out_topic);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    std::shared_ptr&lt;rclcpp::Node&gt; node_;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    std::shared_ptr&lt;rclcpp::Publisher&lt;std_msgs::msg::Int64&gt;&gt; pub_;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    std::shared_ptr&lt;rclcpp::Subscription&lt;std_msgs::msg::Int64&gt;&gt; sub_;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
-<div class="ttc" id="aclassIncrementer_html"><div class="ttname"><a href="classIncrementer.html">Incrementer</a></div><div class="ttdef"><b>Definition:</b> <a href="incrementer_8hpp_source.html#l00041">incrementer.hpp:41</a></div></div>
-<div class="ttc" id="aclassIncrementer_html_afa6b533c84426143ed8f6e14a107b1c3"><div class="ttname"><a href="classIncrementer.html#afa6b533c84426143ed8f6e14a107b1c3">Incrementer::Incrementer</a></div><div class="ttdeci">Incrementer(std::shared_ptr&lt; rclcpp::Node &gt; node, std::string const &amp;in_topic, std::string const &amp;out_topic)</div><div class="ttdoc">Incrementer constructor.</div><div class="ttdef"><b>Definition:</b> <a href="incrementer_8cpp_source.html#l00011">incrementer.cpp:11</a></div></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &lt;std_msgs/msg/int64.hpp&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classIncrementer.html">   43</a></span>&#160;<span class="keyword">class </span><a class="code" href="classIncrementer.html">Incrementer</a> {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <a class="code" href="classIncrementer.html#afa6b533c84426143ed8f6e14a107b1c3">Incrementer</a>(std::shared_ptr&lt;rclcpp::Node&gt; node, std::string <span class="keyword">const</span>&amp; in_topic,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;              std::string <span class="keyword">const</span>&amp; out_topic);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  std::shared_ptr&lt;rclcpp::Node&gt; node_;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  std::shared_ptr&lt;rclcpp::Publisher&lt;std_msgs::msg::Int64&gt;&gt; pub_;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  std::shared_ptr&lt;rclcpp::Subscription&lt;std_msgs::msg::Int64&gt;&gt; sub_;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
+<div class="ttc" id="aclassIncrementer_html"><div class="ttname"><a href="classIncrementer.html">Incrementer</a></div><div class="ttdef"><b>Definition:</b> <a href="incrementer_8hpp_source.html#l00043">incrementer.hpp:43</a></div></div>
+<div class="ttc" id="aclassIncrementer_html_afa6b533c84426143ed8f6e14a107b1c3"><div class="ttname"><a href="classIncrementer.html#afa6b533c84426143ed8f6e14a107b1c3">Incrementer::Incrementer</a></div><div class="ttdeci">Incrementer(std::shared_ptr&lt; rclcpp::Node &gt; node, std::string const &amp;in_topic, std::string const &amp;out_topic)</div><div class="ttdoc">Incrementer constructor.</div><div class="ttdef"><b>Definition:</b> <a href="incrementer_8cpp_source.html#l00013">incrementer.cpp:13</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

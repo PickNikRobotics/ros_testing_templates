@@ -71,20 +71,19 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="node_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="incrementer_8hpp.html">naive/incrementer.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;rclcpp/rclcpp.hpp&gt;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="node_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">    4</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="node_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    rclcpp::init(argc,argv);</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="keyword">auto</span> <span class="keyword">const</span> node = std::make_shared&lt;rclcpp::Node&gt;(<span class="stringliteral">&quot;incrementer&quot;</span>);</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <a class="code" href="classIncrementer.html">Incrementer</a> incrementer{node, <span class="stringliteral">&quot;/in&quot;</span>, <span class="stringliteral">&quot;/out&quot;</span>};</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    rclcpp::spin(node);</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    rclcpp::shutdown();</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div>
-<div class="ttc" id="aclassIncrementer_html"><div class="ttname"><a href="classIncrementer.html">Incrementer</a></div><div class="ttdef"><b>Definition:</b> <a href="incrementer_8hpp_source.html#l00041">incrementer.hpp:41</a></div></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;rclcpp/rclcpp.hpp&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="node_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">    5</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="node_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  rclcpp::init(argc, argv);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  <span class="keyword">auto</span> <span class="keyword">const</span> node = std::make_shared&lt;rclcpp::Node&gt;(<span class="stringliteral">&quot;incrementer&quot;</span>);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <a class="code" href="classIncrementer.html">Incrementer</a> incrementer{node, <span class="stringliteral">&quot;/in&quot;</span>, <span class="stringliteral">&quot;/out&quot;</span>};</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  rclcpp::spin(node);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  rclcpp::shutdown();</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div>
+<div class="ttc" id="aclassIncrementer_html"><div class="ttname"><a href="classIncrementer.html">Incrementer</a></div><div class="ttdef"><b>Definition:</b> <a href="incrementer_8hpp_source.html#l00043">incrementer.hpp:43</a></div></div>
 <div class="ttc" id="aincrementer_8hpp_html"><div class="ttname"><a href="incrementer_8hpp.html">incrementer.hpp</a></div></div>
-<div class="ttc" id="anode_8cpp_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="node_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="node_8cpp_source.html#l00004">node.cpp:4</a></div></div>
+<div class="ttc" id="anode_8cpp_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="node_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="node_8cpp_source.html#l00005">node.cpp:5</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
