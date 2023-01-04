@@ -23,6 +23,12 @@ RUN apt-get update \
         python3-colcon-common-extensions \
         python3-colcon-mixin \
         python3-pip \
+        python3-colcon-common-extensions \
+        python3-colcon-lcov-result \
+        python3-colcon-coveragepy-result \
+        python3-colcon-mixin \
+        python3-rosdep \
+        python3-vcstool \
         vim \
         wget \
         ssh-client \
