@@ -25,7 +25,6 @@ jobs:
           restore-keys: |
             ccache-ros-${{ matrix.ros_distro }}-${{ github.sha }}
             ccache-ros-${{ matrix.ros_distro }}
-      - uses: ros-tooling/setup-ros@v0.4
       - uses: ros-tooling/action-ros-ci@v0.2
         with:
           target-ros2-distro: ${{ matrix.ros_distro }}
