@@ -47,6 +47,4 @@ class TestGTestWaitForCompletion(unittest.TestCase):
 class TestGTestProcessPostShutdown(unittest.TestCase):
     # Checks if the test has been completed with acceptable exit codes
     def test_gtest_pass(self, proc_info, basic_test):
-        launch_testing.asserts.assertExitCodes(
-            proc_info, process=basic_test
-        )
+        launch_testing.asserts.assertExitCodes(proc_info, process=basic_test)

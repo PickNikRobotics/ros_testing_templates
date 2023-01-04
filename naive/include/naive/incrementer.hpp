@@ -33,23 +33,27 @@
  *********************************************************************/
 #pragma once
 
-#include <string>
 #include <memory>
+#include <string>
+
 #include <rclcpp/rclcpp.hpp>
+
 #include <std_msgs/msg/int64.hpp>
 
 class Incrementer {
-public:
-    /**
-     * @brief      Incrementer constructor
-     *
-     * @param[in]  node       Shared pointer to a ROS node
-     * @param[in]  in_topic   ROS topic to the Incrementer subscribes to
-     * @param[in]  out_topic  ROS topic that the Incrementer publishes to
-     */
-	Incrementer(std::shared_ptr<rclcpp::Node> node, std::string const& in_topic, std::string const& out_topic);
-private:
-	std::shared_ptr<rclcpp::Node> node_;
-	std::shared_ptr<rclcpp::Publisher<std_msgs::msg::Int64>> pub_;
-	std::shared_ptr<rclcpp::Subscription<std_msgs::msg::Int64>> sub_;
+ public:
+  /**
+   * @brief      Incrementer constructor
+   *
+   * @param[in]  node       Shared pointer to a ROS node
+   * @param[in]  in_topic   ROS topic to the Incrementer subscribes to
+   * @param[in]  out_topic  ROS topic that the Incrementer publishes to
+   */
+  Incrementer(std::shared_ptr<rclcpp::Node> node, std::string const& in_topic,
+              std::string const& out_topic);
+
+ private:
+  std::shared_ptr<rclcpp::Node> node_;
+  std::shared_ptr<rclcpp::Publisher<std_msgs::msg::Int64>> pub_;
+  std::shared_ptr<rclcpp::Subscription<std_msgs::msg::Int64>> sub_;
 };

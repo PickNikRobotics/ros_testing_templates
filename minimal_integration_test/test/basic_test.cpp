@@ -1,18 +1,17 @@
 // Description: Test if a simple task plan works
 
+#include <memory>
+
 #include <rclcpp/rclcpp.hpp>
 
 #include <gtest/gtest.h>
-#include <memory>
 
 namespace minimal_integration_test {
 class TaskPlanningFixture : public testing::Test {
  public:
   // Setup things that should occur before every test instance should go here
   // https://google.github.io/googletest/faq.html#CtorVsSetUp
-  TaskPlanningFixture()
-      : node_(std::make_shared<rclcpp::Node>("basic_test"))
-  {
+  TaskPlanningFixture() : node_(std::make_shared<rclcpp::Node>("basic_test")) {
     RCLCPP_ERROR_STREAM(node_->get_logger(), "DONE WITH CONSTRUCTOR!!");
   }
 
@@ -47,6 +46,7 @@ int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   int result = RUN_ALL_TESTS();
   rclcpp::shutdown();
-  RCLCPP_ERROR_STREAM(rclcpp::get_logger("basic_test"), "DONE SHUTTING DOWN ROS!!");
+  RCLCPP_ERROR_STREAM(rclcpp::get_logger("basic_test"),
+                      "DONE SHUTTING DOWN ROS!!");
   return result;
 }
