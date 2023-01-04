@@ -1,6 +1,0 @@
-mixin:
-  - clang-10.mixin
-  - en-alu-san.mixin
-  - en-clang-tidy.mixin
-  - en-msan.mixin
-  - en-tsan.mixin

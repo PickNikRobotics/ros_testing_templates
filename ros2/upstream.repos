@@ -1,9 +1,0 @@
-repositories:
-  fp:
-    type: git
-    url: https://github.com/tylerjw/fp
-    version: main
-  units_ros:
-    type: git
-    url: https://github.com/tylerjw/units_ros
-    version: main
