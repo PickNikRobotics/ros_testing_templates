@@ -84,23 +84,23 @@ $(function() {
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="comment">// Setup things that should occur before every test instance should go here</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="comment">// https://google.github.io/googletest/faq.html#CtorVsSetUp</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a3215ac965151aebb16468853d9e342ae">   14</a></span>&#160;  <a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a3215ac965151aebb16468853d9e342ae">TaskPlanningFixture</a>() : <a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a8821d9c500040437db8269495016ba7d">node_</a>(std::make_shared&lt;rclcpp::Node&gt;(<span class="stringliteral">&quot;basic_test&quot;</span>)) {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    RCLCPP_ERROR_STREAM(<a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a8821d9c500040437db8269495016ba7d">node_</a>-&gt;get_logger(), <span class="stringliteral">&quot;DONE WITH CONSTRUCTOR!!&quot;</span>);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    RCLCPP_INFO_STREAM(<a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a8821d9c500040437db8269495016ba7d">node_</a>-&gt;get_logger(), <span class="stringliteral">&quot;DONE WITH CONSTRUCTOR!!&quot;</span>);</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  }</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="comment">// Things that can&#39;t be done in the ctor should go here, such as calling</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="comment">// ASSERT_XX macros in the fixture vs the TEST_F</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a7901cbed76428fa03abcf666275f4d4e">   20</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a7901cbed76428fa03abcf666275f4d4e">SetUp</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    RCLCPP_ERROR_STREAM(<a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a8821d9c500040437db8269495016ba7d">node_</a>-&gt;get_logger(), <span class="stringliteral">&quot;DONE WITH SETUP!!&quot;</span>);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    RCLCPP_INFO_STREAM(<a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a8821d9c500040437db8269495016ba7d">node_</a>-&gt;get_logger(), <span class="stringliteral">&quot;DONE WITH SETUP!!&quot;</span>);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  }</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="comment">// Place most cleanup actions here, if needed</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classminimal__integration__test_1_1TaskPlanningFixture.html#aad8c2467d1b7014b7f9076815dc77d37">   25</a></span>&#160;  <a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html#aad8c2467d1b7014b7f9076815dc77d37">~TaskPlanningFixture</a>() {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    RCLCPP_ERROR_STREAM(<a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a8821d9c500040437db8269495016ba7d">node_</a>-&gt;get_logger(), <span class="stringliteral">&quot;DONE WITH DESTRUCTOR!!&quot;</span>);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    RCLCPP_INFO_STREAM(<a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a8821d9c500040437db8269495016ba7d">node_</a>-&gt;get_logger(), <span class="stringliteral">&quot;DONE WITH DESTRUCTOR!!&quot;</span>);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  }</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="comment">// Cleanup actions that could throw an exception</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a6b8d8556866f51f90acfe61a4014a079">   30</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a6b8d8556866f51f90acfe61a4014a079">TearDown</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    RCLCPP_ERROR_STREAM(<a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a8821d9c500040437db8269495016ba7d">node_</a>-&gt;get_logger(), <span class="stringliteral">&quot;DONE WITH TEARDOWN!!&quot;</span>);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    RCLCPP_INFO_STREAM(<a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html#a8821d9c500040437db8269495016ba7d">node_</a>-&gt;get_logger(), <span class="stringliteral">&quot;DONE WITH TEARDOWN!!&quot;</span>);</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  }</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; <span class="keyword">protected</span>:</div>
@@ -108,7 +108,7 @@ $(function() {
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="namespaceminimal__integration__test.html#a5752f63f1bf9d7fc014d8bc98fc3d277">   38</a></span>&#160;<a class="code" href="namespaceminimal__integration__test.html#a5752f63f1bf9d7fc014d8bc98fc3d277">TEST_F</a>(<a class="code" href="classminimal__integration__test_1_1TaskPlanningFixture.html">TaskPlanningFixture</a>, TrueIsTrueTest) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  RCLCPP_ERROR_STREAM(node_-&gt;get_logger(), <span class="stringliteral">&quot;TESTING!!&quot;</span>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  RCLCPP_INFO_STREAM(node_-&gt;get_logger(), <span class="stringliteral">&quot;TESTING!!&quot;</span>);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  EXPECT_TRUE(<span class="keyword">true</span>);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}  <span class="comment">// namespace minimal_integration_test</span></div>
@@ -118,7 +118,7 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  ::testing::InitGoogleTest(&amp;argc, argv);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">int</span> result = RUN_ALL_TESTS();</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  rclcpp::shutdown();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  RCLCPP_ERROR_STREAM(rclcpp::get_logger(<span class="stringliteral">&quot;basic_test&quot;</span>),</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  RCLCPP_INFO_STREAM(rclcpp::get_logger(<span class="stringliteral">&quot;basic_test&quot;</span>),</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                      <span class="stringliteral">&quot;DONE SHUTTING DOWN ROS!!&quot;</span>);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
