@@ -1,0 +1,4 @@
+<map id="rcl_handle::TEST" name="rcl_handle::TEST">
+<area shape="rect" id="node1" title=" " alt="" coords="5,13,135,39"/>
+<area shape="rect" id="node2" href="$structrcl__handle_1_1action__server.html#ae2ffc181c68b3779aba5b5ec01456422" title="Allows action server to be instantiated outside consumer and for the consumer to then pass in methods..." alt="" coords="183,5,369,47"/>
+</map>

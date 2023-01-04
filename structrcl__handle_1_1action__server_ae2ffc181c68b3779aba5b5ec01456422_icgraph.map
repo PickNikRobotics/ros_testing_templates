@@ -1,0 +1,4 @@
+<map id="rcl_handle::action_server::register_handles" name="rcl_handle::action_server::register_handles">
+<area shape="rect" id="node1" title="Allows action server to be instantiated outside consumer and for the consumer to then pass in methods..." alt="" coords="183,5,369,47"/>
+<area shape="rect" id="node2" href="$namespacercl__handle.html#a282b5f0e0c572038501d9f523efe45d4" title=" " alt="" coords="5,13,135,39"/>
+</map>
