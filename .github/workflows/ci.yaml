@@ -27,7 +27,6 @@ jobs:
             ccache-ros-${{ matrix.ros_distro }}
       - uses: ros-tooling/action-ros-ci@v0.2
         with:
-          package-name: rsl
           target-ros2-distro: ${{ matrix.ros_distro }}
           colcon-defaults: |
             {
