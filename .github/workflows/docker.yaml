@@ -7,9 +7,8 @@ on:
   push:
     paths:
       - '.github/workflows/docker.yaml'
-      - 'ros2/Dockerfile'
-      - 'ros2/upstreams.repos'
-      - 'ros2/compose.dev.yml'
+      - 'Dockerfile'
+      - 'compose.dev.yml'
       - '**/package.xml'
 
 jobs:
@@ -33,8 +32,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: ros2
-          file: ros2/Dockerfile
+          context: .
+          file: Dockerfile
           push: true
           target: upstream
           build-args: |
