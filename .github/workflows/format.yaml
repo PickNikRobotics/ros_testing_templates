@@ -5,7 +5,8 @@ on:
   pull_request:
   push:
     branches:
-      - main
+      - ros1
+      - ros2
 
 jobs:
   pre-commit:
