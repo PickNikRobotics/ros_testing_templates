@@ -1,88 +1,37 @@
-# This config uses industrial_ci (https://github.com/ros-industrial/industrial_ci.git).
-# For troubleshooting, see readme (https://github.com/ros-industrial/industrial_ci/blob/master/README.rst)
-
-name: CI
+name: ci
 
 on:
   workflow_dispatch:
   pull_request:
   push:
-    branches:
-      - main
 
 jobs:
-  default:
+  ros:
     strategy:
-      fail-fast: false
       matrix:
-        env:
-          # TODO: enable building on testing once buildfarm is stable again
-          # - NAME: "testing"
-          #   ROS_REPO: testing
-            # TODO: Enable coverage testing once first test exists
-            # JOB_TARGET_CMAKE_ARGS: -DENABLE_COVERAGE=ON
-            # CCOV: true
-          - NAME: "address-leak-ub-sanitizers"
-            JOB_TARGET_CMAKE_ARGS: >
-              -DENABLE_SANITIZER_ADDRESS=ON
-              -DENABLE_SANITIZER_LEAK=ON
-              -DENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON
-          - NAME: "thread-sanitizer-clang"
-            JOB_TARGET_CMAKE_ARGS: >
-              -DENABLE_SANITIZER_THREAD=ON
-              -DCMAKE_C_COMPILER=clang-10
-              -DCMAKE_CXX_COMPILER=clang++-10
-            BEFORE_RUN_TARGET_TEST_EMBED: >
-              export ASAN_SYMBOLIZER_PATH=$(which llvm-symbolizer-10)
-          - NAME: "memory-sanitizer"
-            JOB_TARGET_CMAKE_ARGS: >
-              -DENABLE_SANITIZER_MEMORY=ON
-          - NAME: "static-analyzers"
-            JOB_TARGET_CMAKE_ARGS: >
-              -DENABLE_CLANG_TIDY=ON
-
-    env:
-      ROS_DISTRO: ${{ matrix.env.ROS_DISTRO || 'galactic' }}
-      ROS_REPO: ${{ matrix.env.ROS_REPO || 'main' }}
-      UPSTREAM_WORKSPACE: upstream.repos
-      UPSTREAM_CMAKE_ARGS: >
-        --no-warn-unused-cli
-        -DCMAKE_BUILD_TYPE=Release
-        -DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=lld
-        -DCMAKE_SHARED_LINKER_FLAGS=-fuse-ld=lld
-        -DCMAKE_MODULE_LINKER_FLAGS=-fuse-ld=lld
-      TARGET_CMAKE_ARGS: >
-        --no-warn-unused-cli
-        ${{ matrix.env.JOB_TARGET_CMAKE_ARGS }}
-        -DCMAKE_BUILD_TYPE=Debug
-        -DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=lld
-        -DCMAKE_SHARED_LINKER_FLAGS=-fuse-ld=lld
-        -DCMAKE_MODULE_LINKER_FLAGS=-fuse-ld=lld
-      # Clear the ccache stats before and log the stats after the build
-      AFTER_SETUP_CCACHE: ccache --zero-stats --max-size=10.0G
-      AFTER_BUILD_TARGET_WORKSPACE: ccache --show-stats
-      CCACHE_DIR: ${{ github.workspace }}/.ccache
-      BASEDIR: ${{ github.workspace }}/.work
-      ADDITIONAL_DEBS: clang-10 clang-9 iwyu clang-tidy lld llvm-10
-
-    name: ${{ matrix.env.NAME }}
+        ros_distro: [foxy, humble, rolling]
     runs-on: ubuntu-latest
+    container: ghcr.io/picknikrobotics/ros_testing_templates:upstream-${{ matrix.ros_distro }}
+    env:
+      CCACHE_DIR: ${{ github.workspace }}/.ccache
     steps:
-      - uses: actions/checkout@v2
-      - id: ici
-        name: Run industrial_ci
-        uses: ros-industrial/industrial_ci@master
-        env: ${{ matrix.env }}
-      - name: Upload test artifacts (on failure)
-        uses: actions/upload-artifact@v2
-        if: failure() && (steps.ici.outputs.run_target_test || steps.ici.outputs.target_test_results)
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Cache ccache
+        uses: pat-s/always-upload-cache@v3
         with:
-          name: test-results-${{ matrix.env.NAME }}
-          path: ${{ env.BASEDIR }}/target_ws/**/test_results/**/*.xml
-      - name: Upload log artifacts (on failure)
-        uses: actions/upload-artifact@v2
-        if: failure()
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-ros-${{ matrix.ros_distro }}-${{ github.sha }}-${{ github.run_id }}
+          restore-keys: |
+            ccache-ros-${{ matrix.ros_distro }}-${{ github.sha }}
+            ccache-ros-${{ matrix.ros_distro }}
+      - uses: ros-tooling/action-ros-ci@v0.2
         with:
-          name: test-results-${{ matrix.env.NAME }}
-          path: ${{ env.BASEDIR }}/target_ws/log/*
-          retention-days: 5
+          package-name: rsl
+          target-ros2-distro: ${{ matrix.ros_distro }}
+          colcon-defaults: |
+            {
+              "build": {
+                "mixin": ["ccache", "lld"]
+              }
+            }
