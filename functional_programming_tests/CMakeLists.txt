@@ -1,32 +1,22 @@
 cmake_minimum_required(VERSION 3.16.3)
-project(functional_programming_tests LANGUAGES CXX)
+project(functional_programming_tests)
+set(CMAKE_CXX_STANDARD 20)
 
-set(THIS_PACKAGE_INCLUDE_DEPENDS
-  ament_cmake
-)
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
 find_package(ament_cmake REQUIRED)
-
-foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
-  find_package(${Dependency} REQUIRED)
-endforeach()
-
-add_library(${PROJECT_NAME} INTERFACE)
-target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_20)
-
-install(
-  TARGETS ${PROJECT_NAME}
-  EXPORT ${PROJECT_NAME}Targets
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION lib/${PROJECT_NAME} 
-)
-
-ament_export_targets(${PROJECT_NAME}Targets)
-ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
 
 if(BUILD_TESTING)
-  add_subdirectory(test)
+  find_package(ament_cmake_gtest REQUIRED)
+  ament_add_gtest(with_functional_programming test/with_functional_programming.cpp TIMEOUT 5)
+  ament_target_dependencies(with_functional_programming rclcpp std_msgs)
+
+  ament_add_gtest(without_functional_programming test/without_functional_programming.cpp TIMEOUT 5)
+  ament_target_dependencies(without_functional_programming rclcpp std_msgs)  
 endif()
 
 ament_package()

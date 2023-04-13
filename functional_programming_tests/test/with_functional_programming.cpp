@@ -1,4 +1,3 @@
-// Planning code and tests per FP principles
 #include <gtest/gtest.h>
 
 #include <iostream>
@@ -29,14 +28,6 @@ std::ostream& operator<<(std::ostream& os, std::vector<Pos> const& path) {
 // Operator overload for position comparison
 bool operator==(Pos const& lhs, Pos const& rhs) {
     return lhs.x == rhs.x && lhs.y == rhs.y;
-}
-
-// Function that gets costmap
-Map<int> get_costmap() { // Action
-    // Get the costmap from a ros topic
-    // This would have to be tested in either an integration test 
-    // or a more elaborate unit test
-    return {};
 }
 
 // From the Robot, goal and costmap, generate a trajectory (Deterministic calculation)
@@ -71,12 +62,6 @@ std::optional<Path> generate_global_path(Pos const& start, Pos const& goal , Map
     }
 
     return path;
-}
-
-// Publish the global trajectory
-void publish_global_path(std::vector<Pos>){ // Action
-    // Publish the trajectory via ros
-    // To test this, would need an integration test or a more elaborate unit test
 }
 
 // test.cc
