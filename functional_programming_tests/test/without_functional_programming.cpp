@@ -68,12 +68,12 @@ private:
 std::optional<Path> PathGenerator::generate_global_path(Pos const& start, Pos const& goal) { // Calculation
     // Some cool and nifty algorithm
     // What is the delta in position
-	int del_x = goal.x - start.x;
-	int del_y = goal.y - start.y;
+	int const del_x = goal.x - start.x;
+	int const del_y = goal.y - start.y;
 
     // What direction to move in for each dimension
-	int del_x_sign = std::copysign(1.0,del_x);
-	int del_y_sign = std::copysign(1.0,del_y);
+	int const del_x_sign = std::copysign(1.0,del_x);
+	int const del_y_sign = std::copysign(1.0,del_y);
 
     // Push start onto the path
 	Path path;
@@ -110,7 +110,7 @@ void PathGenerator::costmap_callback(const std_msgs::msg::UInt8MultiArray::Share
 		RCLCPP_ERROR_STREAM(node_->get_logger(), "COSTMAP LENGTH AND STRIDE INCONSISTENT!!");
 		return;
 	}
-	const auto begin = std::begin(msg->data) ;
+	auto const begin = std::begin(msg->data) ;
 	// Populate the map
 	for (auto row = 0; row < msg->layout.dim[0].size; row++) {
 		map_.push_back({begin+row*msg->layout.dim[1].size, begin+(row+1)*msg->layout.dim[1].size});
@@ -185,8 +185,8 @@ TEST_F(TaskPlanningFixture, same_start_and_goal) {
 	// GIVEN a populated costmap AND the same start and goal position
 	EXPECT_FALSE(pg_.get_costmap().empty());
 
-    Pos start {0, 0};
-    Pos goal {0, 0};
+    Pos const start {0, 0};
+    Pos const goal {0, 0};
 
     // WHEN the global path is produced
     auto const& path = pg_.generate_global_path(start, goal);

@@ -31,15 +31,15 @@ bool operator==(Pos const& lhs, Pos const& rhs) {
 }
 
 // From the Robot, goal and costmap, generate a trajectory (Deterministic calculation)
-std::optional<Path> generate_global_path(Pos const& start, Pos const& goal , Map<int> const& costmap) { // Calculation
+std::optional<Path> generate_global_path(Pos const& start, Pos const& goal , Map<unsigned char> const& costmap) { // Calculation
     // Some cool and nifty algorithm
     // What is the delta in position
-    int del_x = goal.x - start.x;
-    int del_y = goal.y - start.y;
+    int const del_x = goal.x - start.x;
+    int const del_y = goal.y - start.y;
 
     // What direction to move in for each dimension
-    int del_x_sign = std::copysign(1.0,del_x);
-    int del_y_sign = std::copysign(1.0,del_y);
+    int const del_x_sign = std::copysign(1.0,del_x);
+    int const del_y_sign = std::copysign(1.0,del_y);
 
     // Push start onto the path
     Path path;
@@ -68,7 +68,7 @@ std::optional<Path> generate_global_path(Pos const& start, Pos const& goal , Map
 TEST(generate_path, same_start_and_goal) {
 
     // GIVEN a costmap and the same start and goal
-    Map<int> sample_costmap = {{0, 0, 0, 0, 0, 0, 0, 0}, 
+    Map<unsigned char> sample_costmap = {{0, 0, 0, 0, 0, 0, 0, 0},
                                {0, 0, 0, 1, 0, 0, 0, 0}, 
                                {0, 0, 0, 1, 0, 0, 0, 0}, 
                                {0, 0, 1, 1, 1, 0, 0, 0}, 
@@ -77,8 +77,8 @@ TEST(generate_path, same_start_and_goal) {
                                {0, 0, 0, 0, 0, 0, 0, 0}, 
                                {0, 0, 0, 0, 0, 0, 0, 0}};        
 
-    Pos start {0, 0};
-    Pos goal {0, 0};
+    Pos const start {0, 0};
+    Pos const goal {0, 0};
 
     // WHEN the global path is produced
     auto const& path = generate_global_path(start, goal, sample_costmap);    
