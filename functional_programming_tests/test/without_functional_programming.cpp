@@ -16,15 +16,15 @@ template<typename T>
 using Map = std::vector<std::vector<T>>;
 
 // X, Y position
-struct Pos {
+struct Position {
 	size_t x;
 	size_t y;
 };
 
-using Path = std::vector<Pos>;
+using Path = std::vector<Position>;
 
 // Operator overload to print path
-std::ostream& operator<<(std::ostream& os, std::vector<Pos> const& path) {
+std::ostream& operator<<(std::ostream& os, std::vector<Position> const& path) {
 	for (auto const& pose:path) {
 		os << "(" << pose.x << ", " << pose.y << ")\n";
 	}
@@ -32,7 +32,7 @@ std::ostream& operator<<(std::ostream& os, std::vector<Pos> const& path) {
 }
 
 // Operator overload for position comparison
-bool operator==(Pos const& lhs, Pos const& rhs) {
+bool operator==(Position const& lhs, Position const& rhs) {
 	return lhs.x == rhs.x && lhs.y == rhs.y;
 }
 
@@ -50,7 +50,7 @@ public:
 		executor_->cancel();
 		executor_thread_.join();		
 	}
-    std::optional<Path> generate_global_path(Pos const& start, Pos const& goal);
+    std::optional<Path> generate_global_path(Position const& start, Position const& goal);
     void costmap_callback(const std_msgs::msg::UInt8MultiArray::SharedPtr msg);
 
     Map<unsigned char> get_costmap() const { return map_;}
@@ -65,7 +65,7 @@ private:
 };
 
 // From the Robot, goal and costmap, generate a trajectory (Deterministic calculation)
-std::optional<Path> PathGenerator::generate_global_path(Pos const& start, Pos const& goal) { // Calculation
+std::optional<Path> PathGenerator::generate_global_path(Position const& start, Position const& goal) { // Calculation
     // Some cool and nifty algorithm
     // What is the delta in position
 	int const del_x = goal.x - start.x;
@@ -85,14 +85,14 @@ std::optional<Path> PathGenerator::generate_global_path(Pos const& start, Pos co
 		if (map_.at(path.back().y).at(path.back().x + del_x_sign) == 1) {
 			return std::nullopt;
 		}        
-		path.push_back({path.back().x+del_x_sign, path.back().y});
+		path.push_back({path.back().x + del_x_sign, path.back().y});
 	}
     // Move vertically
 	for (size_t i = 0; i < (std::abs(del_y)); i++) {
 		if (map_.at(path.back().y + del_y_sign).at(path.back().x) == 1) {
 			return std::nullopt;
 		}            
-		path.push_back({path.back().x, path.back().y+del_y_sign});
+		path.push_back({path.back().x, path.back().y + del_y_sign});
 	}
 
 	return path;
@@ -139,7 +139,6 @@ public:
 		executor_thread_.join();
 	}
 
-protected:
 	void publish_costmap() { // Action
 		auto msg = std_msgs::msg::UInt8MultiArray();
 
@@ -180,19 +179,23 @@ protected:
 
 TEST_F(TaskPlanningFixture, same_start_and_goal) {
 	// Wait some time to make sure a valid costmap has been received
+	// Note all the extra boilerplate code that had to be written to
+	// test the generate_global_path function. There could have been
+	// bugs introduced in the code. At the minimum, the test has been
+	// slowed down, with the presence of std::this_thread::sleep_for()
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 
 	// GIVEN a populated costmap AND the same start and goal position
 	EXPECT_FALSE(pg_.get_costmap().empty());
 
-    Pos const start {0, 0};
-    Pos const goal {0, 0};
+    Position const start {0, 0};
+    Position const goal {0, 0};
 
     // WHEN the global path is produced
     auto const& path = pg_.generate_global_path(start, goal);
 
     // THEN the global path produced should have one element, which is the start/goal position
-    std::vector<Pos> expected {{0, 0}};
+    std::vector<Position> expected {{0, 0}};
     EXPECT_EQ(path.value(), expected) << path.value();
 }
 
