@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['publish_5ffeedback_26',['publish_feedback',['../structrcl__handle_1_1interface_1_1server__goal.html#aff48a35fe7f21722fb320a0aae7ec4d1',1,'rcl_handle::interface::server_goal::publish_feedback()'],['../structrcl__handle_1_1server__goal.html#aef283e7b9f7c3122cb6d0909e1a01777',1,'rcl_handle::server_goal::publish_feedback()']]]
+  ['interface_26',['interface',['../namespacercl__handle_1_1interface.html',1,'rcl_handle']]],
+  ['rcl_5fhandle_27',['rcl_handle',['../namespacercl__handle.html',1,'']]],
+  ['readme_2emd_28',['README.md',['../README_8md.html',1,'(Global Namespace)'],['../minimal__integration__test_2README_8md.html',1,'(Global Namespace)']]],
+  ['register_5fhandles_29',['register_handles',['../structrcl__handle_1_1interface_1_1action__server.html#a6a26069200c0cf4c22a5b82d2e696f49',1,'rcl_handle::interface::action_server::register_handles()'],['../structrcl__handle_1_1action__server.html#ae2ffc181c68b3779aba5b5ec01456422',1,'rcl_handle::action_server::register_handles()']]]
 ];
