@@ -1,3 +1,4 @@
+[![ci](https://github.com/PickNikRobotics/ros_testing_templates/actions/workflows/ci.yaml/badge.svg)](https://github.com/PickNikRobotics/ros_testing_templates/actions/workflows/ci.yaml)
 # development-container
 The development container allows developers to sandbox repository dependencies
 from their host machine while allowing them to use familiar development tools.
