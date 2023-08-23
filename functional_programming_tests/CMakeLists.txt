@@ -7,6 +7,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(example_srvs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 
@@ -16,7 +17,7 @@ if(BUILD_TESTING)
   ament_target_dependencies(with_functional_programming rclcpp std_msgs)
 
   ament_add_gtest(without_functional_programming test/without_functional_programming.cpp TIMEOUT 5)
-  ament_target_dependencies(without_functional_programming rclcpp std_msgs)  
+  ament_target_dependencies(without_functional_programming rclcpp std_msgs example_srvs)
 endif()
 
 ament_package()

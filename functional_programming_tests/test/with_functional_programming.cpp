@@ -6,13 +6,22 @@
 #include <optional>
 
 // production_code.h/cc
-template<typename T>
-using Map = std::vector<std::vector<T>>;
-
 // X, Y position
 struct Position {
     size_t x;
     size_t y;
+};
+
+template<typename T>
+class Map
+{
+public:
+    Map(std::vector<std::vector<T>> data): data_{data} {};
+    T at(Position const& pos) const {
+        return data_.at(pos.y).at(pos.x);
+    }
+private:
+    std::vector<std::vector<T>> data_;
 };
 
 using Path = std::vector<Position>;
@@ -45,17 +54,22 @@ std::optional<Path> generate_global_path(Position const& start, Position const& 
     Path path;
     path.push_back(start);
 
+    auto is_occupied = [&costmap](auto const x, auto const y) -> bool {
+        return costmap.at(Position{x, y}) == 1;
+    };
+
     // Fails if there is any obstacle in the way
     // Move horizontally
     for (size_t i = 0; i < (std::abs(del_x)); ++i) {
-        if (costmap.at(path.back().y).at(path.back().x + del_x_sign) == 1) {
+        if (is_occupied(path.back().x + del_x_sign, path.back().y)) {        
             return std::nullopt;
         }        
         path.push_back({path.back().x + del_x_sign, path.back().y});
     }
     // Move vertically
     for (size_t i = 0; i < (std::abs(del_y)); i++) {
-        if (costmap.at(path.back().y + del_y_sign).at(path.back().x) == 1) {
+        // if (costmap.at(Position{path.back().x, path.back().y + del_y_sign}) == 1) {
+        if (is_occupied(path.back().x, path.back().y + del_y_sign)) {            
             return std::nullopt;
         }            
         path.push_back({path.back().x, path.back().y + del_y_sign});
@@ -65,17 +79,27 @@ std::optional<Path> generate_global_path(Position const& start, Position const& 
 }
 
 // test.cc
+
+/**
+ * @brief      Gets the test costmap.
+ *
+ * @return     The test costmap.
+ */
+Map<unsigned char> get_test_costmap() {
+    return {{{0, 0, 0, 0, 0, 0, 0, 0},
+             {0, 0, 0, 1, 0, 0, 0, 0}, 
+             {0, 0, 0, 1, 0, 0, 0, 0}, 
+             {0, 0, 1, 1, 1, 0, 0, 0}, 
+             {0, 0, 1, 0, 1, 1, 0, 0}, 
+             {0, 0, 1, 0, 0, 0, 0, 0}, 
+             {0, 0, 0, 0, 0, 0, 0, 0}, 
+             {0, 0, 0, 0, 0, 0, 0, 0}}};
+}
+
 TEST(generate_path, same_start_and_goal) {
 
     // GIVEN a costmap and the same start and goal
-    Map<unsigned char> sample_costmap = {{0, 0, 0, 0, 0, 0, 0, 0},
-                               {0, 0, 0, 1, 0, 0, 0, 0}, 
-                               {0, 0, 0, 1, 0, 0, 0, 0}, 
-                               {0, 0, 1, 1, 1, 0, 0, 0}, 
-                               {0, 0, 1, 0, 1, 1, 0, 0}, 
-                               {0, 0, 1, 0, 0, 0, 0, 0}, 
-                               {0, 0, 0, 0, 0, 0, 0, 0}, 
-                               {0, 0, 0, 0, 0, 0, 0, 0}};        
+    auto const sample_costmap = get_test_costmap();
 
     Position const start {0, 0};
     Position const goal {0, 0};
@@ -85,6 +109,37 @@ TEST(generate_path, same_start_and_goal) {
 
     // THEN the path should have one element, which is the start/goal position
     std::vector<Position> expected {{0, 0}};
+    EXPECT_EQ(path.value(), expected) << path.value();
+}
+
+TEST(generate_path, no_path) {
+
+    // GIVEN a costmap AND a start and goal position
+    auto const sample_costmap = get_test_costmap();
+
+    Position const start {2, 2};
+    Position const goal {5, 5};
+
+    // WHEN the global path is produced
+    auto const& path = generate_global_path(start, goal, sample_costmap);    
+
+    // THEN the path should not have been generated
+    EXPECT_FALSE(path.has_value()) << path.value();
+}
+
+TEST(generate_path, path_generated) {
+
+    // GIVEN a costmap AND a start and goal position
+    auto const sample_costmap = get_test_costmap();
+
+    Position const start {0, 0};
+    Position const goal {7, 7};
+
+    // WHEN the global path is produced
+    auto const& path = generate_global_path(start, goal, sample_costmap);    
+
+    // THEN the path should have a valid path from start to the goal
+    std::vector<Position> expected {{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {7, 1}, {7, 2}, {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}};
     EXPECT_EQ(path.value(), expected) << path.value();
 }
 
