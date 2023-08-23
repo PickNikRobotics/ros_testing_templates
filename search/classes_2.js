@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['server_5fgoal_47',['server_goal',['../structrcl__handle_1_1interface_1_1server__goal.html',1,'rcl_handle::interface::server_goal&lt; T &gt;'],['../structrcl__handle_1_1server__goal.html',1,'rcl_handle::server_goal&lt; T &gt;']]]
+  ['map_69',['Map',['../classMap.html',1,'']]],
+  ['map_3c_20unsigned_20char_20_3e_70',['Map&lt; unsigned char &gt;',['../classMap.html',1,'']]]
 ];
