@@ -1,0 +1,5 @@
+std_msgs/UInt8MultiArray start
+std_msgs/UInt8MultiArray goal
+---
+std_msgs/Bool success
+std_msgs/UInt8MultiArray path
