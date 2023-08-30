@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-ARG ROS_DISTRO="foxy"
+ARG ROS_DISTRO="humble"
 FROM ros:${ROS_DISTRO}-ros-base AS upstream
 # Restate for later use
 ARG ROS_DISTRO
