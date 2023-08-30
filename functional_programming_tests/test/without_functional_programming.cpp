@@ -55,22 +55,10 @@ bool operator==(Position const& lhs, Position const& rhs) {
 
 class PathGenerator : public rclcpp::Node {
 public:
-	PathGenerator() : Node("wo_fp_server"), executor_(std::make_shared<rclcpp::executors::SingleThreadedExecutor>()) {
+	PathGenerator() : Node("wo_fp_server") {
 		// Services for setting the map and generating the path       
 		map_setter_service_ = this->create_service<example_srvs::srv::SetMap>("set_costmap", std::bind(&PathGenerator::set_map_service, this, std::placeholders::_1, std::placeholders::_2));
 		path_generator_service_ = this->create_service<example_srvs::srv::GetPath>("generate_global_path", std::bind(&PathGenerator::generate_path_service, this, std::placeholders::_1, std::placeholders::_2));		
-	}
-
-	// TODO: The thread spinning portion should be removed. Pretty sure there is another way to spin this node
-	void add_and_spin_thread() {
-		// Let the node spin to execute service requests
-		executor_->add_node(this->shared_from_this());
-		executor_thread_ = std::thread([this]() { executor_->spin(); });
-	}
-
-	~PathGenerator() {
-		executor_->cancel();
-		executor_thread_.join();		
 	}
 
 	void set_map_service(const std::shared_ptr<example_srvs::srv::SetMap::Request> request,
@@ -198,8 +186,8 @@ private:
 		return path;
 	}	
 
-	rclcpp::Executor::SharedPtr executor_;
-	std::thread executor_thread_;
+	// rclcpp::Executor::SharedPtr executor_;
+	// std::thread executor_thread_;
 
 	Map<unsigned char> map_;
 
@@ -236,16 +224,17 @@ public:
 
 	// TODO: Remove this stuff also, the executor stuff isn't explicitly needed 
 	void SetUp() override {
-		// executor_->add_node(node_);
-		// executor_thread_ = std::thread([this]() { executor_->spin(); });
+		// Need the server to take commands for testing
+		executor_->add_node(pg_);
+		executor_thread_ = std::thread([this]() { executor_->spin(); });
 
-		pg_->add_and_spin_thread();
+		// pg_->add_and_spin_thread();
 	}
 
     // Cleanup actions that could throw an exception
 	void TearDown() override {
-		// executor_->cancel();
-		// executor_thread_.join();
+		executor_->cancel();
+		executor_thread_.join();
 	}
 
 	void populateAndSetMap() {
