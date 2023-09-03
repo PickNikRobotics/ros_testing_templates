@@ -1,4 +1,5 @@
 #include "naive/incrementer.hpp"
+#include "naive/ros_middleware.hpp"
 
 #include <memory>
 
@@ -6,20 +7,12 @@
 
 #include <std_msgs/msg/int64.hpp>
 
-namespace {
-constexpr auto queue_size = 10;
-}
-
-Incrementer::Incrementer(std::shared_ptr<rclcpp::Node> node,
-                         std::string const& in_topic,
-                         std::string const& out_topic)
-    : node_{std::move(node)},
-      pub_{
-          node_->create_publisher<std_msgs::msg::Int64>(out_topic, queue_size)},
-      sub_{node_->create_subscription<std_msgs::msg::Int64>(
-          in_topic, queue_size,
-          [this](std_msgs::msg::Int64::UniquePtr const msg) {
+Incrementer::Incrementer(std::unique_ptr<MiddlewareHandle> mw)
+    : mw_{std::move(mw)}
+      {
+        mw_->registerCallback([this](const std_msgs::msg::Int64::SharedPtr msg) {
             std_msgs::msg::Int64 incremented;
             incremented.data = msg->data + 1;
-            pub_->publish(incremented);
-          })} {}
+            mw_->publish(incremented);
+          });
+      }

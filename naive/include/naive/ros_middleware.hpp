@@ -33,33 +33,24 @@
  *********************************************************************/
 #pragma once
 
-#include <memory>
 #include <string>
 
 #include <rclcpp/rclcpp.hpp>
+#include <naive/incrementer.hpp>
 
 #include <std_msgs/msg/int64.hpp>
 
-class Incrementer {
- public:
+class RosMiddleware : public Incrementer::MiddlewareHandle {
+public: 
+  RosMiddleware(const rclcpp::Node::SharedPtr node_handle, std::string in_topic,
+                const std::string& out_topic);
+  void registerCallback(Callback cb) override;
+  void publish(std_msgs::msg::Int64 msg) override;
 
-  /**
-   * @brief      An injectable Middleware Object
-   */
-  struct MiddlewareHandle {
-    using Callback = std::function<void(const std_msgs::msg::Int64::SharedPtr)>;
-    virtual void registerCallback(Callback cb) = 0;
-    virtual void publish(std_msgs::msg::Int64 msg) = 0;
-    virtual ~MiddlewareHandle() = default;
-  };
-
-  /**
-   * @brief      Incrementer constructor
-   *
-   * @param[in]  mw       Unique pointer to a MiddlewareHandle object
-   */
-  Incrementer(std::unique_ptr<MiddlewareHandle> mw);
-
- private:
-  std::unique_ptr<MiddlewareHandle> mw_;
+private:
+  static constexpr int QUEUE_SIZE = 10;
+  rclcpp::Node::SharedPtr node_handle_;
+  std::string in_topic_;
+  rclcpp::Subscription<std_msgs::msg::Int64>::SharedPtr subscriber_;
+  rclcpp::Publisher<std_msgs::msg::Int64>::SharedPtr publisher_;
 };
