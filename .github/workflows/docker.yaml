@@ -15,7 +15,7 @@ jobs:
   upstream:
     strategy:
       matrix:
-        ros_distro: [foxy, humble, rolling]
+        ros_distro: [humble, rolling]
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo

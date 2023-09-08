@@ -12,6 +12,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get install -q -y --no-install-recommends \
         apt-utils \
+        ccache \
         clang \
         cmake \
         git \
@@ -58,7 +59,6 @@ RUN if [ -z "$USER" ]; then echo '\nERROR: USER not set. Run \n\n \texport USER=
 RUN --mount=type=cache,target=/var/cache/apt,id=apt \
     apt-get update && apt-get upgrade -y \
     && apt-get install -q -y --no-install-recommends \
-        ccache \
         clang-format \
         clang-tidy \
         git \
