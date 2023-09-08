@@ -76,7 +76,7 @@ TL;DR</h1>
 <p><b>Note</b>: The <code>REPO</code> variable is defined in <code>.env</code></p>
 <div class="fragment"><div class="line">source .env</div>
 <div class="line">mkdir -p ~/.${REPO}/ccache</div>
-<div class="line">export UIDGID=$(id -u):$(id -g); docker compose -f compose.dev.yml build</div>
+<div class="line">export UID=$(id -u) export GID=$(id -g); docker compose -f compose.dev.yml build</div>
 </div><!-- fragment --><p> Start an interactive development container </p><div class="fragment"><div class="line">docker compose -f compose.dev.yml run development</div>
 </div><!-- fragment --><p> Build the repository in the container </p><div class="fragment"><div class="line">username@development-container-dev:~/ws$ colcon build</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
