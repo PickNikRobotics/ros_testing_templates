@@ -4,7 +4,8 @@ services:
   development:
     build:
       args:
-        UIDGID: ${UIDGID}
+        UID: ${UID}
+        GID: ${GID}
         USER: ${USER}
         REPO: ${REPO}
       context: .
@@ -13,6 +14,7 @@ services:
                       colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml &&
                       colcon mixin update &&
                       export PATH="/usr/lib/ccache:$PATH" &&
+                      source /opt/ros/humble/setup.bash &&
                       bash"
     container_name: ${USER}-${REPO}-dev
     environment:
@@ -26,14 +28,12 @@ services:
     image: ${REPO}-dev:latest
     network_mode: host
     privileged: true
-    user: ${UIDGID}
     volumes:
       - ~/.ssh:${HOME}/.ssh:ro
       - ~/.gitconfig:${HOME}/.gitconfig:ro
       - ${PWD}:${HOME}/ws/src/${REPO}
       - ~/.${REPO}/ccache:${HOME}/.ccache
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
-      - ${XDG_RUNTIME_DIR}:${XDG_RUNTIME_DIR}:ro
       - /etc/group:/etc/group:ro
       - /etc/passwd:/etc/passwd:ro
       - /etc/shadow:/etc/shadow:ro
