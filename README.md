@@ -11,7 +11,7 @@ Build a new development image
 ```
 source .env
 mkdir -p ~/.${REPO}/ccache
-export UIDGID=$(id -u):$(id -g); docker compose -f compose.dev.yml build
+export UID=$(id -u) export GID=$(id -g); docker compose -f compose.dev.yml build
 ```
 Start an interactive development container
 ```
