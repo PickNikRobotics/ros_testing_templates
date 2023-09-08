@@ -224,11 +224,10 @@ public:
 
 	// TODO: Remove this stuff also, the executor stuff isn't explicitly needed 
 	void SetUp() override {
-		// Need the server to take commands for testing
+		// Need the server to be spinning so the path planner can be tested
 		executor_->add_node(pg_);
 		executor_thread_ = std::thread([this]() { executor_->spin(); });
 
-		// pg_->add_and_spin_thread();
 	}
 
     // Cleanup actions that could throw an exception
