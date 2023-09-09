@@ -72,36 +72,36 @@ $(function() {
 <div class="contents">
 <a href="basic__test_8test_8py.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno"><a class="line" href="namespacebasic__test.html">    1</a></span>&#160;<span class="comment"># -*- coding: utf-8 -*-</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">import</span> launch</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">from</span> launch.actions <span class="keyword">import</span> TimerAction</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">from</span> launch.substitutions <span class="keyword">import</span> PathJoinSubstitution</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">from</span> launch_ros.actions <span class="keyword">import</span> Node</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">import</span> launch_testing</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">import</span> os</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">import</span> sys</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">import</span> unittest</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="namespacebasic__test.html#a625b2a06a948140d502b53ecb0d527a0">   12</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacebasic__test.html#a625b2a06a948140d502b53ecb0d527a0">generate_test_description</a>():</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    basic_test = Node(</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        executable=launch.substitutions.PathJoinSubstitution(</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            [</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                launch.substitutions.LaunchConfiguration(<span class="stringliteral">&quot;test_binary_dir&quot;</span>),</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                <span class="stringliteral">&quot;basic_test&quot;</span>,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            ]</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        ),</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        output=<span class="stringliteral">&quot;screen&quot;</span>,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    )</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">return</span> launch.LaunchDescription(</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        [</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            launch.actions.DeclareLaunchArgument(</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                name=<span class="stringliteral">&quot;test_binary_dir&quot;</span>,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                description=<span class="stringliteral">&quot;Binary directory of package &quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="stringliteral">&quot;containing test executables&quot;</span>,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            ),</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            basic_test,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="comment"># TimerAction(period=2.0, actions=[basic_test]),</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">from</span> launch_ros.actions <span class="keyword">import</span> Node</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">import</span> launch_testing</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">import</span> unittest</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="namespacebasic__test.html#a625b2a06a948140d502b53ecb0d527a0">    8</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacebasic__test.html#a625b2a06a948140d502b53ecb0d527a0">generate_test_description</a>():</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    basic_test = Node(</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        executable=launch.substitutions.PathJoinSubstitution(</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            [</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;                launch.substitutions.LaunchConfiguration(<span class="stringliteral">&quot;test_binary_dir&quot;</span>),</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;                <span class="stringliteral">&quot;basic_test&quot;</span>,</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            ]</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        ),</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        output=<span class="stringliteral">&quot;screen&quot;</span>,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    )</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">return</span> launch.LaunchDescription(</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        [</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            launch.actions.DeclareLaunchArgument(</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                name=<span class="stringliteral">&quot;test_binary_dir&quot;</span>,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                description=<span class="stringliteral">&quot;Binary directory of package &quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                <span class="stringliteral">&quot;containing test executables&quot;</span>,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            ),</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            basic_test,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="comment"># In tests where all of the procs under tests terminate themselves, it&#39;s necessary</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="comment"># to add a dummy process not under test to keep the launch alive. launch_test</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="comment"># provides a simple launch action that does this:</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="comment"># https://github.com/ros2/launch/blob/aed025e04e0b143362c69bf29a67b2ffff4c59ee/launch_testing/test/launch_testing/examples/args_launch_test.py#L63</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            launch_testing.util.KeepAliveProc(),</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            launch_testing.actions.ReadyToTest(),</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        ]</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    ), {</div>
@@ -124,7 +124,7 @@ $(function() {
 <div class="ttc" id="aclassbasic__test_1_1TestGTestProcessPostShutdown_html_ac5baed1ddb40a331669539d5af26bc95"><div class="ttname"><a href="classbasic__test_1_1TestGTestProcessPostShutdown.html#ac5baed1ddb40a331669539d5af26bc95">basic_test.TestGTestProcessPostShutdown.test_gtest_pass</a></div><div class="ttdeci">def test_gtest_pass(self, proc_info, basic_test)</div><div class="ttdef"><b>Definition:</b> <a href="basic__test_8test_8py_source.html#l00049">basic_test.test.py:49</a></div></div>
 <div class="ttc" id="aclassbasic__test_1_1TestGTestWaitForCompletion_html"><div class="ttname"><a href="classbasic__test_1_1TestGTestWaitForCompletion.html">basic_test.TestGTestWaitForCompletion</a></div><div class="ttdef"><b>Definition:</b> <a href="basic__test_8test_8py_source.html#l00040">basic_test.test.py:40</a></div></div>
 <div class="ttc" id="aclassbasic__test_1_1TestGTestWaitForCompletion_html_a0ef1c0088910bf11da1179841671ec49"><div class="ttname"><a href="classbasic__test_1_1TestGTestWaitForCompletion.html#a0ef1c0088910bf11da1179841671ec49">basic_test.TestGTestWaitForCompletion.test_gtest_run_complete</a></div><div class="ttdeci">def test_gtest_run_complete(self, basic_test)</div><div class="ttdef"><b>Definition:</b> <a href="basic__test_8test_8py_source.html#l00042">basic_test.test.py:42</a></div></div>
-<div class="ttc" id="anamespacebasic__test_html_a625b2a06a948140d502b53ecb0d527a0"><div class="ttname"><a href="namespacebasic__test.html#a625b2a06a948140d502b53ecb0d527a0">basic_test.generate_test_description</a></div><div class="ttdeci">def generate_test_description()</div><div class="ttdef"><b>Definition:</b> <a href="basic__test_8test_8py_source.html#l00012">basic_test.test.py:12</a></div></div>
+<div class="ttc" id="anamespacebasic__test_html_a625b2a06a948140d502b53ecb0d527a0"><div class="ttname"><a href="namespacebasic__test.html#a625b2a06a948140d502b53ecb0d527a0">basic_test.generate_test_description</a></div><div class="ttdeci">def generate_test_description()</div><div class="ttdef"><b>Definition:</b> <a href="basic__test_8test_8py_source.html#l00008">basic_test.test.py:8</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

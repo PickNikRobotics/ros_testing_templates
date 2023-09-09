@@ -70,163 +70,164 @@ $(function() {
 <div class="title">with_functional_programming.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="with__functional__programming_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;gtest/gtest.h&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<a href="with__functional__programming_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;optional&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;optional&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;gtest/gtest.h&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// production_code.h/cc</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// X, Y position</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structPosition.html">   10</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structPosition.html">Position</a> {</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">   11</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">x</a>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">   12</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">y</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">   11</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">x</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">   12</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">y</a>;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;};</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classMap.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMap.html">Map</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classMap.html#ab1b73c0b8cbe7b8dbc8531de49632c68">   19</a></span>&#160;    <a class="code" href="classMap.html#ab1b73c0b8cbe7b8dbc8531de49632c68">Map</a>(std::vector&lt;std::vector&lt;T&gt;&gt; data): data_{data} {};</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classMap.html#aa413a560ed38b04073317ef9370c4bf8">   20</a></span>&#160;    T <a class="code" href="classMap.html#aa413a560ed38b04073317ef9370c4bf8">at</a>(<a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span>&amp; pos)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordflow">return</span> data_.at(pos.<a class="code" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">y</a>).at(pos.<a class="code" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">x</a>);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    std::vector&lt;std::vector&lt;T&gt;&gt; data_;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classMap.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMap.html">Map</a> {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classMap.html#ab1b73c0b8cbe7b8dbc8531de49632c68">   18</a></span>&#160;  <a class="code" href="classMap.html#ab1b73c0b8cbe7b8dbc8531de49632c68">Map</a>(std::vector&lt;std::vector&lt;T&gt;&gt; data) : data_{data} {};</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classMap.html#aa413a560ed38b04073317ef9370c4bf8">   19</a></span>&#160;  T <a class="code" href="classMap.html#aa413a560ed38b04073317ef9370c4bf8">at</a>(<a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span>&amp; pos)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> data_.at(pos.<a class="code" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">y</a>).at(pos.<a class="code" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">x</a>); }</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  std::vector&lt;std::vector&lt;T&gt;&gt; data_;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;};</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#a60848628ff9c6842db4263d71f931f2d">   25</a></span>&#160;<span class="keyword">using</span> <a class="code" href="with__functional__programming_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> = std::vector&lt;Position&gt;;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#a60848628ff9c6842db4263d71f931f2d">   27</a></span>&#160;<span class="keyword">using</span> <a class="code" href="with__functional__programming_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> = std::vector&lt;Position&gt;;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Operator overload to print path</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#a05a10562dc2e99df0c24f65933fc348c">   30</a></span>&#160;std::ostream&amp; <a class="code" href="with__functional__programming_8cpp.html#a05a10562dc2e99df0c24f65933fc348c">operator&lt;&lt;</a>(std::ostream&amp; os, std::vector&lt;Position&gt; <span class="keyword">const</span>&amp; path) {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span>&amp; pose:path) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        os &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; pose.x &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; pose.y &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">return</span> os;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// Operator overload for position comparison</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#a3e007b59836e67e754028ad52344cf1c">   38</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="with__functional__programming_8cpp.html#a3e007b59836e67e754028ad52344cf1c">operator==</a>(<a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span>&amp; lhs, <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span>&amp; rhs) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">return</span> lhs.<a class="code" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">x</a> == rhs.<a class="code" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">x</a> &amp;&amp; lhs.<a class="code" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">y</a> == rhs.<a class="code" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">y</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// From the Robot, goal and costmap, generate a trajectory (Deterministic calculation)</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">   43</a></span>&#160;std::optional&lt;Path&gt; <a class="code" href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">generate_global_path</a>(<a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span>&amp; start, <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span>&amp; goal , <a class="code" href="classMap.html">Map&lt;unsigned char&gt;</a> <span class="keyword">const</span>&amp; costmap) { <span class="comment">// Calculation</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">// Some cool and nifty algorithm</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// What is the delta in position</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> del_x = goal.<a class="code" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">x</a> - start.<a class="code" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">x</a>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> del_y = goal.<a class="code" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">y</a> - start.<a class="code" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">y</a>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">// What direction to move in for each dimension</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> del_x_sign = std::copysign(1.0, del_x);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">const</span> del_y_sign = std::copysign(1.0, del_y);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">// Push start onto the path</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="with__functional__programming_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> path;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    path.push_back(start);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">auto</span> is_occupied = [&amp;costmap](<span class="keyword">auto</span> <span class="keyword">const</span> x, <span class="keyword">auto</span> <span class="keyword">const</span> y) -&gt; <span class="keywordtype">bool</span> {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordflow">return</span> costmap.<a class="code" href="classMap.html#aa413a560ed38b04073317ef9370c4bf8">at</a>(<a class="code" href="structPosition.html">Position</a>{x, y}) == 1;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    };</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">// Fails if there is any obstacle in the way</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">// Move horizontally</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; (std::abs(del_x)); ++i) {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">if</span> (is_occupied(path.back().x + del_x_sign, path.back().y)) {        </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        }        </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        path.push_back({path.back().x + del_x_sign, path.back().y});</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// Move vertically</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; (std::abs(del_y)); i++) {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="comment">// if (costmap.at(Position{path.back().x, path.back().y + del_y_sign}) == 1) {</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">if</span> (is_occupied(path.back().x, path.back().y + del_y_sign)) {            </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        }            </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        path.push_back({path.back().x, path.back().y + del_y_sign});</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">// Operator overload to print path</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#a05a10562dc2e99df0c24f65933fc348c">   28</a></span>&#160;std::ostream&amp; <a class="code" href="with__functional__programming_8cpp.html#a05a10562dc2e99df0c24f65933fc348c">operator&lt;&lt;</a>(std::ostream&amp; os, std::vector&lt;Position&gt; <span class="keyword">const</span>&amp; path) {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span>&amp; pose : path) {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; pose.x &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; pose.y &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  }</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordflow">return</span> os;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// Operator overload for position comparison</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#a3e007b59836e67e754028ad52344cf1c">   36</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="with__functional__programming_8cpp.html#a3e007b59836e67e754028ad52344cf1c">operator==</a>(<a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span>&amp; lhs, <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span>&amp; rhs) {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordflow">return</span> lhs.<a class="code" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">x</a> == rhs.<a class="code" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">x</a> &amp;&amp; lhs.<a class="code" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">y</a> == rhs.<a class="code" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">y</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// From the Robot, goal and costmap, generate a trajectory (Deterministic</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// calculation)</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">   42</a></span>&#160;std::optional&lt;Path&gt; <a class="code" href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">generate_global_path</a>(</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span>&amp; start, <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span>&amp; goal,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classMap.html">Map&lt;unsigned char&gt;</a> <span class="keyword">const</span>&amp; costmap) {  <span class="comment">// Calculation</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="comment">// Some cool and nifty algorithm</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">// What is the delta in position</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">int</span> <span class="keyword">const</span> del_x = goal.<a class="code" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">x</a> - start.<a class="code" href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">x</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordtype">int</span> <span class="keyword">const</span> del_y = goal.<a class="code" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">y</a> - start.<a class="code" href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">y</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="comment">// What direction to move in for each dimension</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordtype">int</span> <span class="keyword">const</span> del_x_sign = std::copysign(1.0, del_x);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">int</span> <span class="keyword">const</span> del_y_sign = std::copysign(1.0, del_y);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="comment">// Push start onto the path</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="with__functional__programming_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> path;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  path.push_back(start);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keyword">auto</span> is_occupied = [&amp;costmap](<span class="keyword">auto</span> <span class="keyword">const</span> x, <span class="keyword">auto</span> <span class="keyword">const</span> y) -&gt; <span class="keywordtype">bool</span> {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> costmap.<a class="code" href="classMap.html#aa413a560ed38b04073317ef9370c4bf8">at</a>(<a class="code" href="structPosition.html">Position</a>{x, y}) == 1;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  };</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="comment">// Fails if there is any obstacle in the way</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="comment">// Move horizontally</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; (std::abs(del_x)); ++i) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> (is_occupied(path.back().x + del_x_sign, path.back().y)) {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    path.push_back({path.back().x + del_x_sign, path.back().y});</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="comment">// Move vertically</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; (std::abs(del_y)); i++) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">// if (costmap.at(Position{path.back().x, path.back().y + del_y_sign}) == 1)</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="comment">// {</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">if</span> (is_occupied(path.back().x, path.back().y + del_y_sign)) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keywordflow">return</span> std::nullopt;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> path;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">// test.cc</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    path.push_back({path.back().x, path.back().y + del_y_sign});</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">return</span> path;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#aec73e2c9df71eca09eb47b2a2c4ec1ee">   88</a></span>&#160;<a class="code" href="classMap.html">Map&lt;unsigned char&gt;</a> <a class="code" href="with__functional__programming_8cpp.html#aec73e2c9df71eca09eb47b2a2c4ec1ee">get_test_costmap</a>() {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">return</span> {{{0, 0, 0, 0, 0, 0, 0, 0},</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;             {0, 0, 0, 1, 0, 0, 0, 0}, </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;             {0, 0, 0, 1, 0, 0, 0, 0}, </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;             {0, 0, 1, 1, 1, 0, 0, 0}, </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;             {0, 0, 1, 0, 1, 1, 0, 0}, </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;             {0, 0, 1, 0, 0, 0, 0, 0}, </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;             {0, 0, 0, 0, 0, 0, 0, 0}, </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;             {0, 0, 0, 0, 0, 0, 0, 0}}};</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#a5c5d8b847985c1d8132d96c520c7cbd6">   99</a></span>&#160;<a class="code" href="with__functional__programming_8cpp.html#a5c5d8b847985c1d8132d96c520c7cbd6">TEST</a>(generate_path, same_start_and_goal) {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">// test.cc</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#aec73e2c9df71eca09eb47b2a2c4ec1ee">   90</a></span>&#160;<a class="code" href="classMap.html">Map&lt;unsigned char&gt;</a> <a class="code" href="with__functional__programming_8cpp.html#aec73e2c9df71eca09eb47b2a2c4ec1ee">get_test_costmap</a>() {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordflow">return</span> {{{0, 0, 0, 0, 0, 0, 0, 0},</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;           {0, 0, 0, 1, 0, 0, 0, 0},</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;           {0, 0, 0, 1, 0, 0, 0, 0},</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;           {0, 0, 1, 1, 1, 0, 0, 0},</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;           {0, 0, 1, 0, 1, 1, 0, 0},</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;           {0, 0, 1, 0, 0, 0, 0, 0},</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;           {0, 0, 0, 0, 0, 0, 0, 0},</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;           {0, 0, 0, 0, 0, 0, 0, 0}}};</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="comment">// GIVEN a costmap and the same start and goal</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">auto</span> <span class="keyword">const</span> sample_costmap = <a class="code" href="with__functional__programming_8cpp.html#aec73e2c9df71eca09eb47b2a2c4ec1ee">get_test_costmap</a>();</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span> start {0, 0};</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span> goal {0, 0};</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="comment">// WHEN the global path is produced</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keyword">auto</span> <span class="keyword">const</span>&amp; path = <a class="code" href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">generate_global_path</a>(start, goal, sample_costmap);    </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="comment">// THEN the path should have one element, which is the start/goal position</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    std::vector&lt;Position&gt; expected {{0, 0}};</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    EXPECT_EQ(path.value(), expected) &lt;&lt; path.value();</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#a87baa8b4699e70dbe90e8df580096978">  115</a></span>&#160;<a class="code" href="with__functional__programming_8cpp.html#a5c5d8b847985c1d8132d96c520c7cbd6">TEST</a>(generate_path, no_path) {</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="comment">// GIVEN a costmap AND a start and goal position</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">auto</span> <span class="keyword">const</span> sample_costmap = <a class="code" href="with__functional__programming_8cpp.html#aec73e2c9df71eca09eb47b2a2c4ec1ee">get_test_costmap</a>();</div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#a5c5d8b847985c1d8132d96c520c7cbd6">  101</a></span>&#160;<a class="code" href="with__functional__programming_8cpp.html#a5c5d8b847985c1d8132d96c520c7cbd6">TEST</a>(generate_path, same_start_and_goal) {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="comment">// GIVEN a costmap and the same start and goal</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="keyword">auto</span> <span class="keyword">const</span> sample_costmap = <a class="code" href="with__functional__programming_8cpp.html#aec73e2c9df71eca09eb47b2a2c4ec1ee">get_test_costmap</a>();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span> start{0, 0};</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span> goal{0, 0};</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="comment">// WHEN the global path is produced</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <span class="keyword">auto</span> <span class="keyword">const</span>&amp; path = <a class="code" href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">generate_global_path</a>(start, goal, sample_costmap);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="comment">// THEN the path should have one element, which is the start/goal position</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  std::vector&lt;Position&gt; expected{{0, 0}};</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  EXPECT_EQ(path.value(), expected) &lt;&lt; path.value();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#a87baa8b4699e70dbe90e8df580096978">  116</a></span>&#160;<a class="code" href="with__functional__programming_8cpp.html#a5c5d8b847985c1d8132d96c520c7cbd6">TEST</a>(generate_path, no_path) {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <span class="comment">// GIVEN a costmap AND a start and goal position</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="keyword">auto</span> <span class="keyword">const</span> sample_costmap = <a class="code" href="with__functional__programming_8cpp.html#aec73e2c9df71eca09eb47b2a2c4ec1ee">get_test_costmap</a>();</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span> start {2, 2};</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span> goal {5, 5};</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span> start{2, 2};</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span> goal{5, 5};</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="comment">// WHEN the global path is produced</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">auto</span> <span class="keyword">const</span>&amp; path = <a class="code" href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">generate_global_path</a>(start, goal, sample_costmap);    </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="comment">// WHEN the global path is produced</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="keyword">auto</span> <span class="keyword">const</span>&amp; path = <a class="code" href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">generate_global_path</a>(start, goal, sample_costmap);</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="comment">// THEN the path should not have been generated</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    EXPECT_FALSE(path.has_value()) &lt;&lt; path.value();</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="comment">// THEN the path should not have been generated</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  EXPECT_FALSE(path.has_value()) &lt;&lt; path.value();</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
 <div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#ab88447652cbf1dacb32d1c2209177d72">  130</a></span>&#160;<a class="code" href="with__functional__programming_8cpp.html#a5c5d8b847985c1d8132d96c520c7cbd6">TEST</a>(generate_path, path_generated) {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="comment">// GIVEN a costmap AND a start and goal position</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keyword">auto</span> <span class="keyword">const</span> sample_costmap = <a class="code" href="with__functional__programming_8cpp.html#aec73e2c9df71eca09eb47b2a2c4ec1ee">get_test_costmap</a>();</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span> start {0, 0};</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span> goal {7, 7};</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="comment">// WHEN the global path is produced</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keyword">auto</span> <span class="keyword">const</span>&amp; path = <a class="code" href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">generate_global_path</a>(start, goal, sample_costmap);    </div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="comment">// THEN the path should have a valid path from start to the goal</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    std::vector&lt;Position&gt; expected {{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {7, 1}, {7, 2}, {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}};</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    EXPECT_EQ(path.value(), expected) &lt;&lt; path.value();</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;}</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">  146</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="with__functional__programming_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv) {</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    ::testing::InitGoogleTest(&amp;argc, argv);</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordflow">return</span> RUN_ALL_TESTS();</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;}</div>
-<div class="ttc" id="aclassMap_html"><div class="ttname"><a href="classMap.html">Map</a></div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00016">with_functional_programming.cpp:17</a></div></div>
-<div class="ttc" id="aclassMap_html_aa413a560ed38b04073317ef9370c4bf8"><div class="ttname"><a href="classMap.html#aa413a560ed38b04073317ef9370c4bf8">Map::at</a></div><div class="ttdeci">T at(Position const &amp;pos) const</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00020">with_functional_programming.cpp:20</a></div></div>
-<div class="ttc" id="aclassMap_html_ab1b73c0b8cbe7b8dbc8531de49632c68"><div class="ttname"><a href="classMap.html#ab1b73c0b8cbe7b8dbc8531de49632c68">Map::Map</a></div><div class="ttdeci">Map(std::vector&lt; std::vector&lt; T &gt;&gt; data)</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00019">with_functional_programming.cpp:19</a></div></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <span class="comment">// GIVEN a costmap AND a start and goal position</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="keyword">auto</span> <span class="keyword">const</span> sample_costmap = <a class="code" href="with__functional__programming_8cpp.html#aec73e2c9df71eca09eb47b2a2c4ec1ee">get_test_costmap</a>();</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span> start{0, 0};</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <a class="code" href="structPosition.html">Position</a> <span class="keyword">const</span> goal{7, 7};</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  <span class="comment">// WHEN the global path is produced</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  <span class="keyword">auto</span> <span class="keyword">const</span>&amp; path = <a class="code" href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">generate_global_path</a>(start, goal, sample_costmap);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  <span class="comment">// THEN the path should have a valid path from start to the goal</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  std::vector&lt;Position&gt; expected{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                                 {5, 0}, {6, 0}, {7, 0}, {7, 1}, {7, 2},</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                                 {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}};</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;  EXPECT_EQ(path.value(), expected) &lt;&lt; path.value();</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="with__functional__programming_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">  147</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="with__functional__programming_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv) {</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  ::testing::InitGoogleTest(&amp;argc, argv);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="keywordflow">return</span> RUN_ALL_TESTS();</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
+<div class="ttc" id="aclassMap_html"><div class="ttname"><a href="classMap.html">Map</a></div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00016">with_functional_programming.cpp:16</a></div></div>
+<div class="ttc" id="aclassMap_html_aa413a560ed38b04073317ef9370c4bf8"><div class="ttname"><a href="classMap.html#aa413a560ed38b04073317ef9370c4bf8">Map::at</a></div><div class="ttdeci">T at(Position const &amp;pos) const</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00019">with_functional_programming.cpp:19</a></div></div>
+<div class="ttc" id="aclassMap_html_ab1b73c0b8cbe7b8dbc8531de49632c68"><div class="ttname"><a href="classMap.html#ab1b73c0b8cbe7b8dbc8531de49632c68">Map::Map</a></div><div class="ttdeci">Map(std::vector&lt; std::vector&lt; T &gt;&gt; data)</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00018">with_functional_programming.cpp:18</a></div></div>
 <div class="ttc" id="astructPosition_html"><div class="ttname"><a href="structPosition.html">Position</a></div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00010">with_functional_programming.cpp:10</a></div></div>
 <div class="ttc" id="astructPosition_html_a5edee13009fd7ddd7d86ca143e032b15"><div class="ttname"><a href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">Position::y</a></div><div class="ttdeci">size_t y</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00012">with_functional_programming.cpp:12</a></div></div>
 <div class="ttc" id="astructPosition_html_ad5afbd3ed0d357957df26a1433685aec"><div class="ttname"><a href="structPosition.html#ad5afbd3ed0d357957df26a1433685aec">Position::x</a></div><div class="ttdeci">size_t x</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00011">with_functional_programming.cpp:11</a></div></div>
-<div class="ttc" id="awith__functional__programming_8cpp_html_a05a10562dc2e99df0c24f65933fc348c"><div class="ttname"><a href="with__functional__programming_8cpp.html#a05a10562dc2e99df0c24f65933fc348c">operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;os, std::vector&lt; Position &gt; const &amp;path)</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00030">with_functional_programming.cpp:30</a></div></div>
-<div class="ttc" id="awith__functional__programming_8cpp_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="with__functional__programming_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00146">with_functional_programming.cpp:146</a></div></div>
-<div class="ttc" id="awith__functional__programming_8cpp_html_a3e007b59836e67e754028ad52344cf1c"><div class="ttname"><a href="with__functional__programming_8cpp.html#a3e007b59836e67e754028ad52344cf1c">operator==</a></div><div class="ttdeci">bool operator==(Position const &amp;lhs, Position const &amp;rhs)</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00038">with_functional_programming.cpp:38</a></div></div>
-<div class="ttc" id="awith__functional__programming_8cpp_html_a5c5d8b847985c1d8132d96c520c7cbd6"><div class="ttname"><a href="with__functional__programming_8cpp.html#a5c5d8b847985c1d8132d96c520c7cbd6">TEST</a></div><div class="ttdeci">TEST(generate_path, same_start_and_goal)</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00099">with_functional_programming.cpp:99</a></div></div>
-<div class="ttc" id="awith__functional__programming_8cpp_html_a60848628ff9c6842db4263d71f931f2d"><div class="ttname"><a href="with__functional__programming_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a></div><div class="ttdeci">std::vector&lt; Position &gt; Path</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00027">with_functional_programming.cpp:27</a></div></div>
-<div class="ttc" id="awith__functional__programming_8cpp_html_ab3969c1538b2265d2c4b64ae1618c3ee"><div class="ttname"><a href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">generate_global_path</a></div><div class="ttdeci">std::optional&lt; Path &gt; generate_global_path(Position const &amp;start, Position const &amp;goal, Map&lt; unsigned char &gt; const &amp;costmap)</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00043">with_functional_programming.cpp:43</a></div></div>
-<div class="ttc" id="awith__functional__programming_8cpp_html_aec73e2c9df71eca09eb47b2a2c4ec1ee"><div class="ttname"><a href="with__functional__programming_8cpp.html#aec73e2c9df71eca09eb47b2a2c4ec1ee">get_test_costmap</a></div><div class="ttdeci">Map&lt; unsigned char &gt; get_test_costmap()</div><div class="ttdoc">Gets the test costmap.</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00088">with_functional_programming.cpp:88</a></div></div>
+<div class="ttc" id="awith__functional__programming_8cpp_html_a05a10562dc2e99df0c24f65933fc348c"><div class="ttname"><a href="with__functional__programming_8cpp.html#a05a10562dc2e99df0c24f65933fc348c">operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;os, std::vector&lt; Position &gt; const &amp;path)</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00028">with_functional_programming.cpp:28</a></div></div>
+<div class="ttc" id="awith__functional__programming_8cpp_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="with__functional__programming_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00147">with_functional_programming.cpp:147</a></div></div>
+<div class="ttc" id="awith__functional__programming_8cpp_html_a3e007b59836e67e754028ad52344cf1c"><div class="ttname"><a href="with__functional__programming_8cpp.html#a3e007b59836e67e754028ad52344cf1c">operator==</a></div><div class="ttdeci">bool operator==(Position const &amp;lhs, Position const &amp;rhs)</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00036">with_functional_programming.cpp:36</a></div></div>
+<div class="ttc" id="awith__functional__programming_8cpp_html_a5c5d8b847985c1d8132d96c520c7cbd6"><div class="ttname"><a href="with__functional__programming_8cpp.html#a5c5d8b847985c1d8132d96c520c7cbd6">TEST</a></div><div class="ttdeci">TEST(generate_path, same_start_and_goal)</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00101">with_functional_programming.cpp:101</a></div></div>
+<div class="ttc" id="awith__functional__programming_8cpp_html_a60848628ff9c6842db4263d71f931f2d"><div class="ttname"><a href="with__functional__programming_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a></div><div class="ttdeci">std::vector&lt; Position &gt; Path</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00025">with_functional_programming.cpp:25</a></div></div>
+<div class="ttc" id="awith__functional__programming_8cpp_html_ab3969c1538b2265d2c4b64ae1618c3ee"><div class="ttname"><a href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">generate_global_path</a></div><div class="ttdeci">std::optional&lt; Path &gt; generate_global_path(Position const &amp;start, Position const &amp;goal, Map&lt; unsigned char &gt; const &amp;costmap)</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00042">with_functional_programming.cpp:42</a></div></div>
+<div class="ttc" id="awith__functional__programming_8cpp_html_aec73e2c9df71eca09eb47b2a2c4ec1ee"><div class="ttname"><a href="with__functional__programming_8cpp.html#aec73e2c9df71eca09eb47b2a2c4ec1ee">get_test_costmap</a></div><div class="ttdeci">Map&lt; unsigned char &gt; get_test_costmap()</div><div class="ttdoc">Gets the test costmap.</div><div class="ttdef"><b>Definition:</b> <a href="with__functional__programming_8cpp_source.html#l00090">with_functional_programming.cpp:90</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
