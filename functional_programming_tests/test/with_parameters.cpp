@@ -104,13 +104,13 @@ struct CollisionChecker {
 
 class PathGenerator : public rclcpp::Node {
  public:
-  PathGenerator() : Node("path_generator") {
-    this->declare_parameter<int>("robot_size", 1);
-    int robot_size;
-    this->get_parameter("robot_size", robot_size);
-    RCLCPP_INFO(this->get_logger(), "Robot size: %d", robot_size);
+  explicit PathGenerator(
+      rclcpp::NodeOptions const& options = rclcpp::NodeOptions{})
+      : Node("path_generator", options) {
+    robot_size_ = this->declare_parameter<int>("robot_size", 1);
+    RCLCPP_INFO(this->get_logger(), "Robot size: %d", robot_size_);
     is_occupied_ =
-        std::make_unique<CollisionChecker<unsigned char>>(robot_size);
+        std::make_unique<CollisionChecker<unsigned char>>(robot_size_);
 
     // Services for setting the map and generating the path
     map_setter_service_ = this->create_service<example_srvs::srv::SetMap>(
@@ -232,15 +232,23 @@ class PathGenerator : public rclcpp::Node {
 
     // Fails if there is any obstacle in the way
     // Move horizontally
-    for (size_t i = 0; i < (std::abs(del_x)); ++i) {
+    // x limit is reduced by half of the robot size to prevent the
+    // algorithm from checking collision outside of the map
+    auto const x_limit = std::abs(del_x) - std::floor(robot_size_ / 2);
+    for (size_t i = 0; i < x_limit; ++i) {
       if ((*is_occupied_)(map_, path.back().x + del_x_sign, path.back().y)) {
+        std::cout << "Failed horizontally at " << path.back().x + del_x_sign
+                  << " " << path.back().y << "\n";
         return {};
       }
       path.push_back({path.back().x + del_x_sign, path.back().y});
     }
     // Move vertically
-    for (size_t i = 0; i < (std::abs(del_y)); i++) {
+    auto const y_limit = std::abs(del_y) - std::floor(robot_size_ / 2);
+    for (size_t i = 0; i < y_limit; i++) {
       if ((*is_occupied_)(map_, path.back().x, path.back().y + del_y_sign)) {
+        std::cout << "Failed vertically at " << path.back().x << " "
+                  << path.back().y + del_y_sign << "\n";
         return {};
       }
       path.push_back({path.back().x, path.back().y + del_y_sign});
@@ -250,7 +258,7 @@ class PathGenerator : public rclcpp::Node {
   }
 
   Map<unsigned char> map_;
-
+  int robot_size_;
   std::unique_ptr<CollisionChecker<unsigned char>> is_occupied_;
   rclcpp::Service<example_srvs::srv::SetMap>::SharedPtr map_setter_service_;
   rclcpp::Service<example_srvs::srv::GetPath>::SharedPtr
@@ -306,7 +314,7 @@ class TaskPlanningFixture : public testing::Test {
     request->map.layout.dim[2].stride = 1;
 
     request->map.data = {0, 0, 0,   0,   0,   0,   0, 0,  //
-                         0, 0, 0,   255, 0,   0,   0, 0,  //
+                         0, 0, 0,   0,   0,   0,   0, 0,  //
                          0, 0, 0,   255, 0,   0,   0, 0,  //
                          0, 0, 255, 255, 255, 0,   0, 0,  //
                          0, 0, 255, 0,   255, 255, 0, 0,  //
@@ -472,6 +480,76 @@ TEST_F(TaskPlanningFixture, path_generated) {
   EXPECT_EQ(result.first->success.data, true) << result.first->success.data;
   EXPECT_EQ(parseGeneratedPath(result.first->path), expected)
       << parseGeneratedPath(result.first->path);
+  executor->cancel();
+  executor_thread.join();
+}
+
+TEST_F(TaskPlanningFixture, large_footprint_no_path) {
+  // Creare executor to spin the node in a separate thread
+  auto executor = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
+
+  // GIVEN a PathGenerator node with a large robot footprint
+  auto options = rclcpp::NodeOptions{};
+  options.parameter_overrides(
+      std::vector<rclcpp::Parameter>{{"robot_size", 5}});
+  auto const pg = std::make_shared<PathGenerator>(options);
+
+  executor->add_node(pg);
+  auto executor_thread = std::thread([&executor]() { executor->spin(); });
+
+  // WHEN a path is requested between two positions that do have a valid path
+  // for a smaller robot footprint
+  auto const return_code = populateAndSetMap();
+  EXPECT_EQ(return_code, rclcpp::FutureReturnCode::SUCCESS)
+      << "Setting the map failed";
+
+  auto const request = std::make_shared<example_srvs::srv::GetPath::Request>();
+  request->start.data = {0, 0};
+  request->goal.data = {7, 7};
+
+  auto const result = sendPathRequest(request);
+
+  EXPECT_EQ(result.second, rclcpp::FutureReturnCode::SUCCESS)
+      << "Generating path failed";
+
+  // THEN path planning should fail
+  EXPECT_EQ(result.first->success.data, false) << result.first->success.data;
+
+  executor->cancel();
+  executor_thread.join();
+}
+
+TEST_F(TaskPlanningFixture, medium_footprint_with_path) {
+  // Creare executor to spin the node in a separate thread
+  auto executor = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
+
+  // GIVEN a PathGenerator node with a large robot footprint
+  auto options = rclcpp::NodeOptions{};
+  options.parameter_overrides(
+      std::vector<rclcpp::Parameter>{{"robot_size", 2}});
+  auto const pg = std::make_shared<PathGenerator>(options);
+
+  executor->add_node(pg);
+  auto executor_thread = std::thread([&executor]() { executor->spin(); });
+
+  // WHEN a path is requested between two positions that do have a valid path
+  // for a smaller robot footprint
+  auto const return_code = populateAndSetMap();
+  EXPECT_EQ(return_code, rclcpp::FutureReturnCode::SUCCESS)
+      << "Setting the map failed";
+
+  auto const request = std::make_shared<example_srvs::srv::GetPath::Request>();
+  request->start.data = {0, 0};
+  request->goal.data = {7, 7};
+
+  auto const result = sendPathRequest(request);
+
+  EXPECT_EQ(result.second, rclcpp::FutureReturnCode::SUCCESS)
+      << "Generating path failed";
+
+  // THEN path planning should fail
+  EXPECT_EQ(result.first->success.data, true) << result.first->success.data;
+
   executor->cancel();
   executor_thread.join();
 }

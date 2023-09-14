@@ -27,9 +27,8 @@ if(BUILD_TESTING)
   ament_add_gmock(with_dependency_injection test/with_dependency_injection.cpp TIMEOUT 5)
   ament_target_dependencies(with_dependency_injection rclcpp std_msgs example_srvs)
 
-  ament_add_gtest_executable(with_parameters test/with_parameters.cpp)
+  ament_add_gtest(with_parameters test/with_parameters.cpp TIMEOUT 5)
   ament_target_dependencies(with_parameters rclcpp std_msgs example_srvs)
-  add_launch_test(test/launch/with_parameters.test.py TIMEOUT 120 ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
 endif()
 
 ament_package()
