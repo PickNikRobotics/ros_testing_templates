@@ -13,6 +13,7 @@
   <depend>example_srvs</depend>
   <depend>rclcpp</depend>
   <depend>std_msgs</depend>
+  <depend>tl_expected</depend>
 
   <test_depend>ament_cmake_gtest</test_depend>
   <test_depend>ament_lint_auto</test_depend>
