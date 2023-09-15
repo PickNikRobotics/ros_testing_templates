@@ -117,13 +117,11 @@ class PathGenerator : public rclcpp::Node {
     response_path.layout.dim[2].size = 1;
     response_path.layout.dim[2].stride = 1;
 
-    if (!path.empty()){
-      // Start pushing back the path only if there is one
-      if (path.value().size() > 0) {
-        for (auto const& position : path.value()) {
-          response_path.data.push_back(position.x);
-          response_path.data.push_back(position.y);
-        }
+    // Start pushing back the path only if there is one
+    if (path.size() > 0) {
+      for (auto const& position : path) {
+        response_path.data.push_back(position.x);
+        response_path.data.push_back(position.y);
       }
     }
 
@@ -158,8 +156,8 @@ class PathGenerator : public rclcpp::Node {
   }
 
   // From the start and goal, generate a trajectory (Deterministic calculation)
-  Path generate_global_path(
-      Position const& start, Position const& goal) {  // Calculation
+  Path generate_global_path(Position const& start,
+                            Position const& goal) {  // Calculation
     // Some cool and nifty algorithm
     // What is the delta in position
     int const del_x = goal.x - start.x;

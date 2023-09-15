@@ -56,7 +56,7 @@ std::optional<Path> generate_global_path(
   path.push_back(start);
 
   auto is_occupied = [&costmap](auto const x, auto const y) -> bool {
-  return costmap.at(Position{x, y}) == 255;
+    return costmap.at(Position{x, y}) == 255;
   };
 
   // Fails if there is any obstacle in the way
