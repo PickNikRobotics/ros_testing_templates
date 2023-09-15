@@ -11,6 +11,9 @@ find_package(example_srvs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 
+add_executable(main test/main.cpp)
+ament_target_dependencies(main rclcpp std_msgs example_srvs)
+
 if(BUILD_TESTING)
   find_package(ament_cmake_gtest REQUIRED)
   find_package(ament_cmake_gmock REQUIRED)
