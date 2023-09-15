@@ -160,32 +160,34 @@ Map<unsigned char> set_costmap_callback(const std::shared_ptr<example_srvs::srv:
 // TODO: Edit this function such that the generate_path function is an input
 // TODO: Set the return  to be a std::expected with the various errors ()
 // TODO: Make a function that takes the error
-void generate_path_callback(const std::shared_ptr<example_srvs::srv::GetPath::Request> request,
-                           std::shared_ptr<example_srvs::srv::GetPath::Response> response,
-                           const Map<unsigned char>& costmap)
+std::shared_ptr<example_srvs::srv::GetPath::Response> generate_path_callback(
+                           const std::shared_ptr<example_srvs::srv::GetPath::Request> request,
+                           const Map<unsigned char>& costmap,
+                           std::function<std::optional<Path>(Position const&, Position const&, Map<unsigned char> const&)> path_generater_function)
 {
+  std::shared_ptr<example_srvs::srv::GetPath::Response> response = std::make_shared<example_srvs::srv::GetPath::Response>();
   if (costmap.get_data().size() == 0) {
     response->success.data = false;
     response->path = std_msgs::msg::UInt8MultiArray();
-    return;
+    return response;
   }
   // Check to make sure start and goal fields of the request are of size 2
   if (request->start.data.size() != 2) {
     response->success.data = false;
     response->path = std_msgs::msg::UInt8MultiArray();
-    return;
+    return response;
   }
   if (request->goal.data.size() != 2) {
     response->success.data = false;
     response->path = std_msgs::msg::UInt8MultiArray();
-    return;
+    return response;
   }
 
   auto const start = Position{request->start.data[0], request->start.data[1]};
   auto const goal = Position{request->goal.data[0], request->goal.data[1]};
 
-  // Generate the path
-  auto const path = PathGenerator::generate_global_path(start, goal, costmap);
+  // Generate the path using the path generator function that was input
+  auto const path = path_generater_function(start, goal, costmap);
 
   // Start populating the response message
   auto response_path = std_msgs::msg::UInt8MultiArray();
@@ -196,6 +198,8 @@ void generate_path_callback(const std::shared_ptr<example_srvs::srv::GetPath::Re
 
   response->success.data = path.has_value();
   response->path = response_path;
+
+  return response;
 }
 
 struct MainObject {
@@ -210,7 +214,7 @@ struct MainObject {
     [this](const std::shared_ptr<example_srvs::srv::GetPath::Request> request,
                std::shared_ptr<example_srvs::srv::GetPath::Response> response) -> void
     {
-      generate_path_callback(request, response, this->map_);
+      response = generate_path_callback(request, this->map_, PathGenerator::generate_global_path);
     }    
   }
   {}
