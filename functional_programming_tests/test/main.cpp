@@ -244,7 +244,7 @@ int main(int argc, char** argv) {
 
   rclcpp::Service<example_srvs::srv::GetPath>::SharedPtr get_path_service = node->create_service<example_srvs::srv::GetPath>("generate_global_path", mo.generate_path_wrapper_);
 
-  // rclcpp::spin(node);
-  // rclcpp::shutdown();
+  rclcpp::spin(node);
+  rclcpp::shutdown();
   return EXIT_SUCCESS;
 }
