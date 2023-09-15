@@ -52,10 +52,7 @@ bool operator==(Position const& lhs, Position const& rhs) {
 
 class PathGenerator : public rclcpp::Node {
  public:
-  PathGenerator()
-      : Node("wo_fp_server"),
-        executor_(
-            std::make_shared<rclcpp::executors::SingleThreadedExecutor>()) {
+  PathGenerator() : Node("path_generator_node") {
     // Services for setting the map and generating the path
     map_setter_service_ = this->create_service<example_srvs::srv::SetMap>(
         "set_costmap", std::bind(&PathGenerator::set_map_service, this,
@@ -66,24 +63,11 @@ class PathGenerator : public rclcpp::Node {
                   std::placeholders::_1, std::placeholders::_2));
   }
 
-  // TODO: The thread spinning portion should be removed. Pretty sure there is
-  // another way to spin this node
-  void add_and_spin_thread() {
-    // Let the node spin to execute service requests
-    executor_->add_node(this->shared_from_this());
-    executor_thread_ = std::thread([this]() { executor_->spin(); });
-  }
-
-  ~PathGenerator() {
-    executor_->cancel();
-    executor_thread_.join();
-  }
-
   void set_map_service(
       const std::shared_ptr<example_srvs::srv::SetMap::Request> request,
       std::shared_ptr<example_srvs::srv::SetMap::Response> response) {
     // Set the map to generate the path from
-    response->success.data = costmap_setter(request->map);
+    response->success.data = set_costmap(request->map);
   }
 
   void generate_path_service(
@@ -93,6 +77,7 @@ class PathGenerator : public rclcpp::Node {
       RCLCPP_ERROR_STREAM(this->get_logger(), "MAP IS EMPTY!!");
       response->success.data = false;
       response->path = std_msgs::msg::UInt8MultiArray();
+      return;
     }
     // Check to make sure start and goal fields of the request are of size 2
     if (request->start.data.size() != 2) {
@@ -118,21 +103,21 @@ class PathGenerator : public rclcpp::Node {
     // Start populating the response message
     auto response_path = std_msgs::msg::UInt8MultiArray();
 
-    if (path.has_value()) {
-      response_path.layout.dim.resize(3, std_msgs::msg::MultiArrayDimension());
+    response_path.layout.dim.resize(3, std_msgs::msg::MultiArrayDimension());
 
-      response_path.layout.dim[0].label = "rows";
-      response_path.layout.dim[0].size = path.value().size();
-      response_path.layout.dim[0].stride = path.value().size() * 2;
+    response_path.layout.dim[0].label = "rows";
+    response_path.layout.dim[0].size = path.size();
+    response_path.layout.dim[0].stride = path.size() * 2;
 
-      response_path.layout.dim[1].label = "columns";
-      response_path.layout.dim[1].size = 2;
-      response_path.layout.dim[1].stride = 1;
+    response_path.layout.dim[1].label = "columns";
+    response_path.layout.dim[1].size = 2;
+    response_path.layout.dim[1].stride = 1;
 
-      response_path.layout.dim[2].label = "channel";
-      response_path.layout.dim[2].size = 1;
-      response_path.layout.dim[2].stride = 1;
+    response_path.layout.dim[2].label = "channel";
+    response_path.layout.dim[2].size = 1;
+    response_path.layout.dim[2].stride = 1;
 
+    if (!path.empty()){
       // Start pushing back the path only if there is one
       if (path.value().size() > 0) {
         for (auto const& position : path.value()) {
@@ -142,14 +127,13 @@ class PathGenerator : public rclcpp::Node {
       }
     }
 
-    response->success.data = path.has_value();
+    response->success.data = !path.empty();
     response->path = response_path;
   }
 
  private:
   // Function that sets costmap
-  bool costmap_setter(
-      const std_msgs::msg::UInt8MultiArray& costmap) {  // Action
+  bool set_costmap(const std_msgs::msg::UInt8MultiArray& costmap) {  // Action
     // Get the costmap from a ros topic
     // Check that map layout makes sense
     if ((costmap.layout.dim[0].size * costmap.layout.dim[1].size) !=
@@ -174,7 +158,7 @@ class PathGenerator : public rclcpp::Node {
   }
 
   // From the start and goal, generate a trajectory (Deterministic calculation)
-  std::optional<Path> generate_global_path(
+  Path generate_global_path(
       Position const& start, Position const& goal) {  // Calculation
     // Some cool and nifty algorithm
     // What is the delta in position
@@ -190,32 +174,27 @@ class PathGenerator : public rclcpp::Node {
     path.push_back(start);
 
     auto is_occupied = [this](auto const x, auto const y) -> bool {
-      return this->map_.at(Position{x, y}) == 1;
+      return this->map_.at(Position{x, y}) == 255;
     };
 
     // Fails if there is any obstacle in the way
     // Move horizontally
     for (size_t i = 0; i < (std::abs(del_x)); ++i) {
       if (is_occupied(path.back().x + del_x_sign, path.back().y)) {
-        return std::nullopt;
+        return {};
       }
       path.push_back({path.back().x + del_x_sign, path.back().y});
     }
     // Move vertically
     for (size_t i = 0; i < (std::abs(del_y)); i++) {
-      // if (costmap.at(Position{path.back().x, path.back().y + del_y_sign}) ==
-      // 1) {
       if (is_occupied(path.back().x, path.back().y + del_y_sign)) {
-        return std::nullopt;
+        return {};
       }
       path.push_back({path.back().x, path.back().y + del_y_sign});
     }
 
     return path;
   }
-
-  rclcpp::Executor::SharedPtr executor_;
-  std::thread executor_thread_;
 
   Map<unsigned char> map_;
 
@@ -244,13 +223,9 @@ std::vector<Position> parseGeneratedPath(
 
 // TODO: clean up/fix up the Test Fixture class
 class TaskPlanningFixture : public testing::Test {
- public:
+ protected:
   // Adapted from minimal_integration_test
-  TaskPlanningFixture()
-      : node_(std::make_shared<rclcpp::Node>("wo_fp_client")),
-        executor_(
-            std::make_shared<rclcpp::executors::SingleThreadedExecutor>()),
-        pg_(std::make_shared<PathGenerator>()) {
+  TaskPlanningFixture() : node_(std::make_shared<rclcpp::Node>("test_client")) {
     // Create ROS2 clients to set the map and calculate the path
     map_setter_client_ =
         node_->create_client<example_srvs::srv::SetMap>("set_costmap");
@@ -258,21 +233,7 @@ class TaskPlanningFixture : public testing::Test {
         "generate_global_path");
   }
 
-  // TODO: Remove this stuff also, the executor stuff isn't explicitly needed
-  void SetUp() override {
-    // executor_->add_node(node_);
-    // executor_thread_ = std::thread([this]() { executor_->spin(); });
-
-    pg_->add_and_spin_thread();
-  }
-
-  // Cleanup actions that could throw an exception
-  void TearDown() override {
-    // executor_->cancel();
-    // executor_thread_.join();
-  }
-
-  void populateAndSetMap() {
+  rclcpp::FutureReturnCode populateAndSetMap() {
     auto const request = std::make_shared<example_srvs::srv::SetMap::Request>();
 
     request->map = std_msgs::msg::UInt8MultiArray();
@@ -291,17 +252,18 @@ class TaskPlanningFixture : public testing::Test {
     request->map.layout.dim[2].size = 1;
     request->map.layout.dim[2].stride = 1;
 
-    request->map.data = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
-                         0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0,
-                         0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
-                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    request->map.data = {0,   0,   0,   0,   0, 0, 0,   0, 0,   0, 0,   255, 0,
+                         0,   0,   0,   0,   0, 0, 255, 0, 0,   0, 0,   0,   0,
+                         255, 255, 255, 0,   0, 0, 0,   0, 255, 0, 255, 255, 0,
+                         0,   0,   0,   255, 0, 0, 0,   0, 0,   0, 0,   0,   0,
+                         0,   0,   0,   0,   0, 0, 0,   0, 0,   0, 0,   0};
 
     while (!map_setter_client_->wait_for_service(1s)) {
       if (!rclcpp::ok()) {
         RCLCPP_ERROR_STREAM(
             node_->get_logger(),
             "Interrupted while waiting for map setter service. Exiting.");
-        return;
+        return rclcpp::FutureReturnCode::TIMEOUT;
       }
       RCLCPP_INFO_STREAM(node_->get_logger(),
                          "Map setter service not available, waiting again...");
@@ -309,19 +271,20 @@ class TaskPlanningFixture : public testing::Test {
 
     auto set_map_result = map_setter_client_->async_send_request(request);
 
-    EXPECT_EQ(rclcpp::spin_until_future_complete(node_, set_map_result),
-              rclcpp::FutureReturnCode::SUCCESS)
-        << "Setting the map failed";
+    return rclcpp::spin_until_future_complete(node_, set_map_result);
   }
 
-  example_srvs::srv::GetPath::Response::SharedPtr sendPathRequest(
+  std::pair<example_srvs::srv::GetPath::Response::SharedPtr,
+            rclcpp::FutureReturnCode>
+  sendPathRequest(
       const example_srvs::srv::GetPath::Request::SharedPtr request) {
     while (!path_generator_client_->wait_for_service(1s)) {
       if (!rclcpp::ok()) {
         RCLCPP_ERROR_STREAM(
             node_->get_logger(),
             "Interrupted while waiting for path generator service. Exiting.");
-        return std::make_shared<example_srvs::srv::GetPath::Response>();
+        return {std::make_shared<example_srvs::srv::GetPath::Response>(),
+                rclcpp::FutureReturnCode::TIMEOUT};
       }
       RCLCPP_INFO_STREAM(
           node_->get_logger(),
@@ -331,32 +294,37 @@ class TaskPlanningFixture : public testing::Test {
     auto generate_path_result =
         path_generator_client_->async_send_request(request);
 
-    EXPECT_EQ(rclcpp::spin_until_future_complete(node_, generate_path_result),
-              rclcpp::FutureReturnCode::SUCCESS)
-        << "Generating path failed";
-
-    return generate_path_result.get();
+    return std::make_pair(
+        generate_path_result.get(),
+        rclcpp::spin_until_future_complete(node_, generate_path_result));
   }
 
- private:
   // Member variables
   rclcpp::Node::SharedPtr node_;
-  rclcpp::Executor::SharedPtr executor_;
-  std::thread executor_thread_;
 
   rclcpp::Client<example_srvs::srv::SetMap>::SharedPtr map_setter_client_;
   rclcpp::Client<example_srvs::srv::GetPath>::SharedPtr path_generator_client_;
-
-  std::shared_ptr<PathGenerator> pg_;
 };
 
 TEST_F(TaskPlanningFixture, same_start_and_goal) {
-  // Note all the extra boilerplate code that had to be written to
-  // test the generate_global_path function. There could have been
-  // bugs introduced in the code.
+  // Create executors process requests to the PathGenerator Server
+  auto executor = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
+  std::thread executor_thread;
+
+  // The PathGenerator class to test
+  auto pg = std::make_shared<PathGenerator>();
+
+  // Starts processing requests to the PathGenerator service in a separate
+  // thread
+  executor->add_node(pg);
+  executor_thread = std::thread([&executor]() { executor->spin(); });
 
   // GIVEN a populated costmap that is set without error
-  populateAndSetMap();
+
+  auto return_code = populateAndSetMap();
+
+  EXPECT_EQ(return_code, rclcpp::FutureReturnCode::SUCCESS)
+      << "Setting the map failed";
 
   // WHEN a path with the same start and goal is requested
 
@@ -367,17 +335,35 @@ TEST_F(TaskPlanningFixture, same_start_and_goal) {
 
   auto const result = sendPathRequest(request);
 
-  // THEN the global path produced should have one element, which is the
+  // THEN the global path should have been successfully produced
+  // AND the path should have one element, which is the
   // start/goal position
+  EXPECT_EQ(result.second, rclcpp::FutureReturnCode::SUCCESS)
+      << "Generating path failed";
+
   std::vector<Position> expected{{0, 0}};
-  EXPECT_EQ(result->success.data, true) << result->success.data;
-  EXPECT_EQ(parseGeneratedPath(result->path), expected)
-      << parseGeneratedPath(result->path);
+  EXPECT_EQ(result.first->success.data, true) << result.first->success.data;
+  EXPECT_EQ(parseGeneratedPath(result.first->path), expected)
+      << parseGeneratedPath(result.first->path);
+
+  executor->cancel();
+  executor_thread.join();
 }
 
 TEST_F(TaskPlanningFixture, no_path) {
+  auto executor = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
+  std::thread executor_thread;
+
+  auto pg = std::make_shared<PathGenerator>();
+
+  executor->add_node(pg);
+  executor_thread = std::thread([&executor]() { executor->spin(); });
+
   // GIVEN a populated costmap that is set without error
-  populateAndSetMap();
+  auto return_code = populateAndSetMap();
+
+  EXPECT_EQ(return_code, rclcpp::FutureReturnCode::SUCCESS)
+      << "Setting the map failed";
 
   // WHEN a path with the same start and goal is requested
 
@@ -388,17 +374,34 @@ TEST_F(TaskPlanningFixture, no_path) {
 
   auto const result = sendPathRequest(request);
 
+  EXPECT_EQ(result.second, rclcpp::FutureReturnCode::SUCCESS)
+      << "Generating path failed";
+
   // THEN the global path produced should have one element, which is the
   // start/goal position
   std::vector<Position> expected{};
-  EXPECT_EQ(result->success.data, false) << result->success.data;
-  EXPECT_EQ(parseGeneratedPath(result->path), expected)
-      << parseGeneratedPath(result->path);
+  EXPECT_EQ(result.first->success.data, false) << result.first->success.data;
+  EXPECT_EQ(parseGeneratedPath(result.first->path), expected)
+      << parseGeneratedPath(result.first->path);
+
+  executor->cancel();
+  executor_thread.join();
 }
 
 TEST_F(TaskPlanningFixture, path_generated) {
+  auto executor = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
+  std::thread executor_thread;
+
+  auto pg = std::make_shared<PathGenerator>();
+
+  executor->add_node(pg);
+  executor_thread = std::thread([&executor]() { executor->spin(); });
+
   // GIVEN a populated costmap that is set without error
-  populateAndSetMap();
+  auto return_code = populateAndSetMap();
+
+  EXPECT_EQ(return_code, rclcpp::FutureReturnCode::SUCCESS)
+      << "Setting the map failed";
 
   // WHEN a path with the same start and goal is requested
 
@@ -409,14 +412,20 @@ TEST_F(TaskPlanningFixture, path_generated) {
 
   auto const result = sendPathRequest(request);
 
+  EXPECT_EQ(result.second, rclcpp::FutureReturnCode::SUCCESS)
+      << "Generating path failed";
+
   // THEN the global path produced should have one element, which is the
   // start/goal position
   std::vector<Position> expected{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},
                                  {5, 0}, {6, 0}, {7, 0}, {7, 1}, {7, 2},
                                  {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}};
-  EXPECT_EQ(result->success.data, true) << result->success.data;
-  EXPECT_EQ(parseGeneratedPath(result->path), expected)
-      << parseGeneratedPath(result->path);
+  EXPECT_EQ(result.first->success.data, true) << result.first->success.data;
+  EXPECT_EQ(parseGeneratedPath(result.first->path), expected)
+      << parseGeneratedPath(result.first->path);
+
+  executor->cancel();
+  executor_thread.join();
 }
 
 int main(int argc, char** argv) {
