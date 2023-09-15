@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['sendpathrequest_45',['sendPathRequest',['../classTaskPlanningFixture.html#af7dcdd2f85542c07766489c687e55c9a',1,'TaskPlanningFixture']]],
-  ['server_5fgoal_46',['server_goal',['../structrcl__handle_1_1interface_1_1server__goal.html',1,'rcl_handle::interface::server_goal&lt; T &gt;'],['../structrcl__handle_1_1server__goal.html',1,'rcl_handle::server_goal&lt; T &gt;'],['../structrcl__handle_1_1server__goal.html#ae9fc9e541704d698a9642405a653c86c',1,'rcl_handle::server_goal::server_goal()']]],
-  ['set_5fmap_5fservice_47',['set_map_service',['../classPathGenerator.html#a75416f2f0e3915326c6a78aaca4027de',1,'PathGenerator']]],
-  ['setup_48',['SetUp',['../classTaskPlanningFixture.html#a89b93523d03e9a761194e0d815543a59',1,'TaskPlanningFixture::SetUp()'],['../classminimal__integration__test_1_1TaskPlanningFixture.html#a7901cbed76428fa03abcf666275f4d4e',1,'minimal_integration_test::TaskPlanningFixture::SetUp()']]],
-  ['succeed_49',['succeed',['../structrcl__handle_1_1interface_1_1server__goal.html#a23ab4190a4076b51ce817a05b456c473',1,'rcl_handle::interface::server_goal::succeed()'],['../structrcl__handle_1_1server__goal.html#a1ff00de7c05dc2b0ac2cce56a0819a2e',1,'rcl_handle::server_goal::succeed()']]]
+  ['interface_51',['interface',['../namespacercl__handle_1_1interface.html',1,'rcl_handle']]],
+  ['rcl_5fhandle_52',['rcl_handle',['../namespacercl__handle.html',1,'']]],
+  ['readme_2emd_53',['README.md',['../README_8md.html',1,'(Global Namespace)'],['../functional__programming__tests_2README_8md.html',1,'(Global Namespace)'],['../minimal__integration__test_2README_8md.html',1,'(Global Namespace)']]],
+  ['register_5fgenerate_5fpath_5fservice_54',['register_generate_path_service',['../structPathGenerator_1_1MiddlewareHandle.html#a68e65dfe617443dfa70b126074b022e6',1,'PathGenerator::MiddlewareHandle::register_generate_path_service()'],['../structRosMiddleware.html#a7cadbeb2ec18265c7ecd1b37e4122ac8',1,'RosMiddleware::register_generate_path_service()']]],
+  ['register_5fhandles_55',['register_handles',['../structrcl__handle_1_1interface_1_1action__server.html#a6a26069200c0cf4c22a5b82d2e696f49',1,'rcl_handle::interface::action_server::register_handles()'],['../structrcl__handle_1_1action__server.html#ae2ffc181c68b3779aba5b5ec01456422',1,'rcl_handle::action_server::register_handles()']]],
+  ['register_5fset_5fmap_5fservice_56',['register_set_map_service',['../structPathGenerator_1_1MiddlewareHandle.html#a263f18cef0f881bd212648b1fe6ae505',1,'PathGenerator::MiddlewareHandle::register_set_map_service()'],['../structRosMiddleware.html#a5a02a860ac01cfc746df8f690f69990f',1,'RosMiddleware::register_set_map_service()']]],
+  ['rosmiddleware_57',['RosMiddleware',['../structRosMiddleware.html',1,'RosMiddleware'],['../structRosMiddleware.html#aad88d366fc5577ff4143ceb2f65f0a77',1,'RosMiddleware::RosMiddleware()']]]
 ];

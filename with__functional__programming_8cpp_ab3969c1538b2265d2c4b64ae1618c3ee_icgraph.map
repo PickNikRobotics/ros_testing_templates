@@ -1,6 +1,7 @@
 <map id="generate_global_path" name="generate_global_path">
-<area shape="rect" id="node1" title=" " alt="" coords="499,42,661,69"/>
-<area shape="rect" id="node2" href="$classPathGenerator.html#a541ce4b2dbc0e8e3d5a2d38106924438" title=" " alt="" coords="269,5,451,47"/>
-<area shape="rect" id="node4" href="$with__functional__programming_8cpp.html#a5c5d8b847985c1d8132d96c520c7cbd6" title=" " alt="" coords="333,71,387,98"/>
-<area shape="rect" id="node3" href="$classPathGenerator.html#a811a7586db958a28521f38c5076e7ef3" title=" " alt="" coords="5,13,221,39"/>
+<area shape="rect" id="node1" title=" " alt="" coords="533,71,696,98"/>
+<area shape="rect" id="node2" href="$structPathGenerator.html#a541ce4b2dbc0e8e3d5a2d38106924438" title=" " alt="" coords="287,5,468,47"/>
+<area shape="rect" id="node4" href="$structPathGenerator.html#a7ddb86262b7b95dcdd2b235e469e1373" title="Builds paths given a map." alt="" coords="269,71,485,98"/>
+<area shape="rect" id="node5" href="$with__functional__programming_8cpp.html#a5c5d8b847985c1d8132d96c520c7cbd6" title=" " alt="" coords="350,122,405,149"/>
+<area shape="rect" id="node3" href="$structPathGenerator.html#a811a7586db958a28521f38c5076e7ef3" title=" " alt="" coords="5,13,221,39"/>
 </map>

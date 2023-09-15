@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['main_27',['main',['../with__functional__programming_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;with_functional_programming.cpp'],['../without__functional__programming_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;without_functional_programming.cpp'],['../basic__test_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;basic_test.cpp'],['../node_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;node.cpp'],['../test__action_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;test_action.cpp']]],
-  ['map_28',['Map',['../classMap.html',1,'Map&lt; T &gt;'],['../classMap.html#ab1b73c0b8cbe7b8dbc8531de49632c68',1,'Map::Map(std::vector&lt; std::vector&lt; T &gt;&gt; data)'],['../classMap.html#afedbaa14db4c0a1f578e62d658c50e7a',1,'Map::Map()'],['../classMap.html#ab1b73c0b8cbe7b8dbc8531de49632c68',1,'Map::Map(std::vector&lt; std::vector&lt; T &gt;&gt; data)']]],
-  ['map_3c_20unsigned_20char_20_3e_29',['Map&lt; unsigned char &gt;',['../classMap.html',1,'']]],
-  ['minimal_5fintegration_5ftest_30',['minimal_integration_test',['../namespaceminimal__integration__test.html',1,'']]]
+  ['log_5ferror_28',['log_error',['../structPathGenerator_1_1MiddlewareHandle.html#a8b1a6a79547b245c99963e35256edfcb',1,'PathGenerator::MiddlewareHandle::log_error()'],['../structRosMiddleware.html#a9c0ecec6ae6b17821e06c74e0e434c76',1,'RosMiddleware::log_error()']]],
+  ['log_5finfo_29',['log_info',['../structPathGenerator_1_1MiddlewareHandle.html#a44366947908b027b01f36d48db0f6b22',1,'PathGenerator::MiddlewareHandle::log_info()'],['../structRosMiddleware.html#a0d372ebf789983175ef0229b92583175',1,'RosMiddleware::log_info()']]]
 ];
