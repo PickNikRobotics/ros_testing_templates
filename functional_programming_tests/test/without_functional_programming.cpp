@@ -390,7 +390,7 @@ TEST_F(TaskPlanningFixture, path_generated) {
   auto executor = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
   std::thread executor_thread;
 
-  auto pg = std::make_shared<PathGenerator>();
+  auto const pg = std::make_shared<PathGenerator>();
 
   executor->add_node(pg);
   executor_thread = std::thread([&executor]() { executor->spin(); });
