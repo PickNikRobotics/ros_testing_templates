@@ -415,7 +415,7 @@ TEST_F(TaskPlanningFixture, path_generated) {
 
   // THEN the global path produced should have one element, which is the
   // start/goal position
-  std::vector<Position> expected{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},
+  std::vector<Position> const expected{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},
                                  {5, 0}, {6, 0}, {7, 0}, {7, 1}, {7, 2},
                                  {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}};
   EXPECT_EQ(result.first->success.data, true) << result.first->success.data;
