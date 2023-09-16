@@ -3,6 +3,7 @@
 #include <iostream>
 #include <memory>
 #include <optional>
+#include <unordered_map>
 #include <vector>
 
 #include <rclcpp/rclcpp.hpp>
@@ -11,6 +12,7 @@
 #include <example_srvs/srv/set_map.hpp>
 #include <gtest/gtest.h>
 #include <std_msgs/msg/u_int8_multi_array.hpp>
+#include <tl_expected/expected.hpp>
 
 // production_code.h/cc
 // X, Y position
@@ -166,28 +168,55 @@ std_msgs::msg::UInt8MultiArray createUInt8MultiArrayMessageFromPath(
 };  // namespace utilities
 };  // namespace pathing
 
-// TODO: Set the return  to be a std::expected with the various errors ()
-// TODO: Make a function that takes the error
-std::shared_ptr<example_srvs::srv::GetPath::Response> generate_path_callback(
-    std::shared_ptr<example_srvs::srv::GetPath::Request> const request,
-    Map<unsigned char> const& occupancy_map,
-    pathing::PathingGeneratorFunctionType path_generater) {
-  auto const empty_response = []() {
-    auto response = std::make_shared<example_srvs::srv::GetPath::Response>();
-    response->success.data = false;
-    response->path = std_msgs::msg::UInt8MultiArray();
-    return response;
-  };
+namespace generate_path {
 
+/**
+ * @brief      Types of errors expected in the generate path callback function
+ */
+enum class errors {
+  NO_OCCUPANCY_MAP,
+  INVALID_START_SIZE,
+  INVALID_GOAL_SIZE,
+  NO_VALID_PATH
+};
+
+/**
+ * @brief      Gets the error description from the generate_path::errors error
+ * type
+ *
+ * @param[in]  error  The error type
+ *
+ * @return     The error description.
+ */
+std::string get_error_description(generate_path::errors error) {
+  switch (error) {
+    case errors::NO_OCCUPANCY_MAP:
+      return "The Occupancy Map is empty.";
+    case errors::INVALID_START_SIZE:
+      return "The start field in the request is not of size 2.";
+    case errors::INVALID_GOAL_SIZE:
+      return "The goal field in the request is not of size 2.";
+    case errors::NO_VALID_PATH:
+      return "There is no valid path between the start and goal.";
+    default:
+      return "No description for given error type";
+  }
+}
+
+tl::expected<std::shared_ptr<example_srvs::srv::GetPath::Response>,
+             generate_path::errors>
+callback(std::shared_ptr<example_srvs::srv::GetPath::Request> const request,
+         Map<unsigned char> const& occupancy_map,
+         pathing::PathingGeneratorFunctionType path_generater) {
   if (occupancy_map.get_data().size() == 0) {
-    return empty_response();
+    return tl::unexpected(errors::NO_OCCUPANCY_MAP);
   }
   // Check to make sure start and goal fields of the request are of size 2
   if (request->start.data.size() != 2) {
-    return empty_response();
+    return tl::unexpected(errors::INVALID_START_SIZE);
   }
   if (request->goal.data.size() != 2) {
-    return empty_response();
+    return tl::unexpected(errors::INVALID_GOAL_SIZE);
   }
 
   auto const start = Position{request->start.data[0], request->start.data[1]};
@@ -197,7 +226,7 @@ std::shared_ptr<example_srvs::srv::GetPath::Response> generate_path_callback(
   auto const path = path_generater(start, goal, occupancy_map);
 
   if (!path.has_value()) {
-    return empty_response();
+    return tl::unexpected(errors::NO_VALID_PATH);
   }
 
   auto const response =
@@ -208,6 +237,8 @@ std::shared_ptr<example_srvs::srv::GetPath::Response> generate_path_callback(
 
   return response;
 }
+
+};  // namespace generate_path
 
 struct MainObject {
   MainObject()
@@ -227,8 +258,35 @@ struct MainObject {
                     request,
                 std::shared_ptr<example_srvs::srv::GetPath::Response> response)
                 -> void {
-              response = generate_path_callback(request, this->map_,
-                                                pathing::generate_global_path);
+              auto const print_error = [](std::string error)
+                  -> tl::expected<
+                      std::shared_ptr<example_srvs::srv::GetPath::Response>,
+                      std::string> {
+                std::cout << error << "\n";
+                return tl::expected<
+                    std::shared_ptr<example_srvs::srv::GetPath::Response>,
+                    std::string>(tl::unexpected, std::string());
+              };
+
+              auto const return_empty_response = [](std::string /* not used */)
+                  -> tl::expected<
+                      std::shared_ptr<example_srvs::srv::GetPath::Response>,
+                      std::string> {
+                auto response =
+                    std::make_shared<example_srvs::srv::GetPath::Response>();
+                response->success.data = false;
+                response->path = std_msgs::msg::UInt8MultiArray();
+                return tl::expected<
+                    std::shared_ptr<example_srvs::srv::GetPath::Response>,
+                    std::string>(response);
+              };
+
+              response = generate_path::callback(request, this->map_,
+                                                 pathing::generate_global_path)
+                             .map_error(generate_path::get_error_description)
+                             .or_else(print_error)
+                             .or_else(return_empty_response)
+                             .value();
             }} {}
 
   std::function<void(const std::shared_ptr<example_srvs::srv::SetMap::Request>,
