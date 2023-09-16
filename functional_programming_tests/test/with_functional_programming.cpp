@@ -56,7 +56,7 @@ std::optional<Path> generate_global_path(
   path.push_back(start);
 
   auto is_occupied = [&costmap](auto const x, auto const y) -> bool {
-    return costmap.at(Position{x, y}) == 1;
+    return costmap.at(Position{x, y}) == 255;
   };
 
   // Fails if there is any obstacle in the way
@@ -69,8 +69,6 @@ std::optional<Path> generate_global_path(
   }
   // Move vertically
   for (size_t i = 0; i < (std::abs(del_y)); i++) {
-    // if (costmap.at(Position{path.back().x, path.back().y + del_y_sign}) == 1)
-    // {
     if (is_occupied(path.back().x, path.back().y + del_y_sign)) {
       return std::nullopt;
     }
@@ -88,13 +86,13 @@ std::optional<Path> generate_global_path(
  * @return     The test costmap.
  */
 Map<unsigned char> get_test_costmap() {
-  return {{{0, 0, 0, 0, 0, 0, 0, 0},
-           {0, 0, 0, 1, 0, 0, 0, 0},
-           {0, 0, 0, 1, 0, 0, 0, 0},
-           {0, 0, 1, 1, 1, 0, 0, 0},
-           {0, 0, 1, 0, 1, 1, 0, 0},
-           {0, 0, 1, 0, 0, 0, 0, 0},
-           {0, 0, 0, 0, 0, 0, 0, 0},
+  return {{{0, 0, 0, 0, 0, 0, 0, 0},        //
+           {0, 0, 0, 255, 0, 0, 0, 0},      //
+           {0, 0, 0, 255, 0, 0, 0, 0},      //
+           {0, 0, 255, 255, 255, 0, 0, 0},  //
+           {0, 0, 255, 0, 255, 255, 0, 0},  //
+           {0, 0, 255, 0, 0, 0, 0, 0},      //
+           {0, 0, 0, 0, 0, 0, 0, 0},        //
            {0, 0, 0, 0, 0, 0, 0, 0}}};
 }
 
