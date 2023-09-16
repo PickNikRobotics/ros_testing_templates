@@ -396,7 +396,7 @@ TEST_F(TaskPlanningFixture, path_generated) {
   executor_thread = std::thread([&executor]() { executor->spin(); });
 
   // GIVEN a populated costmap that is set without error
-  auto return_code = populateAndSetMap();
+  auto const return_code = populateAndSetMap();
 
   EXPECT_EQ(return_code, rclcpp::FutureReturnCode::SUCCESS)
       << "Setting the map failed";
