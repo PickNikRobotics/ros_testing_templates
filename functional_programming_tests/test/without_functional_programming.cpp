@@ -339,7 +339,7 @@ TEST_F(TaskPlanningFixture, same_start_and_goal) {
   EXPECT_EQ(result.second, rclcpp::FutureReturnCode::SUCCESS)
       << "Generating path failed";
 
-  std::vector<Position> expected{{0, 0}};
+  std::vector<Position> const expected{{0, 0}};
   EXPECT_EQ(result.first->success.data, true) << result.first->success.data;
   EXPECT_EQ(parseGeneratedPath(result.first->path), expected)
       << parseGeneratedPath(result.first->path);
