@@ -63,7 +63,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classTaskPlanningFixture-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">TaskPlanningFixture Class Reference</div>  </div>
@@ -88,22 +89,27 @@ Collaboration diagram for TaskPlanningFixture:</div>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
 <tr class="memitem:aa0e47a59d4355dc162845c6a2d010c9c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTaskPlanningFixture.html#aa0e47a59d4355dc162845c6a2d010c9c">TaskPlanningFixture</a> ()</td></tr>
 <tr class="separator:aa0e47a59d4355dc162845c6a2d010c9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89b93523d03e9a761194e0d815543a59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTaskPlanningFixture.html#a89b93523d03e9a761194e0d815543a59">SetUp</a> () override</td></tr>
-<tr class="separator:a89b93523d03e9a761194e0d815543a59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f174a7c0366b8f4f6558bc5f5c682a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTaskPlanningFixture.html#a9f174a7c0366b8f4f6558bc5f5c682a3">TearDown</a> () override</td></tr>
-<tr class="separator:a9f174a7c0366b8f4f6558bc5f5c682a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71887ca102a778b8c0c550ebd548eb98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTaskPlanningFixture.html#a71887ca102a778b8c0c550ebd548eb98">populateAndSetMap</a> ()</td></tr>
-<tr class="separator:a71887ca102a778b8c0c550ebd548eb98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7dcdd2f85542c07766489c687e55c9a"><td class="memItemLeft" align="right" valign="top">example_srvs::srv::GetPath::Response::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTaskPlanningFixture.html#af7dcdd2f85542c07766489c687e55c9a">sendPathRequest</a> (const example_srvs::srv::GetPath::Request::SharedPtr request)</td></tr>
-<tr class="separator:af7dcdd2f85542c07766489c687e55c9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24da74eac10219f9453e7f1ba3189e36"><td class="memItemLeft" align="right" valign="top">rclcpp::FutureReturnCode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTaskPlanningFixture.html#a24da74eac10219f9453e7f1ba3189e36">populateAndSetMap</a> ()</td></tr>
+<tr class="separator:a24da74eac10219f9453e7f1ba3189e36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65cd33d8fc08282062ed928751be3fb4"><td class="memItemLeft" align="right" valign="top">std::pair&lt; example_srvs::srv::GetPath::Response::SharedPtr, rclcpp::FutureReturnCode &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTaskPlanningFixture.html#a65cd33d8fc08282062ed928751be3fb4">sendPathRequest</a> (const example_srvs::srv::GetPath::Request::SharedPtr request)</td></tr>
+<tr class="separator:a65cd33d8fc08282062ed928751be3fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a45da2855e72a6aac980d5b00686779d2"><td class="memItemLeft" align="right" valign="top">rclcpp::Node::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTaskPlanningFixture.html#a45da2855e72a6aac980d5b00686779d2">node_</a></td></tr>
+<tr class="separator:a45da2855e72a6aac980d5b00686779d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d949bcfff772a52f191c1243d34c8e0"><td class="memItemLeft" align="right" valign="top">rclcpp::Client&lt; example_srvs::srv::SetMap &gt;::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTaskPlanningFixture.html#a0d949bcfff772a52f191c1243d34c8e0">map_setter_client_</a></td></tr>
+<tr class="separator:a0d949bcfff772a52f191c1243d34c8e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d462c9ab44f33cef32014698a8001df"><td class="memItemLeft" align="right" valign="top">rclcpp::Client&lt; example_srvs::srv::GetPath &gt;::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTaskPlanningFixture.html#a4d462c9ab44f33cef32014698a8001df">path_generator_client_</a></td></tr>
+<tr class="separator:a4d462c9ab44f33cef32014698a8001df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="without__functional__programming_8cpp_source.html#l00246">246</a> of file <a class="el" href="without__functional__programming_8cpp_source.html">without_functional_programming.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="without__functional__programming_8cpp_source.html#l00223">223</a> of file <a class="el" href="without__functional__programming_8cpp_source.html">without_functional_programming.cpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa0e47a59d4355dc162845c6a2d010c9c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa0e47a59d4355dc162845c6a2d010c9c">&#9670;&nbsp;</a></span>TaskPlanningFixture()</h2>
@@ -123,18 +129,18 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="without__functional__programming_8cpp_source.html#l00249">249</a> of file <a class="el" href="without__functional__programming_8cpp_source.html">without_functional_programming.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="without__functional__programming_8cpp_source.html#l00226">226</a> of file <a class="el" href="without__functional__programming_8cpp_source.html">without_functional_programming.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a71887ca102a778b8c0c550ebd548eb98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71887ca102a778b8c0c550ebd548eb98">&#9670;&nbsp;</a></span>populateAndSetMap()</h2>
+<a id="a24da74eac10219f9453e7f1ba3189e36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24da74eac10219f9453e7f1ba3189e36">&#9670;&nbsp;</a></span>populateAndSetMap()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -143,7 +149,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void TaskPlanningFixture::populateAndSetMap </td>
+          <td class="memname">rclcpp::FutureReturnCode TaskPlanningFixture::populateAndSetMap </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -151,17 +157,17 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="without__functional__programming_8cpp_source.html#l00275">275</a> of file <a class="el" href="without__functional__programming_8cpp_source.html">without_functional_programming.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="without__functional__programming_8cpp_source.html#l00234">234</a> of file <a class="el" href="without__functional__programming_8cpp_source.html">without_functional_programming.cpp</a>.</p>
 
 </div>
 </div>
-<a id="af7dcdd2f85542c07766489c687e55c9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7dcdd2f85542c07766489c687e55c9a">&#9670;&nbsp;</a></span>sendPathRequest()</h2>
+<a id="a65cd33d8fc08282062ed928751be3fb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65cd33d8fc08282062ed928751be3fb4">&#9670;&nbsp;</a></span>sendPathRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -170,7 +176,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">example_srvs::srv::GetPath::Response::SharedPtr TaskPlanningFixture::sendPathRequest </td>
+          <td class="memname">std::pair&lt;example_srvs::srv::GetPath::Response::SharedPtr, rclcpp::FutureReturnCode&gt; TaskPlanningFixture::sendPathRequest </td>
           <td>(</td>
           <td class="paramtype">const example_srvs::srv::GetPath::Request::SharedPtr&#160;</td>
           <td class="paramname"><em>request</em></td><td>)</td>
@@ -179,17 +185,18 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="without__functional__programming_8cpp_source.html#l00317">317</a> of file <a class="el" href="without__functional__programming_8cpp_source.html">without_functional_programming.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="without__functional__programming_8cpp_source.html#l00280">280</a> of file <a class="el" href="without__functional__programming_8cpp_source.html">without_functional_programming.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a89b93523d03e9a761194e0d815543a59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89b93523d03e9a761194e0d815543a59">&#9670;&nbsp;</a></span>SetUp()</h2>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0d949bcfff772a52f191c1243d34c8e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d949bcfff772a52f191c1243d34c8e0">&#9670;&nbsp;</a></span>map_setter_client_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -198,25 +205,22 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void TaskPlanningFixture::SetUp </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname">rclcpp::Client&lt;example_srvs::srv::SetMap&gt;::SharedPtr TaskPlanningFixture::map_setter_client_</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="without__functional__programming_8cpp_source.html#l00262">262</a> of file <a class="el" href="without__functional__programming_8cpp_source.html">without_functional_programming.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="without__functional__programming_8cpp_source.html#l00306">306</a> of file <a class="el" href="without__functional__programming_8cpp_source.html">without_functional_programming.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a9f174a7c0366b8f4f6558bc5f5c682a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f174a7c0366b8f4f6558bc5f5c682a3">&#9670;&nbsp;</a></span>TearDown()</h2>
+<a id="a45da2855e72a6aac980d5b00686779d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45da2855e72a6aac980d5b00686779d2">&#9670;&nbsp;</a></span>node_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,20 +229,41 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void TaskPlanningFixture::TearDown </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname">rclcpp::Node::SharedPtr TaskPlanningFixture::node_</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="without__functional__programming_8cpp_source.html#l00270">270</a> of file <a class="el" href="without__functional__programming_8cpp_source.html">without_functional_programming.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="without__functional__programming_8cpp_source.html#l00304">304</a> of file <a class="el" href="without__functional__programming_8cpp_source.html">without_functional_programming.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4d462c9ab44f33cef32014698a8001df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d462c9ab44f33cef32014698a8001df">&#9670;&nbsp;</a></span>path_generator_client_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">rclcpp::Client&lt;example_srvs::srv::GetPath&gt;::SharedPtr TaskPlanningFixture::path_generator_client_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="without__functional__programming_8cpp_source.html#l00307">307</a> of file <a class="el" href="without__functional__programming_8cpp_source.html">without_functional_programming.cpp</a>.</p>
 
 </div>
 </div>
