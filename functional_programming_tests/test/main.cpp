@@ -265,7 +265,7 @@ struct MainObject {
                 std::cout << error << "\n";
                 return tl::expected<
                     std::shared_ptr<example_srvs::srv::GetPath::Response>,
-                    std::string>(tl::unexpected, std::string());
+                    std::string>(tl::unexpect, std::string()); // Need to tell linter to skip this line
               };
 
               auto const return_empty_response = [](std::string /* not used */)
