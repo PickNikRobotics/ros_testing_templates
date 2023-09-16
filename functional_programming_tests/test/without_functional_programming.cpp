@@ -250,11 +250,14 @@ class TaskPlanningFixture : public testing::Test {
     request->map.layout.dim[2].size = 1;
     request->map.layout.dim[2].stride = 1;
 
-    request->map.data = {0,   0,   0,   0,   0, 0, 0,   0, 0,   0, 0,   255, 0,
-                         0,   0,   0,   0,   0, 0, 255, 0, 0,   0, 0,   0,   0,
-                         255, 255, 255, 0,   0, 0, 0,   0, 255, 0, 255, 255, 0,
-                         0,   0,   0,   255, 0, 0, 0,   0, 0,   0, 0,   0,   0,
-                         0,   0,   0,   0,   0, 0, 0,   0, 0,   0, 0,   0};
+    request->map.data = {0, 0, 0,   0,   0,   0,   0, 0,  //
+                         0, 0, 0,   255, 0,   0,   0, 0,  //
+                         0, 0, 0,   255, 0,   0,   0, 0,  //
+                         0, 0, 255, 255, 255, 0,   0, 0,  //
+                         0, 0, 255, 0,   255, 255, 0, 0,  //
+                         0, 0, 255, 0,   0,   0,   0, 0,  //
+                         0, 0, 0,   0,   0,   0,   0, 0,  //
+                         0, 0, 0,   0,   0,   0,   0, 0};
 
     while (!map_setter_client_->wait_for_service(1s)) {
       if (!rclcpp::ok()) {
@@ -267,7 +270,7 @@ class TaskPlanningFixture : public testing::Test {
                          "Map setter service not available, waiting again...");
     }
 
-    auto set_map_result = map_setter_client_->async_send_request(request);
+    auto const set_map_result = map_setter_client_->async_send_request(request);
 
     return rclcpp::spin_until_future_complete(node_, set_map_result);
   }
@@ -305,27 +308,22 @@ class TaskPlanningFixture : public testing::Test {
 };
 
 TEST_F(TaskPlanningFixture, same_start_and_goal) {
-  // Create executors process requests to the PathGenerator Server
-  auto executor = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
-  std::thread executor_thread;
-
   // The PathGenerator class to test
-  auto pg = std::make_shared<PathGenerator>();
+  auto const pg = std::make_shared<PathGenerator>();
 
   // Starts processing requests to the PathGenerator service in a separate
   // thread
+  auto executor = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
   executor->add_node(pg);
-  executor_thread = std::thread([&executor]() { executor->spin(); });
+  auto executor_thread = std::thread([&executor]() { executor->spin(); });
 
   // GIVEN a populated costmap that is set without error
-
   auto const return_code = populateAndSetMap();
 
   EXPECT_EQ(return_code, rclcpp::FutureReturnCode::SUCCESS)
       << "Setting the map failed";
 
   // WHEN a path with the same start and goal is requested
-
   auto const request = std::make_shared<example_srvs::srv::GetPath::Request>();
 
   request->start.data = {0, 0};
@@ -416,8 +414,8 @@ TEST_F(TaskPlanningFixture, path_generated) {
   // THEN the global path produced should have one element, which is the
   // start/goal position
   std::vector<Position> const expected{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},
-                                 {5, 0}, {6, 0}, {7, 0}, {7, 1}, {7, 2},
-                                 {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}};
+                                       {5, 0}, {6, 0}, {7, 0}, {7, 1}, {7, 2},
+                                       {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}};
   EXPECT_EQ(result.first->success.data, true) << result.first->success.data;
   EXPECT_EQ(parseGeneratedPath(result.first->path), expected)
       << parseGeneratedPath(result.first->path);
