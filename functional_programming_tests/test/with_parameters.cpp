@@ -415,7 +415,8 @@ TEST_F(TaskPlanningFixture, no_path) {
   EXPECT_EQ(return_code, rclcpp::FutureReturnCode::SUCCESS)
       << "Setting the map failed";
 
-  // WHEN a path is requested between two positions that do not have a valid path between them given the algorithm
+  // WHEN a path is requested between two positions that do not have a valid
+  // path between them given the algorithm
 
   auto const request = std::make_shared<example_srvs::srv::GetPath::Request>();
 
@@ -450,7 +451,8 @@ TEST_F(TaskPlanningFixture, path_generated) {
   EXPECT_EQ(return_code, rclcpp::FutureReturnCode::SUCCESS)
       << "Setting the map failed";
 
-  // WHEN a path is requested between two positions that do have a valid path between them given the algorithm
+  // WHEN a path is requested between two positions that do have a valid path
+  // between them given the algorithm
 
   auto const request = std::make_shared<example_srvs::srv::GetPath::Request>();
 
@@ -462,7 +464,8 @@ TEST_F(TaskPlanningFixture, path_generated) {
   EXPECT_EQ(result.second, rclcpp::FutureReturnCode::SUCCESS)
       << "Generating path failed";
 
-  // THEN the global path produced should be the same as the expected set of Positions
+  // THEN the global path produced should be the same as the expected set of
+  // Positions
   std::vector<Position> const expected{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},
                                        {5, 0}, {6, 0}, {7, 0}, {7, 1}, {7, 2},
                                        {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}};
