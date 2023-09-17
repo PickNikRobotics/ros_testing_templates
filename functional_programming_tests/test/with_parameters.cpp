@@ -450,7 +450,7 @@ TEST_F(TaskPlanningFixture, path_generated) {
   EXPECT_EQ(return_code, rclcpp::FutureReturnCode::SUCCESS)
       << "Setting the map failed";
 
-  // WHEN a path with the same start and goal is requested
+  // WHEN a path is requested between two positions that do have a valid path between them given the algorithm
 
   auto const request = std::make_shared<example_srvs::srv::GetPath::Request>();
 
