@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['sendpathrequest_167',['sendPathRequest',['../classTaskPlanningFixture.html#a65cd33d8fc08282062ed928751be3fb4',1,'TaskPlanningFixture']]],
-  ['server_5fgoal_168',['server_goal',['../structrcl__handle_1_1server__goal.html#ae9fc9e541704d698a9642405a653c86c',1,'rcl_handle::server_goal']]],
-  ['set_5fmap_5fservice_169',['set_map_service',['../structPathGenerator.html#a75416f2f0e3915326c6a78aaca4027de',1,'PathGenerator']]],
-  ['setup_170',['SetUp',['../classminimal__integration__test_1_1TaskPlanningFixture.html#a7901cbed76428fa03abcf666275f4d4e',1,'minimal_integration_test::TaskPlanningFixture']]],
-  ['succeed_171',['succeed',['../structrcl__handle_1_1interface_1_1server__goal.html#a23ab4190a4076b51ce817a05b456c473',1,'rcl_handle::interface::server_goal::succeed()'],['../structrcl__handle_1_1server__goal.html#a1ff00de7c05dc2b0ac2cce56a0819a2e',1,'rcl_handle::server_goal::succeed()']]]
+  ['register_5fgenerate_5fpath_5fservice_176',['register_generate_path_service',['../structPathGenerator_1_1MiddlewareHandle.html#a68e65dfe617443dfa70b126074b022e6',1,'PathGenerator::MiddlewareHandle::register_generate_path_service()'],['../structRosMiddleware.html#a7cadbeb2ec18265c7ecd1b37e4122ac8',1,'RosMiddleware::register_generate_path_service()']]],
+  ['register_5fhandles_177',['register_handles',['../structrcl__handle_1_1interface_1_1action__server.html#a6a26069200c0cf4c22a5b82d2e696f49',1,'rcl_handle::interface::action_server::register_handles()'],['../structrcl__handle_1_1action__server.html#ae2ffc181c68b3779aba5b5ec01456422',1,'rcl_handle::action_server::register_handles()']]],
+  ['register_5fset_5fmap_5fservice_178',['register_set_map_service',['../structPathGenerator_1_1MiddlewareHandle.html#a263f18cef0f881bd212648b1fe6ae505',1,'PathGenerator::MiddlewareHandle::register_set_map_service()'],['../structRosMiddleware.html#a5a02a860ac01cfc746df8f690f69990f',1,'RosMiddleware::register_set_map_service(SetMapServiceCallback callback) override']]],
+  ['rosmiddleware_179',['RosMiddleware',['../structRosMiddleware.html#aad88d366fc5577ff4143ceb2f65f0a77',1,'RosMiddleware']]]
 ];

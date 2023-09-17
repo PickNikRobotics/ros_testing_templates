@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['taskplanningfixture_107',['TaskPlanningFixture',['../classminimal__integration__test_1_1TaskPlanningFixture.html',1,'minimal_integration_test::TaskPlanningFixture'],['../classTaskPlanningFixture.html',1,'TaskPlanningFixture']]],
-  ['testgtestprocesspostshutdown_108',['TestGTestProcessPostShutdown',['../classbasic__test_1_1TestGTestProcessPostShutdown.html',1,'basic_test']]],
-  ['testgtestwaitforcompletion_109',['TestGTestWaitForCompletion',['../classbasic__test_1_1TestGTestWaitForCompletion.html',1,'basic_test']]]
+  ['server_5fgoal_113',['server_goal',['../structrcl__handle_1_1interface_1_1server__goal.html',1,'rcl_handle::interface::server_goal&lt; T &gt;'],['../structrcl__handle_1_1server__goal.html',1,'rcl_handle::server_goal&lt; T &gt;']]]
 ];

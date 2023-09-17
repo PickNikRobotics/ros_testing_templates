@@ -1,0 +1,5 @@
+<map id="CollisionChecker::operator()" name="CollisionChecker::operator()">
+<area shape="rect" id="node1" title="Checks if the robot is colliding with an obstacle or out of bounds." alt="" coords="5,31,208,57"/>
+<area shape="rect" id="node2" href="$classMap.html#aa413a560ed38b04073317ef9370c4bf8" title=" " alt="" coords="262,5,333,32"/>
+<area shape="rect" id="node3" href="$classMap.html#a9ddfce89a5714e0ba94e0210d749c1f4" title=" " alt="" coords="256,56,339,83"/>
+</map>

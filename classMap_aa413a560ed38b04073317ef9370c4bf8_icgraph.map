@@ -1,7 +1,8 @@
 <map id="Map::at" name="Map::at">
-<area shape="rect" id="node1" title=" " alt="" coords="801,97,872,123"/>
+<area shape="rect" id="node1" title=" " alt="" coords="801,122,872,149"/>
 <area shape="rect" id="node2" href="$with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee" title=" " alt="" coords="562,71,725,98"/>
 <area shape="rect" id="node7" href="$namespacepathing.html#aa5a3c053f4fbb497f3568321995f6d18" title="Generates a path." alt="" coords="533,122,753,149"/>
+<area shape="rect" id="node8" href="$structCollisionChecker.html#a9ef9f82b98ebbeeeb90ddc4f436ab2a3" title="Checks if the robot is colliding with an obstacle or out of bounds." alt="" coords="542,173,745,199"/>
 <area shape="rect" id="node3" href="$structPathGenerator.html#a541ce4b2dbc0e8e3d5a2d38106924438" title=" " alt="" coords="287,5,468,47"/>
 <area shape="rect" id="node5" href="$structPathGenerator.html#a7ddb86262b7b95dcdd2b235e469e1373" title="Builds paths given a map." alt="" coords="269,71,485,98"/>
 <area shape="rect" id="node6" href="$with__functional__programming_8cpp.html#a5c5d8b847985c1d8132d96c520c7cbd6" title=" " alt="" coords="350,122,405,149"/>
