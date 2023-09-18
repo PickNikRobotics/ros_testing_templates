@@ -1,4 +1,6 @@
 <map id="pathing::generate_global_path" name="pathing::generate_global_path">
-<area shape="rect" id="node1" title="Generates a path." alt="" coords="5,5,225,32"/>
-<area shape="rect" id="node2" href="$classMap.html#aa413a560ed38b04073317ef9370c4bf8" title=" " alt="" coords="273,5,344,32"/>
+<area shape="rect" id="node1" title="Generates a path." alt="" coords="5,56,225,83"/>
+<area shape="rect" id="node2" href="$classMap.html#aa413a560ed38b04073317ef9370c4bf8" title=" " alt="" coords="288,5,359,32"/>
+<area shape="rect" id="node3" href="$classMap.html#a21278cdae4a80bd24a58f07b2d335585" title="Checks if the map is empty." alt="" coords="273,56,373,83"/>
+<area shape="rect" id="node4" href="$classMap.html#ae4caa7dbace4006cbc2a26464deacd8e" title="Gets the dimensions of the map." alt="" coords="275,107,372,133"/>
 </map>

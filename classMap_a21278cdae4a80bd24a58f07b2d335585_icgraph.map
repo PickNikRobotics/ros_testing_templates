@@ -1,0 +1,5 @@
+<map id="Map::empty" name="Map::empty">
+<area shape="rect" id="node1" title="Checks if the map is empty." alt="" coords="561,5,661,32"/>
+<area shape="rect" id="node2" href="$namespacepathing.html#aa5a3c053f4fbb497f3568321995f6d18" title="Generates a path." alt="" coords="293,5,513,32"/>
+<area shape="rect" id="node3" href="$structPathingManager.html#ae00651b16225b9bcd6b53a31177d380a" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,5,245,32"/>
+</map>

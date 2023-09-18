@@ -1,5 +1,0 @@
-<map id="generate_path::callback" name="generate_path::callback">
-<area shape="rect" id="node1" title="Converts between types and dispatches to path generator." alt="" coords="5,53,184,80"/>
-<area shape="rect" id="node2" href="$namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe" title="Creates a UInt8MultiArray message from a path." alt="" coords="232,5,464,61"/>
-<area shape="rect" id="node3" href="$classMap.html#a2d26c288c1336257492cf45c954fbdc6" title=" " alt="" coords="291,85,405,112"/>
-</map>
