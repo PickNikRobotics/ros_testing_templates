@@ -251,19 +251,65 @@ tl::expected<GetPath::Response, error> callback(
 };  // namespace generate_path
 
 struct PathingManager {
+  struct MiddlewareHandle {
+    // Define map service callback type
+    using SetMapCallback =
+        std::function<void(std::shared_ptr<SetMap::Request> const request,
+                           std::shared_ptr<SetMap::Response> response)>;
+
+    // Define path generation service callback type
+    using GeneratePathCallback =
+        std::function<void(std::shared_ptr<GetPath::Request> const request,
+                           std::shared_ptr<GetPath::Response> response)>;
+    /**
+     * @brief Ensure public dtor is virtual
+     * @note
+     * http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-dtor-virtual
+     */
+    virtual ~MiddlewareHandle() = default;
+
+    /**
+     * @brief Register a callback for the set map service
+     * @param callback The callback to register
+     */
+    virtual void register_set_map_service(SetMapCallback callback) = 0;
+
+    /**
+     * @brief Register a callback for the generate path service
+     * @param callback The callback to register
+     */
+    virtual void register_generate_path_service(
+        GeneratePathCallback callback) = 0;
+
+    /**
+     * @brief Log error message
+     * @param msg The message to log
+     */
+    virtual void log_error(std::string const& msg) = 0;
+
+    /**
+     * @brief Log info message
+     * @param msg The message to log
+     */
+    virtual void log_info(std::string const& msg) = 0;
+  };
+
   /**
    * @brief Manages occupancy_map and path generation for the pathing node
+   * @param mw The middleware handle for interacting with services
    */
-  PathingManager()
-      : set_costmap_wrapper_{[this](auto const request, auto response) -> void {
+  PathingManager(std::unique_ptr<MiddlewareHandle> mw) : mw_{std::move(mw)} {
+    mw_->register_set_map_service(
+        [this](auto const request, auto response) -> void {
           auto const path = pathing::utilities::parseSetMapRequest(request);
           if (path) this->map_ = path.value();
           response->success.data = path.has_value();
-        }},
-        generate_path_wrapper_{[this](auto const request, auto response) {
-          auto const print_error = [](std::string_view error)
+        });
+    mw_->register_generate_path_service(
+        [this](auto const request, auto response) {
+          auto const print_error = [this](std::string_view error)
               -> tl::expected<GetPath::Response, std::string> {
-            std::cout << error << "\n";
+            mw_->log_error(std::string{error});
             return tl::make_unexpected("");
           };
 
@@ -283,18 +329,49 @@ struct PathingManager {
                           .or_else(print_error)
                           .or_else(return_empty_response)
                           .value();
-        }} {}
+        });
+  }
 
-  using SetMapCallback =
-      std::function<void(std::shared_ptr<SetMap::Request> const,
-                         std::shared_ptr<SetMap::Response>)>;
-  using GetPathCallback =
-      std::function<void(std::shared_ptr<GetPath::Request> const,
-                         std::shared_ptr<GetPath::Response>)>;
-
-  SetMapCallback set_costmap_wrapper_;
-  GetPathCallback generate_path_wrapper_;
+  std::unique_ptr<MiddlewareHandle> mw_;
   Map<unsigned char> map_;
+};
+
+struct RosMiddleware : public PathingManager::MiddlewareHandle {
+  /**
+   * @brief Construct a new Rosful Pathing Manager middleware handle
+   * @param node to use for the ROS services
+   */
+  RosMiddleware(std::shared_ptr<rclcpp::Node> node) : node_{std::move(node)} {}
+
+  void register_set_map_service(SetMapCallback callback) override {
+    map_setter_ = node_->create_service<SetMap>(
+        "set_costmap",
+        [callback](std::shared_ptr<SetMap::Request> const request,
+                   std::shared_ptr<SetMap::Response> response) {
+          callback(request, response);
+        });
+  }
+  void register_generate_path_service(GeneratePathCallback callback) override {
+    path_generator_ = node_->create_service<GetPath>(
+        "generate_global_path",
+        [callback](std::shared_ptr<GetPath::Request> const request,
+                   std::shared_ptr<GetPath::Response> response) {
+          callback(request, response);
+        });
+  }
+
+  void log_info(std::string const& msg) override {
+    RCLCPP_INFO_STREAM(node_->get_logger(), msg);
+  }
+
+  void log_error(std::string const& msg) override {
+    RCLCPP_ERROR_STREAM(node_->get_logger(), msg);
+  }
+
+ private:
+  std::shared_ptr<rclcpp::Node> node_;
+  std::shared_ptr<rclcpp::Service<SetMap>> map_setter_;
+  std::shared_ptr<rclcpp::Service<GetPath>> path_generator_;
 };
 
 int main(int argc, char** argv) {
@@ -303,16 +380,9 @@ int main(int argc, char** argv) {
   // Using a higher order function to change the functionality of the generate
   // path callback Using monads (hopefully) to process errors
 
-  PathingManager pm;
-
   rclcpp::init(argc, argv);
-  const auto node = std::make_shared<rclcpp::Node>("PathGenerator");
-
-  auto const set_map_service =
-      node->create_service<SetMap>("set_costmap", pm.set_costmap_wrapper_);
-
-  auto const get_path_service = node->create_service<GetPath>(
-      "generate_global_path", pm.generate_path_wrapper_);
+  auto const node = std::make_shared<rclcpp::Node>("PathGenerator");
+  PathingManager pm{std::make_unique<RosMiddleware>(node)};
 
   rclcpp::spin(node);
   rclcpp::shutdown();
