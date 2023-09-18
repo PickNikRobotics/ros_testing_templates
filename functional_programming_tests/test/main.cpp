@@ -3,6 +3,7 @@
 #include <iostream>
 #include <memory>
 #include <optional>
+#include <unordered_map>
 #include <vector>
 
 #include <rclcpp/rclcpp.hpp>
@@ -11,6 +12,10 @@
 #include <example_srvs/srv/set_map.hpp>
 #include <gtest/gtest.h>
 #include <std_msgs/msg/u_int8_multi_array.hpp>
+#include <tl_expected/expected.hpp>
+
+using SetMap = example_srvs::srv::SetMap;
+using GetPath = example_srvs::srv::GetPath;
 
 // production_code.h/cc
 // X, Y position
@@ -50,15 +55,15 @@ bool operator==(Position const& lhs, Position const& rhs) {
 
 namespace pathing {
 
-using PathingGeneratorFunctionType = std::function<std::optional<Path>(
+using PathingGenerator = std::function<std::optional<Path>(
     Position const&, Position const&, Map<unsigned char> const&)>;
 
 /**
  * @brief      Generates a path
  *
- * @param      start          The start position
- * @param      goal           The goal position
- * @param      occupancy_map  The occupancy_map
+ * @param      start position
+ * @param      goal position
+ * @param      occupancy_map to path through
  *
  * @return     std::optional containing the Path
  */
@@ -75,7 +80,7 @@ std::optional<Path> generate_global_path(
   int const del_y_sign = std::copysign(1.0, del_y);
 
   // Push start onto the path
-  std::optional<Path> path;
+  std::optional<Path> path = Path{};
   path.value().push_back(start);
 
   auto const is_occupied = [&occupancy_map](auto const x,
@@ -111,11 +116,16 @@ std::optional<Path> generate_global_path(
 
 namespace utilities {
 
+/**
+ * @brief      Converts map from message to occupancy map if possible
+ *
+ * @param[in]  request containing the map
+ *
+ * @return     std::optional containing the occupancy map
+ */
 std::optional<Map<unsigned char>> parseSetMapRequest(
-    std::shared_ptr<example_srvs::srv::SetMap::Request> const request) {
+    std::shared_ptr<SetMap::Request> const request) {
   auto const occupancy_map = request->map;
-  ;
-  // Get the occupancy_map from a ros topic
   // Check that map layout makes sense
   if ((occupancy_map.layout.dim[0].size * occupancy_map.layout.dim[1].size) !=
       occupancy_map.layout.dim[0].stride) {
@@ -136,8 +146,15 @@ std::optional<Map<unsigned char>> parseSetMapRequest(
   return map;
 }
 
+/**
+ * @brief      Creates a UInt8MultiArray message from a path
+ *
+ * @param[in]  path to convert
+ *
+ * @return     The UInt8MultiArray message
+ */
 std_msgs::msg::UInt8MultiArray createUInt8MultiArrayMessageFromPath(
-    const Path& path) {
+    Path const& path) {
   auto message = std_msgs::msg::UInt8MultiArray();
 
   message.layout.dim.resize(3, std_msgs::msg::MultiArrayDimension());
@@ -166,79 +183,117 @@ std_msgs::msg::UInt8MultiArray createUInt8MultiArrayMessageFromPath(
 };  // namespace utilities
 };  // namespace pathing
 
-// TODO: Set the return  to be a std::expected with the various errors ()
-// TODO: Make a function that takes the error
-std::shared_ptr<example_srvs::srv::GetPath::Response> generate_path_callback(
-    std::shared_ptr<example_srvs::srv::GetPath::Request> const request,
-    Map<unsigned char> const& occupancy_map,
-    pathing::PathingGeneratorFunctionType path_generater) {
-  auto const empty_response = []() {
-    auto response = std::make_shared<example_srvs::srv::GetPath::Response>();
-    response->success.data = false;
-    response->path = std_msgs::msg::UInt8MultiArray();
-    return response;
-  };
+namespace generate_path {
 
+/**
+ * @brief      Types of errors expected in the generate path callback function
+ */
+enum class error {
+  NO_OCCUPANCY_MAP,
+  INVALID_START_SIZE,
+  INVALID_GOAL_SIZE,
+  NO_VALID_PATH
+};
+
+/**
+ * @brief      Descriptions of the errors
+ */
+std::map<error, std::string> const error_description = {
+    {error::NO_OCCUPANCY_MAP, "The Occupancy Map is empty."},
+    {error::INVALID_START_SIZE,
+     "The start field in the request is not of size 2."},
+    {error::INVALID_GOAL_SIZE,
+     "The goal field in the request is not of size 2."},
+    {error::NO_VALID_PATH,
+     "There is no valid path between the start and goal."}};
+
+/**
+ * @brief      Converts between types and dispatches to path generator
+ *
+ * @param[in]  request contains the start and goal positions
+ * @param[in]  occupancy_map to path through
+ * @param[in]  path_generator algorithm to use for pathing
+ *
+ * @return     The path if successful, otherwise an error
+ */
+tl::expected<GetPath::Response, error> callback(
+    std::shared_ptr<GetPath::Request> const request,
+    Map<unsigned char> const& occupancy_map,
+    pathing::PathingGenerator path_generator) {
   if (occupancy_map.get_data().size() == 0) {
-    return empty_response();
+    return tl::unexpected(error::NO_OCCUPANCY_MAP);
   }
   // Check to make sure start and goal fields of the request are of size 2
   if (request->start.data.size() != 2) {
-    return empty_response();
+    return tl::unexpected(error::INVALID_START_SIZE);
   }
   if (request->goal.data.size() != 2) {
-    return empty_response();
+    return tl::unexpected(error::INVALID_GOAL_SIZE);
   }
 
   auto const start = Position{request->start.data[0], request->start.data[1]};
   auto const goal = Position{request->goal.data[0], request->goal.data[1]};
 
   // Generate the path using the path generator function that was input
-  auto const path = path_generater(start, goal, occupancy_map);
-
+  auto const path = path_generator(start, goal, occupancy_map);
   if (!path.has_value()) {
-    return empty_response();
+    return tl::unexpected(error::NO_VALID_PATH);
   }
 
-  auto const response =
-      std::make_shared<example_srvs::srv::GetPath::Response>();
-  response->success.data = path.has_value();
-  response->path =
+  auto response = GetPath::Response{};
+  response.success.data = path.has_value();
+  response.path =
       pathing::utilities::createUInt8MultiArrayMessageFromPath(path.value());
 
   return response;
 }
 
-struct MainObject {
-  MainObject()
-      : set_costmap_wrapper_{[this](const std::shared_ptr<
-                                        example_srvs::srv::SetMap::Request>
-                                        request,
-                                    std::shared_ptr<
-                                        example_srvs::srv::SetMap::Response>
-                                        response) -> void {
-          const auto path = pathing::utilities::parseSetMapRequest(request);
+};  // namespace generate_path
+
+struct PathingManager {
+  /**
+   * @brief Manages occupancy_map and path generation for the pathing node
+   */
+  PathingManager()
+      : set_costmap_wrapper_{[this](auto const request, auto response) -> void {
+          auto const path = pathing::utilities::parseSetMapRequest(request);
           if (path) this->map_ = path.value();
           response->success.data = path.has_value();
         }},
-        generate_path_wrapper_{
-            [this](
-                const std::shared_ptr<example_srvs::srv::GetPath::Request>
-                    request,
-                std::shared_ptr<example_srvs::srv::GetPath::Response> response)
-                -> void {
-              response = generate_path_callback(request, this->map_,
-                                                pathing::generate_global_path);
-            }} {}
+        generate_path_wrapper_{[this](auto const request, auto response) {
+          auto const print_error = [](std::string_view error)
+              -> tl::expected<GetPath::Response, std::string> {
+            std::cout << error << "\n";
+            return tl::make_unexpected("");
+          };
 
-  std::function<void(const std::shared_ptr<example_srvs::srv::SetMap::Request>,
-                     std::shared_ptr<example_srvs::srv::SetMap::Response>)>
-      set_costmap_wrapper_;
+          auto const return_empty_response = []([[maybe_unused]] auto const)
+              -> tl::expected<GetPath::Response, std::string> {
+            auto response = GetPath::Response{};
+            response.success.data = false;
+            response.path = std_msgs::msg::UInt8MultiArray();
+            return response;
+          };
+          auto const stringify_error = [](auto const error) {
+            return generate_path::error_description.at(error);
+          };
+          *response = generate_path::callback(request, this->map_,
+                                              pathing::generate_global_path)
+                          .map_error(stringify_error)
+                          .or_else(print_error)
+                          .or_else(return_empty_response)
+                          .value();
+        }} {}
 
-  std::function<void(const std::shared_ptr<example_srvs::srv::GetPath::Request>,
-                     std::shared_ptr<example_srvs::srv::GetPath::Response>)>
-      generate_path_wrapper_;
+  using SetMapCallback =
+      std::function<void(std::shared_ptr<SetMap::Request> const,
+                         std::shared_ptr<SetMap::Response>)>;
+  using GetPathCallback =
+      std::function<void(std::shared_ptr<GetPath::Request> const,
+                         std::shared_ptr<GetPath::Response>)>;
 
+  SetMapCallback set_costmap_wrapper_;
+  GetPathCallback generate_path_wrapper_;
   Map<unsigned char> map_;
 };
 
@@ -248,19 +303,16 @@ int main(int argc, char** argv) {
   // Using a higher order function to change the functionality of the generate
   // path callback Using monads (hopefully) to process errors
 
-  MainObject mo;
+  PathingManager pm;
 
   rclcpp::init(argc, argv);
-
   const auto node = std::make_shared<rclcpp::Node>("PathGenerator");
 
-  rclcpp::Service<example_srvs::srv::SetMap>::SharedPtr set_map_service =
-      node->create_service<example_srvs::srv::SetMap>("set_costmap",
-                                                      mo.set_costmap_wrapper_);
+  auto const set_map_service =
+      node->create_service<SetMap>("set_costmap", pm.set_costmap_wrapper_);
 
-  rclcpp::Service<example_srvs::srv::GetPath>::SharedPtr get_path_service =
-      node->create_service<example_srvs::srv::GetPath>(
-          "generate_global_path", mo.generate_path_wrapper_);
+  auto const get_path_service = node->create_service<GetPath>(
+      "generate_global_path", pm.generate_path_wrapper_);
 
   rclcpp::spin(node);
   rclcpp::shutdown();
