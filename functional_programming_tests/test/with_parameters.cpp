@@ -122,6 +122,7 @@ class PathGenerator : public rclcpp::Node {
                   std::placeholders::_1, std::placeholders::_2));
   }
 
+ private:
   void set_map_service(
       const std::shared_ptr<example_srvs::srv::SetMap::Request> request,
       std::shared_ptr<example_srvs::srv::SetMap::Response> response) {
@@ -188,7 +189,6 @@ class PathGenerator : public rclcpp::Node {
     response->path = response_path;
   }
 
- private:
   // Function that sets costmap
   bool set_costmap(const std_msgs::msg::UInt8MultiArray& costmap) {  // Action
     // Get the costmap from a ros topic
