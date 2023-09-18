@@ -78,8 +78,8 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ab45ce1c5a43516818bb12b468f5dad6b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#ab45ce1c5a43516818bb12b468f5dad6b">PathingGeneratorFunctionType</a> = std::function&lt; std::optional&lt; <a class="el" href="main_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> &gt;(<a class="el" href="structPosition.html">Position</a> const  &amp;, <a class="el" href="structPosition.html">Position</a> const  &amp;, <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; const  &amp;)&gt;</td></tr>
-<tr class="separator:ab45ce1c5a43516818bb12b468f5dad6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03e90a5d8a22623c181571ac9fc37028"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#a03e90a5d8a22623c181571ac9fc37028">PathingGenerator</a> = std::function&lt; std::optional&lt; <a class="el" href="main_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> &gt;(<a class="el" href="structPosition.html">Position</a> const  &amp;, <a class="el" href="structPosition.html">Position</a> const  &amp;, <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; const  &amp;)&gt;</td></tr>
+<tr class="separator:a03e90a5d8a22623c181571ac9fc37028"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -88,19 +88,19 @@ Functions</h2></td></tr>
 <tr class="separator:aa5a3c053f4fbb497f3568321995f6d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="ab45ce1c5a43516818bb12b468f5dad6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab45ce1c5a43516818bb12b468f5dad6b">&#9670;&nbsp;</a></span>PathingGeneratorFunctionType</h2>
+<a id="a03e90a5d8a22623c181571ac9fc37028"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03e90a5d8a22623c181571ac9fc37028">&#9670;&nbsp;</a></span>PathingGenerator</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespacepathing.html#ab45ce1c5a43516818bb12b468f5dad6b">pathing::PathingGeneratorFunctionType</a> = typedef std::function&lt;std::optional&lt;<a class="el" href="main_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a>&gt;( <a class="el" href="structPosition.html">Position</a> const&amp;, <a class="el" href="structPosition.html">Position</a> const&amp;, <a class="el" href="classMap.html">Map</a>&lt;unsigned char&gt; const&amp;)&gt;</td>
+          <td class="memname">using <a class="el" href="namespacepathing.html#a03e90a5d8a22623c181571ac9fc37028">pathing::PathingGenerator</a> = typedef std::function&lt;std::optional&lt;<a class="el" href="main_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a>&gt;( <a class="el" href="structPosition.html">Position</a> const&amp;, <a class="el" href="structPosition.html">Position</a> const&amp;, <a class="el" href="classMap.html">Map</a>&lt;unsigned char&gt; const&amp;)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00053">53</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00058">58</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -140,15 +140,15 @@ Functions</h2></td></tr>
 <p>Generates a path. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">start</td><td>The start position </td></tr>
-    <tr><td class="paramname">goal</td><td>The goal position </td></tr>
-    <tr><td class="paramname">occupancy_map</td><td>The occupancy_map</td></tr>
+    <tr><td class="paramname">start</td><td>position </td></tr>
+    <tr><td class="paramname">goal</td><td>position </td></tr>
+    <tr><td class="paramname">occupancy_map</td><td>to path through</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::optional containing the Path </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00065">65</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00070">70</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">

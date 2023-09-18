@@ -1,5 +1,5 @@
 <map id="pathing::utilities::parseSetMapRequest" name="pathing::utilities::parseSetMapRequest">
-<area shape="rect" id="node1" title=" " alt="" coords="5,23,173,65"/>
+<area shape="rect" id="node1" title="Converts map from message to occupancy map if possible." alt="" coords="5,23,173,65"/>
 <area shape="rect" id="node2" href="$classMap.html#a9ddfce89a5714e0ba94e0210d749c1f4" title=" " alt="" coords="237,5,320,32"/>
 <area shape="rect" id="node3" href="$classMap.html#a2d26c288c1336257492cf45c954fbdc6" title=" " alt="" coords="221,56,336,83"/>
 </map>

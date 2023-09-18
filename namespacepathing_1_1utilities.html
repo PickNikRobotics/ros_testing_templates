@@ -75,14 +75,16 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a88a411f5b81c742ccd61e45b77d1cf3e"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#a88a411f5b81c742ccd61e45b77d1cf3e">parseSetMapRequest</a> (std::shared_ptr&lt; example_srvs::srv::SetMap::Request &gt; const request)</td></tr>
-<tr class="separator:a88a411f5b81c742ccd61e45b77d1cf3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c8418761d1ceb0d02dc6db0eb06fec1"><td class="memItemLeft" align="right" valign="top">std_msgs::msg::UInt8MultiArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#a4c8418761d1ceb0d02dc6db0eb06fec1">createUInt8MultiArrayMessageFromPath</a> (const <a class="el" href="main_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> &amp;path)</td></tr>
-<tr class="separator:a4c8418761d1ceb0d02dc6db0eb06fec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11c89614b394e8e759bc27108c6f82d8"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#a11c89614b394e8e759bc27108c6f82d8">parseSetMapRequest</a> (std::shared_ptr&lt; SetMap::Request &gt; const request)</td></tr>
+<tr class="memdesc:a11c89614b394e8e759bc27108c6f82d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts map from message to occupancy map if possible.  <a href="namespacepathing_1_1utilities.html#a11c89614b394e8e759bc27108c6f82d8">More...</a><br /></td></tr>
+<tr class="separator:a11c89614b394e8e759bc27108c6f82d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add45b1db5874120e324913322b981dfe"><td class="memItemLeft" align="right" valign="top">std_msgs::msg::UInt8MultiArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe">createUInt8MultiArrayMessageFromPath</a> (<a class="el" href="main_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> const &amp;path)</td></tr>
+<tr class="memdesc:add45b1db5874120e324913322b981dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a UInt8MultiArray message from a path.  <a href="namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe">More...</a><br /></td></tr>
+<tr class="separator:add45b1db5874120e324913322b981dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a4c8418761d1ceb0d02dc6db0eb06fec1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c8418761d1ceb0d02dc6db0eb06fec1">&#9670;&nbsp;</a></span>createUInt8MultiArrayMessageFromPath()</h2>
+<a id="add45b1db5874120e324913322b981dfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add45b1db5874120e324913322b981dfe">&#9670;&nbsp;</a></span>createUInt8MultiArrayMessageFromPath()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -90,28 +92,40 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">std_msgs::msg::UInt8MultiArray pathing::utilities::createUInt8MultiArrayMessageFromPath </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="main_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="main_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> const &amp;&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00139">139</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Creates a UInt8MultiArray message from a path. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">path</td><td>to convert</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The UInt8MultiArray message </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00156">156</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacepathing_1_1utilities_a4c8418761d1ceb0d02dc6db0eb06fec1_icgraph.png" border="0" usemap="#anamespacepathing_1_1utilities_a4c8418761d1ceb0d02dc6db0eb06fec1_icgraph" alt=""/></div>
-<map name="anamespacepathing_1_1utilities_a4c8418761d1ceb0d02dc6db0eb06fec1_icgraph" id="anamespacepathing_1_1utilities_a4c8418761d1ceb0d02dc6db0eb06fec1_icgraph">
-<area shape="rect" title=" " alt="" coords="231,5,463,61"/>
-<area shape="rect" href="main_8cpp.html#ab1468dd94aa58605f4bea82445fdb7d1" title=" " alt="" coords="5,20,183,47"/>
+<div class="center"><img src="namespacepathing_1_1utilities_add45b1db5874120e324913322b981dfe_icgraph.png" border="0" usemap="#anamespacepathing_1_1utilities_add45b1db5874120e324913322b981dfe_icgraph" alt=""/></div>
+<map name="anamespacepathing_1_1utilities_add45b1db5874120e324913322b981dfe_icgraph" id="anamespacepathing_1_1utilities_add45b1db5874120e324913322b981dfe_icgraph">
+<area shape="rect" title="Creates a UInt8MultiArray message from a path." alt="" coords="460,63,692,119"/>
+<area shape="rect" href="namespacegenerate__path.html#acab23f1169a02054ca6acb9a87e45392" title="Converts between types and dispatches to path generator." alt="" coords="233,78,412,105"/>
+<area shape="rect" href="structRosMiddleware.html#a7cadbeb2ec18265c7ecd1b37e4122ac8" title="Register a callback for the generate path service." alt="" coords="5,5,185,47"/>
+<area shape="rect" href="structRosMiddleware.html#a5a02a860ac01cfc746df8f690f69990f" title="Register a callback for the set map service." alt="" coords="5,71,185,112"/>
+<area shape="rect" href="with__dependency__injection_8cpp.html#a07ced520814e7cc067a3cace9214dda6" title=" " alt="" coords="68,137,123,163"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a88a411f5b81c742ccd61e45b77d1cf3e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88a411f5b81c742ccd61e45b77d1cf3e">&#9670;&nbsp;</a></span>parseSetMapRequest()</h2>
+<a id="a11c89614b394e8e759bc27108c6f82d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11c89614b394e8e759bc27108c6f82d8">&#9670;&nbsp;</a></span>parseSetMapRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -119,20 +133,29 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">std::optional&lt;<a class="el" href="classMap.html">Map</a>&lt;unsigned char&gt; &gt; pathing::utilities::parseSetMapRequest </td>
           <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; example_srvs::srv::SetMap::Request &gt; const&#160;</td>
+          <td class="paramtype">std::shared_ptr&lt; SetMap::Request &gt; const&#160;</td>
           <td class="paramname"><em>request</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00114">114</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Converts map from message to occupancy map if possible. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">request</td><td>containing the map</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::optional containing the occupancy map </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00126">126</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacepathing_1_1utilities_a88a411f5b81c742ccd61e45b77d1cf3e_cgraph.png" border="0" usemap="#anamespacepathing_1_1utilities_a88a411f5b81c742ccd61e45b77d1cf3e_cgraph" alt=""/></div>
-<map name="anamespacepathing_1_1utilities_a88a411f5b81c742ccd61e45b77d1cf3e_cgraph" id="anamespacepathing_1_1utilities_a88a411f5b81c742ccd61e45b77d1cf3e_cgraph">
-<area shape="rect" title=" " alt="" coords="5,23,173,65"/>
+<div class="center"><img src="namespacepathing_1_1utilities_a11c89614b394e8e759bc27108c6f82d8_cgraph.png" border="0" usemap="#anamespacepathing_1_1utilities_a11c89614b394e8e759bc27108c6f82d8_cgraph" alt=""/></div>
+<map name="anamespacepathing_1_1utilities_a11c89614b394e8e759bc27108c6f82d8_cgraph" id="anamespacepathing_1_1utilities_a11c89614b394e8e759bc27108c6f82d8_cgraph">
+<area shape="rect" title="Converts map from message to occupancy map if possible." alt="" coords="5,23,173,65"/>
 <area shape="rect" href="classMap.html#a9ddfce89a5714e0ba94e0210d749c1f4" title=" " alt="" coords="237,5,320,32"/>
 <area shape="rect" href="classMap.html#a2d26c288c1336257492cf45c954fbdc6" title=" " alt="" coords="221,56,336,83"/>
 </map>

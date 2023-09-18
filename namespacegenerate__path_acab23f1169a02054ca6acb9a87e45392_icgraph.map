@@ -1,0 +1,6 @@
+<map id="generate_path::callback" name="generate_path::callback">
+<area shape="rect" id="node1" title="Converts between types and dispatches to path generator." alt="" coords="233,78,412,105"/>
+<area shape="rect" id="node2" href="$structRosMiddleware.html#a7cadbeb2ec18265c7ecd1b37e4122ac8" title="Register a callback for the generate path service." alt="" coords="5,5,185,47"/>
+<area shape="rect" id="node3" href="$structRosMiddleware.html#a5a02a860ac01cfc746df8f690f69990f" title="Register a callback for the set map service." alt="" coords="5,71,185,112"/>
+<area shape="rect" id="node4" href="$with__dependency__injection_8cpp.html#a07ced520814e7cc067a3cace9214dda6" title=" " alt="" coords="68,137,123,163"/>
+</map>
