@@ -133,7 +133,7 @@ struct PathGenerator : public rclcpp::Node {
                   std::placeholders::_1, std::placeholders::_2));
   }
 
-private:
+ private:
   void set_map_service(
       const std::shared_ptr<example_srvs::srv::SetMap::Request> request,
       std::shared_ptr<example_srvs::srv::SetMap::Response> response) {
