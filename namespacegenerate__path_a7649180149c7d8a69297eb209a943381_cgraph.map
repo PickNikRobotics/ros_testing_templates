@@ -1,5 +1,0 @@
-<map id="generate_path::generate_path" name="generate_path::generate_path">
-<area shape="rect" id="node1" title="Converts between types and dispatches to path generator." alt="" coords="5,53,224,80"/>
-<area shape="rect" id="node2" href="$namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe" title="Creates a UInt8MultiArray message from a path." alt="" coords="272,5,504,61"/>
-<area shape="rect" id="node3" href="$classMap.html#a2d26c288c1336257492cf45c954fbdc6" title=" " alt="" coords="331,85,445,112"/>
-</map>

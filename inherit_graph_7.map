@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structPathGenerator_1_1MiddlewareHandle.html" title=" " alt="" coords="11,5,210,47"/>
-<area shape="rect" id="node2" href="$structMockMiddlewareHandle.html" title=" " alt="" coords="264,13,443,39"/>
-<area shape="rect" id="node3" href="$structRosMiddleware.html" title=" " alt="" coords="292,70,415,97"/>
-<area shape="rect" id="node4" href="$structPathingManager_1_1MiddlewareHandle.html" title=" " alt="" coords="5,71,216,112"/>
+<area shape="rect" id="node1" href="$structPathGenerator_1_1MiddlewareHandle.html" title=" " alt="" coords="16,5,215,47"/>
+<area shape="rect" id="node2" href="$structMockMiddlewareHandle.html" title=" " alt="" coords="273,13,452,39"/>
+<area shape="rect" id="node3" href="$structRosMiddleware.html" title=" " alt="" coords="301,70,424,97"/>
+<area shape="rect" id="node4" href="$structpathing_1_1Manager_1_1MiddlewareHandle.html" title=" " alt="" coords="5,71,225,112"/>
 </map>

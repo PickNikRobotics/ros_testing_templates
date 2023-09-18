@@ -1,4 +1,0 @@
-<map id="pathing::utilities::parseSetMapRequest" name="pathing::utilities::parseSetMapRequest">
-<area shape="rect" id="node1" title="Converts map from message to occupancy map if possible." alt="" coords="293,5,461,47"/>
-<area shape="rect" id="node2" href="$structPathingManager.html#ae00651b16225b9bcd6b53a31177d380a" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,13,245,39"/>
-</map>

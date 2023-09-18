@@ -64,6 +64,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -73,21 +74,54 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
+<tr class="memitem:namespacepathing_1_1generate__path"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1generate__path.html">generate_path</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespacepathing_1_1utilities"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html">utilities</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpathing_1_1Position.html">Position</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpathing_1_1Map.html">Map</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpathing_1_1Manager.html">Manager</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a03e90a5d8a22623c181571ac9fc37028"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#a03e90a5d8a22623c181571ac9fc37028">PathingGenerator</a> = std::function&lt; std::optional&lt; <a class="el" href="main_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> &gt;(<a class="el" href="structPosition.html">Position</a> const  &amp;, <a class="el" href="structPosition.html">Position</a> const  &amp;, <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; const  &amp;)&gt;</td></tr>
+<tr class="memitem:a7d0803c57700af5860c06cde68bdab03"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#a7d0803c57700af5860c06cde68bdab03">Path</a> = std::vector&lt; <a class="el" href="structpathing_1_1Position.html">Position</a> &gt;</td></tr>
+<tr class="separator:a7d0803c57700af5860c06cde68bdab03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03e90a5d8a22623c181571ac9fc37028"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#a03e90a5d8a22623c181571ac9fc37028">PathingGenerator</a> = std::function&lt; std::optional&lt; <a class="el" href="namespacepathing.html#a7d0803c57700af5860c06cde68bdab03">Path</a> &gt;(<a class="el" href="structpathing_1_1Position.html">Position</a> const  &amp;, <a class="el" href="structpathing_1_1Position.html">Position</a> const  &amp;, <a class="el" href="classpathing_1_1Map.html">Map</a>&lt; unsigned char &gt; const  &amp;)&gt;</td></tr>
 <tr class="separator:a03e90a5d8a22623c181571ac9fc37028"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa5a3c053f4fbb497f3568321995f6d18"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="main_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#aa5a3c053f4fbb497f3568321995f6d18">generate_global_path</a> (<a class="el" href="structPosition.html">Position</a> const &amp;start, <a class="el" href="structPosition.html">Position</a> const &amp;goal, <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; const &amp;occupancy_map)</td></tr>
+<tr class="memitem:afde373754dd7a03cc725f7859043bafb"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#afde373754dd7a03cc725f7859043bafb">operator&lt;&lt;</a> (std::ostream &amp;os, std::vector&lt; <a class="el" href="structpathing_1_1Position.html">Position</a> &gt; const &amp;path)</td></tr>
+<tr class="separator:afde373754dd7a03cc725f7859043bafb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57b45b9568e2e6985acee77ae91ce44a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#a57b45b9568e2e6985acee77ae91ce44a">operator==</a> (<a class="el" href="structpathing_1_1Position.html">Position</a> const &amp;lhs, <a class="el" href="structpathing_1_1Position.html">Position</a> const &amp;rhs)</td></tr>
+<tr class="separator:a57b45b9568e2e6985acee77ae91ce44a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5a3c053f4fbb497f3568321995f6d18"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="namespacepathing.html#a7d0803c57700af5860c06cde68bdab03">Path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#aa5a3c053f4fbb497f3568321995f6d18">generate_global_path</a> (<a class="el" href="structpathing_1_1Position.html">Position</a> const &amp;start, <a class="el" href="structpathing_1_1Position.html">Position</a> const &amp;goal, <a class="el" href="classpathing_1_1Map.html">Map</a>&lt; unsigned char &gt; const &amp;occupancy_map)</td></tr>
 <tr class="memdesc:aa5a3c053f4fbb497f3568321995f6d18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a path.  <a href="namespacepathing.html#aa5a3c053f4fbb497f3568321995f6d18">More...</a><br /></td></tr>
 <tr class="separator:aa5a3c053f4fbb497f3568321995f6d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a id="a7d0803c57700af5860c06cde68bdab03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d0803c57700af5860c06cde68bdab03">&#9670;&nbsp;</a></span>Path</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacepathing.html#a7d0803c57700af5860c06cde68bdab03">pathing::Path</a> = typedef std::vector&lt;<a class="el" href="structpathing_1_1Position.html">Position</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="pathing_8hpp_source.html#l00048">48</a> of file <a class="el" href="pathing_8hpp_source.html">pathing.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a03e90a5d8a22623c181571ac9fc37028"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a03e90a5d8a22623c181571ac9fc37028">&#9670;&nbsp;</a></span>PathingGenerator</h2>
 
@@ -95,12 +129,12 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespacepathing.html#a03e90a5d8a22623c181571ac9fc37028">pathing::PathingGenerator</a> = typedef std::function&lt;std::optional&lt;<a class="el" href="main_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a>&gt;( <a class="el" href="structPosition.html">Position</a> const&amp;, <a class="el" href="structPosition.html">Position</a> const&amp;, <a class="el" href="classMap.html">Map</a>&lt;unsigned char&gt; const&amp;)&gt;</td>
+          <td class="memname">using <a class="el" href="namespacepathing.html#a03e90a5d8a22623c181571ac9fc37028">pathing::PathingGenerator</a> = typedef std::function&lt;std::optional&lt;<a class="el" href="namespacepathing.html#a7d0803c57700af5860c06cde68bdab03">Path</a>&gt;( <a class="el" href="structpathing_1_1Position.html">Position</a> const&amp;, <a class="el" href="structpathing_1_1Position.html">Position</a> const&amp;, <a class="el" href="classpathing_1_1Map.html">Map</a>&lt;unsigned char&gt; const&amp;)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00073">73</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pathing_8hpp_source.html#l00056">56</a> of file <a class="el" href="pathing_8hpp_source.html">pathing.hpp</a>.</p>
 
 </div>
 </div>
@@ -112,21 +146,21 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::optional&lt;<a class="el" href="main_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a>&gt; pathing::generate_global_path </td>
+          <td class="memname">std::optional&lt;<a class="el" href="namespacepathing.html#a7d0803c57700af5860c06cde68bdab03">Path</a>&gt; pathing::generate_global_path </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structPosition.html">Position</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="structpathing_1_1Position.html">Position</a> const &amp;&#160;</td>
           <td class="paramname"><em>start</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structPosition.html">Position</a> const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="structpathing_1_1Position.html">Position</a> const &amp;&#160;</td>
           <td class="paramname"><em>goal</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; const &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classpathing_1_1Map.html">Map</a>&lt; unsigned char &gt; const &amp;&#160;</td>
           <td class="paramname"><em>occupancy_map</em>&#160;</td>
         </tr>
         <tr>
@@ -148,16 +182,14 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::optional containing the Path </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00085">85</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pathing_8cpp_source.html#l00028">28</a> of file <a class="el" href="pathing_8cpp_source.html">pathing.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacepathing_aa5a3c053f4fbb497f3568321995f6d18_cgraph.png" border="0" usemap="#anamespacepathing_aa5a3c053f4fbb497f3568321995f6d18_cgraph" alt=""/></div>
 <map name="anamespacepathing_aa5a3c053f4fbb497f3568321995f6d18_cgraph" id="anamespacepathing_aa5a3c053f4fbb497f3568321995f6d18_cgraph">
-<area shape="rect" title="Generates a path." alt="" coords="5,56,225,83"/>
-<area shape="rect" href="classMap.html#aa413a560ed38b04073317ef9370c4bf8" title=" " alt="" coords="288,5,359,32"/>
-<area shape="rect" href="classMap.html#a21278cdae4a80bd24a58f07b2d335585" title="Checks if the map is empty." alt="" coords="273,56,373,83"/>
-<area shape="rect" href="classMap.html#ae4caa7dbace4006cbc2a26464deacd8e" title="Gets the dimensions of the map." alt="" coords="275,107,372,133"/>
+<area shape="rect" title="Generates a path." alt="" coords="5,5,225,32"/>
+<area shape="rect" href="classMap.html#aa413a560ed38b04073317ef9370c4bf8" title=" " alt="" coords="273,5,344,32"/>
 </map>
 </div>
 <div class="dynheader">
@@ -165,10 +197,70 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacepathing_aa5a3c053f4fbb497f3568321995f6d18_icgraph.png" border="0" usemap="#anamespacepathing_aa5a3c053f4fbb497f3568321995f6d18_icgraph" alt=""/></div>
 <map name="anamespacepathing_aa5a3c053f4fbb497f3568321995f6d18_icgraph" id="anamespacepathing_aa5a3c053f4fbb497f3568321995f6d18_icgraph">
-<area shape="rect" title="Generates a path." alt="" coords="293,5,513,32"/>
-<area shape="rect" href="structPathingManager.html#ae00651b16225b9bcd6b53a31177d380a" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,5,245,32"/>
+<area shape="rect" title="Generates a path." alt="" coords="255,5,475,32"/>
+<area shape="rect" href="structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,5,207,32"/>
 </map>
 </div>
+
+</div>
+</div>
+<a id="afde373754dd7a03cc725f7859043bafb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afde373754dd7a03cc725f7859043bafb">&#9670;&nbsp;</a></span>operator&lt;&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; pathing::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structpathing_1_1Position.html">Position</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>path</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="pathing_8cpp_source.html#l00016">16</a> of file <a class="el" href="pathing_8cpp_source.html">pathing.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a57b45b9568e2e6985acee77ae91ce44a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57b45b9568e2e6985acee77ae91ce44a">&#9670;&nbsp;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pathing::operator== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpathing_1_1Position.html">Position</a> const &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpathing_1_1Position.html">Position</a> const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="pathing_8cpp_source.html#l00024">24</a> of file <a class="el" href="pathing_8cpp_source.html">pathing.cpp</a>.</p>
 
 </div>
 </div>

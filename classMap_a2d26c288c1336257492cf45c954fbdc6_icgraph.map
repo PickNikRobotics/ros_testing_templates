@@ -1,6 +1,6 @@
 <map id="Map::get_data" name="Map::get_data">
-<area shape="rect" id="node1" title=" " alt="" coords="560,35,675,61"/>
-<area shape="rect" id="node2" href="$namespacegenerate__path.html#a7649180149c7d8a69297eb209a943381" title="Converts between types and dispatches to path generator." alt="" coords="293,5,512,32"/>
-<area shape="rect" id="node4" href="$namespacepathing_1_1utilities.html#a11c89614b394e8e759bc27108c6f82d8" title="Converts map from message to occupancy map if possible." alt="" coords="319,57,487,98"/>
-<area shape="rect" id="node3" href="$structPathingManager.html#ae00651b16225b9bcd6b53a31177d380a" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,35,245,61"/>
+<area shape="rect" id="node1" title=" " alt="" coords="476,46,591,73"/>
+<area shape="rect" id="node2" href="$namespacepathing_1_1generate__path.html#a981d5c06081b8c6de51ffa8d569d4591" title="Converts between types and dispatches to path generator." alt="" coords="255,5,428,47"/>
+<area shape="rect" id="node4" href="$namespacepathing_1_1utilities.html#afd105d787f6685bba9390425221c15aa" title="Converts map from message to occupancy map if possible." alt="" coords="257,71,425,112"/>
+<area shape="rect" id="node3" href="$structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,46,207,73"/>
 </map>

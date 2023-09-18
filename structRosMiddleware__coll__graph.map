@@ -1,5 +1,5 @@
 <map id="RosMiddleware" name="RosMiddleware">
-<area shape="rect" id="node1" title=" " alt="" coords="163,95,285,121"/>
-<area shape="rect" id="node2" href="$structPathingManager_1_1MiddlewareHandle.html" title=" " alt="" coords="5,5,216,47"/>
-<area shape="rect" id="node3" href="$structPathGenerator_1_1MiddlewareHandle.html" title=" " alt="" coords="239,5,438,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="170,95,293,121"/>
+<area shape="rect" id="node2" href="$structpathing_1_1Manager_1_1MiddlewareHandle.html" title=" " alt="" coords="5,5,225,47"/>
+<area shape="rect" id="node3" href="$structPathGenerator_1_1MiddlewareHandle.html" title=" " alt="" coords="249,5,448,47"/>
 </map>
