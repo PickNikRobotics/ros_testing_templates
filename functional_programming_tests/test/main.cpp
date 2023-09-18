@@ -32,7 +32,22 @@ class Map {
   T at(Position const& pos) const { return data_.at(pos.y).at(pos.x); }
   std::vector<std::vector<T>>& get_data() { return data_; }
   const std::vector<std::vector<T>>& get_data() const { return data_; }
-  bool empty() { return data_.empty(); }
+
+  /**
+   * @brief      Checks if the map is empty
+   * @return     bool indicating if the map is empty
+   */
+  bool empty() const { return data_.empty(); }
+
+  /**
+   * @brief      Gets the dimensions of the map
+   * @return     std::pair containing the shape of the map
+   *            first: number of rows
+   *            second: number of columns
+   */
+  std::pair<size_t, size_t> shape() const {
+    return std::make_pair(data_.size(), data_.at(0).size());
+  }
 
  private:
   std::vector<std::vector<T>> data_;
@@ -70,7 +85,25 @@ using PathingGenerator = std::function<std::optional<Path>(
 std::optional<Path> generate_global_path(
     Position const& start, Position const& goal,
     Map<unsigned char> const& occupancy_map) {  // Calculation
-  // Some cool and nifty algorithm
+  // Pre-checks
+  if (occupancy_map.empty()) {
+    return std::nullopt;
+  }
+  // Get the dimensions of the map for bounds checking
+  auto const [dim_x, dim_y] = occupancy_map.shape();
+
+  if (start.x > dim_x) {
+    return std::nullopt;
+  }
+  if (start.y > dim_y) {
+    return std::nullopt;
+  }
+  if (goal.x > dim_x) {
+    return std::nullopt;
+  }
+  if (goal.y > dim_y) {
+    return std::nullopt;
+  }
   // What is the delta in position
   int const del_x = goal.x - start.x;
   int const del_y = goal.y - start.y;
@@ -80,8 +113,7 @@ std::optional<Path> generate_global_path(
   int const del_y_sign = std::copysign(1.0, del_y);
 
   // Push start onto the path
-  std::optional<Path> path = Path{};
-  path.value().push_back(start);
+  std::optional<Path> path = Path{start};
 
   auto const is_occupied = [&occupancy_map](auto const x,
                                             auto const y) -> bool {
@@ -125,15 +157,19 @@ namespace utilities {
  */
 std::optional<Map<unsigned char>> parseSetMapRequest(
     std::shared_ptr<SetMap::Request> const request) {
-  auto const occupancy_map = request->map;
+  if (request->map.layout.dim.empty() || request->map.data.empty()) {
+    return std::nullopt;
+  }
   // Check that map layout makes sense
-  if ((occupancy_map.layout.dim[0].size * occupancy_map.layout.dim[1].size) !=
-      occupancy_map.layout.dim[0].stride) {
+  if ((request->map.layout.dim[0].size * request->map.layout.dim[1].size) !=
+      request->map.layout.dim[0].stride) {
     return std::nullopt;
   }
-  if (occupancy_map.layout.dim[0].stride != occupancy_map.data.size()) {
+  if (request->map.layout.dim[0].stride != request->map.data.size()) {
     return std::nullopt;
   }
+
+  auto const occupancy_map = request->map;
   auto const begin = std::begin(occupancy_map.data);
 
   // Populate the map
@@ -155,6 +191,9 @@ std::optional<Map<unsigned char>> parseSetMapRequest(
  */
 std_msgs::msg::UInt8MultiArray createUInt8MultiArrayMessageFromPath(
     Path const& path) {
+  if (path.empty()) {
+    return std_msgs::msg::UInt8MultiArray();
+  }
   auto message = std_msgs::msg::UInt8MultiArray();
 
   message.layout.dim.resize(3, std_msgs::msg::MultiArrayDimension());
@@ -216,7 +255,7 @@ std::map<error, std::string> const error_description = {
  *
  * @return     The path if successful, otherwise an error
  */
-tl::expected<GetPath::Response, error> callback(
+tl::expected<GetPath::Response, error> generate_path(
     std::shared_ptr<GetPath::Request> const request,
     Map<unsigned char> const& occupancy_map,
     pathing::PathingGenerator path_generator) {
@@ -323,8 +362,8 @@ struct PathingManager {
           auto const stringify_error = [](auto const error) {
             return generate_path::error_description.at(error);
           };
-          *response = generate_path::callback(request, this->map_,
-                                              pathing::generate_global_path)
+          *response = generate_path::generate_path(
+                          request, this->map_, pathing::generate_global_path)
                           .map_error(stringify_error)
                           .or_else(print_error)
                           .or_else(return_empty_response)
