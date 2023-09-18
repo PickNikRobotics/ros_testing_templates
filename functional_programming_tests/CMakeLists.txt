@@ -47,9 +47,11 @@ if(BUILD_TESTING)
   find_package(ament_cmake_gtest REQUIRED)
   find_package(ament_cmake_gmock REQUIRED)
 
-  ament_add_gtest(with_functional_programming test/with_functional_programming.cpp TIMEOUT 5)
+  ament_add_gmock(with_functional_programming test/with_functional_programming.cpp TIMEOUT 5)
   target_compile_features(with_functional_programming PUBLIC cxx_std_20)
   ament_target_dependencies(with_functional_programming rclcpp std_msgs)
+  target_link_libraries(with_functional_programming
+	  pathing)
 
   ament_add_gtest(without_functional_programming test/without_functional_programming.cpp TIMEOUT 5)
   target_compile_features(without_functional_programming PUBLIC cxx_std_20)
