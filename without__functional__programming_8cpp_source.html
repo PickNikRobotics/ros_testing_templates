@@ -127,81 +127,81 @@ $(function() {
 <div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structPathGenerator.html#a811a7586db958a28521f38c5076e7ef3">   55</a></span>&#160;  <a class="code" href="structPathGenerator.html#a811a7586db958a28521f38c5076e7ef3">PathGenerator</a>() : Node(<span class="stringliteral">&quot;path_generator_node&quot;</span>) {</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">// Services for setting the map and generating the path</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    map_setter_service_ = this-&gt;create_service&lt;example_srvs::srv::SetMap&gt;(</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="stringliteral">&quot;set_costmap&quot;</span>, std::bind(&amp;<a class="code" href="structPathGenerator.html#a75416f2f0e3915326c6a78aaca4027de">PathGenerator::set_map_service</a>, <span class="keyword">this</span>,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="stringliteral">&quot;set_costmap&quot;</span>, std::bind(&amp;PathGenerator::set_map_service, <span class="keyword">this</span>,</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                                 std::placeholders::_1, std::placeholders::_2));</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    path_generator_service_ = this-&gt;create_service&lt;example_srvs::srv::GetPath&gt;(</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="stringliteral">&quot;generate_global_path&quot;</span>,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        std::bind(&amp;<a class="code" href="structPathGenerator.html#a541ce4b2dbc0e8e3d5a2d38106924438">PathGenerator::generate_path_service</a>, <span class="keyword">this</span>,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        std::bind(&amp;PathGenerator::generate_path_service, <span class="keyword">this</span>,</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                  std::placeholders::_1, std::placeholders::_2));</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  }</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="structPathGenerator.html#a75416f2f0e3915326c6a78aaca4027de">   66</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="structPathGenerator.html#a75416f2f0e3915326c6a78aaca4027de">set_map_service</a>(</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <span class="keyword">const</span> std::shared_ptr&lt;example_srvs::srv::SetMap::Request&gt; request,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      std::shared_ptr&lt;example_srvs::srv::SetMap::Response&gt; response) {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// Set the map to generate the path from</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    response-&gt;success.data = set_costmap(request-&gt;map);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="structPathGenerator.html#a541ce4b2dbc0e8e3d5a2d38106924438">   73</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="structPathGenerator.html#a541ce4b2dbc0e8e3d5a2d38106924438">generate_path_service</a>(</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keyword">const</span> std::shared_ptr&lt;example_srvs::srv::GetPath::Request&gt; request,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      std::shared_ptr&lt;example_srvs::srv::GetPath::Response&gt; response) {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">if</span> (map_.get_data().size() == 0) {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      RCLCPP_ERROR_STREAM(this-&gt;get_logger(), <span class="stringliteral">&quot;MAP IS EMPTY!!&quot;</span>);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      response-&gt;success.data = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      response-&gt;path = std_msgs::msg::UInt8MultiArray();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="comment">// Check to make sure start and goal fields of the request are of size 2</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span> (request-&gt;start.data.size() != 2) {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      RCLCPP_ERROR_STREAM(this-&gt;get_logger(),</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                          <span class="stringliteral">&quot;START POSITION MUST CONTAIN TWO ELEMENTS!!&quot;</span>);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      response-&gt;success.data = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      response-&gt;path = std_msgs::msg::UInt8MultiArray();</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">if</span> (request-&gt;goal.data.size() != 2) {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      RCLCPP_ERROR_STREAM(this-&gt;get_logger(),</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                          <span class="stringliteral">&quot;GOAL POSITION MUST CONTAIN TWO ELEMENTS!!&quot;</span>);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      response-&gt;success.data = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      response-&gt;path = std_msgs::msg::UInt8MultiArray();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">auto</span> <span class="keyword">const</span> start = <a class="code" href="structPosition.html">Position</a>{request-&gt;start.data[0], request-&gt;start.data[1]};</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">auto</span> <span class="keyword">const</span> goal = <a class="code" href="structPosition.html">Position</a>{request-&gt;goal.data[0], request-&gt;goal.data[1]};</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="comment">// Generate the path</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">auto</span> <span class="keyword">const</span> path = <a class="code" href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">generate_global_path</a>(start, goal);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="comment">// Start populating the response message</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keyword">auto</span> response_path = std_msgs::msg::UInt8MultiArray();</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    response_path.layout.dim.resize(3, std_msgs::msg::MultiArrayDimension());</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    response_path.layout.dim[0].label = <span class="stringliteral">&quot;rows&quot;</span>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    response_path.layout.dim[0].size = path.size();</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    response_path.layout.dim[0].stride = path.size() * 2;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    response_path.layout.dim[1].label = <span class="stringliteral">&quot;columns&quot;</span>;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    response_path.layout.dim[1].size = 2;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    response_path.layout.dim[1].stride = 1;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    response_path.layout.dim[2].label = <span class="stringliteral">&quot;channel&quot;</span>;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    response_path.layout.dim[2].size = 1;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    response_path.layout.dim[2].stride = 1;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="comment">// Start pushing back the path only if there is one</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">if</span> (path.size() &gt; 0) {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span>&amp; position : path) {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        response_path.data.push_back(position.x);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        response_path.data.push_back(position.y);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;      }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    }</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    response-&gt;success.data = !path.empty();</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    response-&gt;path = response_path;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  }</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">void</span> set_map_service(</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      <span class="keyword">const</span> std::shared_ptr&lt;example_srvs::srv::SetMap::Request&gt; request,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      std::shared_ptr&lt;example_srvs::srv::SetMap::Response&gt; response) {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// Set the map to generate the path from</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    response-&gt;success.data = set_costmap(request-&gt;map);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordtype">void</span> generate_path_service(</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keyword">const</span> std::shared_ptr&lt;example_srvs::srv::GetPath::Request&gt; request,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      std::shared_ptr&lt;example_srvs::srv::GetPath::Response&gt; response) {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span> (map_.get_data().size() == 0) {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      RCLCPP_ERROR_STREAM(this-&gt;get_logger(), <span class="stringliteral">&quot;MAP IS EMPTY!!&quot;</span>);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      response-&gt;success.data = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      response-&gt;path = std_msgs::msg::UInt8MultiArray();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">// Check to make sure start and goal fields of the request are of size 2</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">if</span> (request-&gt;start.data.size() != 2) {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      RCLCPP_ERROR_STREAM(this-&gt;get_logger(),</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                          <span class="stringliteral">&quot;START POSITION MUST CONTAIN TWO ELEMENTS!!&quot;</span>);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      response-&gt;success.data = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      response-&gt;path = std_msgs::msg::UInt8MultiArray();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">if</span> (request-&gt;goal.data.size() != 2) {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      RCLCPP_ERROR_STREAM(this-&gt;get_logger(),</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                          <span class="stringliteral">&quot;GOAL POSITION MUST CONTAIN TWO ELEMENTS!!&quot;</span>);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      response-&gt;success.data = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      response-&gt;path = std_msgs::msg::UInt8MultiArray();</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">auto</span> <span class="keyword">const</span> start = <a class="code" href="structPosition.html">Position</a>{request-&gt;start.data[0], request-&gt;start.data[1]};</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">auto</span> <span class="keyword">const</span> goal = <a class="code" href="structPosition.html">Position</a>{request-&gt;goal.data[0], request-&gt;goal.data[1]};</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="comment">// Generate the path</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">auto</span> <span class="keyword">const</span> path = <a class="code" href="with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee">generate_global_path</a>(start, goal);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="comment">// Start populating the response message</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keyword">auto</span> response_path = std_msgs::msg::UInt8MultiArray();</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    response_path.layout.dim.resize(3, std_msgs::msg::MultiArrayDimension());</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    response_path.layout.dim[0].label = <span class="stringliteral">&quot;rows&quot;</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    response_path.layout.dim[0].size = path.size();</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    response_path.layout.dim[0].stride = path.size() * 2;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    response_path.layout.dim[1].label = <span class="stringliteral">&quot;columns&quot;</span>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    response_path.layout.dim[1].size = 2;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    response_path.layout.dim[1].stride = 1;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    response_path.layout.dim[2].label = <span class="stringliteral">&quot;channel&quot;</span>;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    response_path.layout.dim[2].size = 1;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    response_path.layout.dim[2].stride = 1;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="comment">// Start pushing back the path only if there is one</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">if</span> (path.size() &gt; 0) {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span>&amp; position : path) {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        response_path.data.push_back(position.x);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        response_path.data.push_back(position.y);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;      }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    response-&gt;success.data = !path.empty();</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    response-&gt;path = response_path;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  }</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="comment">// Function that sets costmap</span></div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="keywordtype">bool</span> set_costmap(<span class="keyword">const</span> std_msgs::msg::UInt8MultiArray&amp; costmap) {  <span class="comment">// Action</span></div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="comment">// Get the costmap from a ros topic</span></div>
@@ -516,8 +516,6 @@ $(function() {
 <div class="ttc" id="amain_8cpp_html_aa656810951e73a4608280f6aebd72231"><div class="ttname"><a href="main_8cpp.html#aa656810951e73a4608280f6aebd72231">GetPath</a></div><div class="ttdeci">example_srvs::srv::GetPath GetPath</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00018">main.cpp:18</a></div></div>
 <div class="ttc" id="amain_8cpp_html_af15c72120c6d44d1aaaba2dc44ce4602"><div class="ttname"><a href="main_8cpp.html#af15c72120c6d44d1aaaba2dc44ce4602">SetMap</a></div><div class="ttdeci">example_srvs::srv::SetMap SetMap</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00017">main.cpp:17</a></div></div>
 <div class="ttc" id="astructPathGenerator_html"><div class="ttname"><a href="structPathGenerator.html">PathGenerator</a></div><div class="ttdef"><b>Definition:</b> <a href="with__dependency__injection_8cpp_source.html#l00057">with_dependency_injection.cpp:57</a></div></div>
-<div class="ttc" id="astructPathGenerator_html_a541ce4b2dbc0e8e3d5a2d38106924438"><div class="ttname"><a href="structPathGenerator.html#a541ce4b2dbc0e8e3d5a2d38106924438">PathGenerator::generate_path_service</a></div><div class="ttdeci">void generate_path_service(const std::shared_ptr&lt; example_srvs::srv::GetPath::Request &gt; request, std::shared_ptr&lt; example_srvs::srv::GetPath::Response &gt; response)</div><div class="ttdef"><b>Definition:</b> <a href="with__parameter__factory_8cpp_source.html#l00143">with_parameter_factory.cpp:143</a></div></div>
-<div class="ttc" id="astructPathGenerator_html_a75416f2f0e3915326c6a78aaca4027de"><div class="ttname"><a href="structPathGenerator.html#a75416f2f0e3915326c6a78aaca4027de">PathGenerator::set_map_service</a></div><div class="ttdeci">void set_map_service(const std::shared_ptr&lt; example_srvs::srv::SetMap::Request &gt; request, std::shared_ptr&lt; example_srvs::srv::SetMap::Response &gt; response)</div><div class="ttdef"><b>Definition:</b> <a href="with__parameter__factory_8cpp_source.html#l00136">with_parameter_factory.cpp:136</a></div></div>
 <div class="ttc" id="astructPathGenerator_html_a811a7586db958a28521f38c5076e7ef3"><div class="ttname"><a href="structPathGenerator.html#a811a7586db958a28521f38c5076e7ef3">PathGenerator::PathGenerator</a></div><div class="ttdeci">PathGenerator()</div><div class="ttdef"><b>Definition:</b> <a href="without__functional__programming_8cpp_source.html#l00055">without_functional_programming.cpp:55</a></div></div>
 <div class="ttc" id="astructPosition_html"><div class="ttname"><a href="structPosition.html">Position</a></div><div class="ttdoc">Represents a position in the map.</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00022">main.cpp:22</a></div></div>
 <div class="ttc" id="astructPosition_html_a5edee13009fd7ddd7d86ca143e032b15"><div class="ttname"><a href="structPosition.html#a5edee13009fd7ddd7d86ca143e032b15">Position::y</a></div><div class="ttdeci">size_t y</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00024">main.cpp:24</a></div></div>
