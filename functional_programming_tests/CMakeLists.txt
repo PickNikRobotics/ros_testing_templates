@@ -32,6 +32,9 @@ if(BUILD_TESTING)
 
   ament_add_gtest(with_parameters test/with_parameters.cpp TIMEOUT 5)
   ament_target_dependencies(with_parameters rclcpp std_msgs example_srvs)
+
+  ament_add_gtest(with_parameter_factory test/with_parameter_factory.cpp TIMEOUT 5)
+  ament_target_dependencies(with_parameter_factory rclcpp std_msgs example_srvs)
 endif()
 
 ament_package()
