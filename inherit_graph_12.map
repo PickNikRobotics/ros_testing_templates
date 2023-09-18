@@ -1,4 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,13,173,39"/>
-<area shape="rect" id="node2" href="$structrcl__handle_1_1server__goal.html" title="Wrapper for server goal." alt="" coords="221,5,360,47"/>
+<area shape="rect" id="node1" href="$structrcl__handle_1_1interface_1_1action__server.html" title="Allows action server to be mocked." alt="" coords="5,5,161,47"/>
+<area shape="rect" id="node2" href="$structrcl__handle_1_1action__server.html" title="Wrapper for action server." alt="" coords="209,5,347,47"/>
 </map>
