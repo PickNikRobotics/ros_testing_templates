@@ -1,5 +1,6 @@
 <map id="Map::dim" name="Map::dim">
-<area shape="rect" id="node1" title=" " alt="" coords="256,35,339,61"/>
-<area shape="rect" id="node2" href="$structCollisionChecker.html#a9ef9f82b98ebbeeeb90ddc4f436ab2a3" title="Checks if the robot is colliding with an obstacle or out of bounds." alt="" coords="5,5,208,32"/>
-<area shape="rect" id="node3" href="$namespacepathing_1_1utilities.html#a11c89614b394e8e759bc27108c6f82d8" title="Converts map from message to occupancy map if possible." alt="" coords="23,57,191,98"/>
+<area shape="rect" id="node1" title=" " alt="" coords="544,35,627,61"/>
+<area shape="rect" id="node2" href="$structCollisionChecker.html#a9ef9f82b98ebbeeeb90ddc4f436ab2a3" title="Checks if the robot is colliding with an obstacle or out of bounds." alt="" coords="293,5,496,32"/>
+<area shape="rect" id="node3" href="$namespacepathing_1_1utilities.html#a11c89614b394e8e759bc27108c6f82d8" title="Converts map from message to occupancy map if possible." alt="" coords="311,57,479,98"/>
+<area shape="rect" id="node4" href="$structPathingManager.html#ae00651b16225b9bcd6b53a31177d380a" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,64,245,91"/>
 </map>

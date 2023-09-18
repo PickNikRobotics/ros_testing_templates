@@ -1,0 +1,4 @@
+<map id="pathing::generate_global_path" name="pathing::generate_global_path">
+<area shape="rect" id="node1" title="Generates a path." alt="" coords="293,5,513,32"/>
+<area shape="rect" id="node2" href="$structPathingManager.html#ae00651b16225b9bcd6b53a31177d380a" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,5,245,32"/>
+</map>

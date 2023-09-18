@@ -1,8 +1,9 @@
 <map id="Map::get_data" name="Map::get_data">
-<area shape="rect" id="node1" title=" " alt="" coords="460,107,575,134"/>
-<area shape="rect" id="node2" href="$namespacegenerate__path.html#acab23f1169a02054ca6acb9a87e45392" title="Converts between types and dispatches to path generator." alt="" coords="233,78,412,105"/>
-<area shape="rect" id="node6" href="$namespacepathing_1_1utilities.html#a11c89614b394e8e759bc27108c6f82d8" title="Converts map from message to occupancy map if possible." alt="" coords="239,129,407,171"/>
-<area shape="rect" id="node3" href="$structRosMiddleware.html#a7cadbeb2ec18265c7ecd1b37e4122ac8" title="Register a callback for the generate path service." alt="" coords="5,5,185,47"/>
-<area shape="rect" id="node4" href="$structRosMiddleware.html#a5a02a860ac01cfc746df8f690f69990f" title="Register a callback for the set map service." alt="" coords="5,71,185,112"/>
-<area shape="rect" id="node5" href="$with__dependency__injection_8cpp.html#a07ced520814e7cc067a3cace9214dda6" title=" " alt="" coords="68,137,123,163"/>
+<area shape="rect" id="node1" title=" " alt="" coords="520,42,635,69"/>
+<area shape="rect" id="node2" href="$namespacegenerate__path.html#acab23f1169a02054ca6acb9a87e45392" title="Converts between types and dispatches to path generator." alt="" coords="293,71,472,98"/>
+<area shape="rect" id="node7" href="$namespacepathing_1_1utilities.html#a11c89614b394e8e759bc27108c6f82d8" title="Converts map from message to occupancy map if possible." alt="" coords="299,5,467,47"/>
+<area shape="rect" id="node3" href="$structPathingManager.html#ae00651b16225b9bcd6b53a31177d380a" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,13,245,39"/>
+<area shape="rect" id="node4" href="$structRosMiddleware.html#a9a5c01d17d73a5d1cfddfae80233db73" title="Register a callback for the generate path service." alt="" coords="35,64,215,105"/>
+<area shape="rect" id="node5" href="$structRosMiddleware.html#aa4652f077f791c27fe9a4bf5fcc7fe61" title="Register a callback for the set map service." alt="" coords="35,129,215,171"/>
+<area shape="rect" id="node6" href="$with__dependency__injection_8cpp.html#a07ced520814e7cc067a3cace9214dda6" title=" " alt="" coords="98,195,153,222"/>
 </map>

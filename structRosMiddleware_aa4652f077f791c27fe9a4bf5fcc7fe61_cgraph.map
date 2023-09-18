@@ -1,0 +1,6 @@
+<map id="RosMiddleware::register_set_map_service" name="RosMiddleware::register_set_map_service">
+<area shape="rect" id="node1" title="Register a callback for the set map service." alt="" coords="5,46,185,87"/>
+<area shape="rect" id="node2" href="$namespacegenerate__path.html#acab23f1169a02054ca6acb9a87e45392" title="Converts between types and dispatches to path generator." alt="" coords="233,53,412,80"/>
+<area shape="rect" id="node3" href="$namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe" title="Creates a UInt8MultiArray message from a path." alt="" coords="460,5,692,61"/>
+<area shape="rect" id="node4" href="$classMap.html#a2d26c288c1336257492cf45c954fbdc6" title=" " alt="" coords="519,85,633,112"/>
+</map>
