@@ -81,6 +81,9 @@ Functions</h2></td></tr>
 <tr class="memitem:add45b1db5874120e324913322b981dfe"><td class="memItemLeft" align="right" valign="top">std_msgs::msg::UInt8MultiArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe">createUInt8MultiArrayMessageFromPath</a> (<a class="el" href="namespacepathing.html#a7d0803c57700af5860c06cde68bdab03">Path</a> const &amp;path)</td></tr>
 <tr class="memdesc:add45b1db5874120e324913322b981dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a UInt8MultiArray message from a path.  <a href="namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe">More...</a><br /></td></tr>
 <tr class="separator:add45b1db5874120e324913322b981dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a658d511069ef5dcdfbade9bf1c4681bd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structpathing_1_1Position.html">Position</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#a658d511069ef5dcdfbade9bf1c4681bd">parseGeneratedPath</a> (const std_msgs::msg::UInt8MultiArray &amp;msg)</td></tr>
+<tr class="memdesc:a658d511069ef5dcdfbade9bf1c4681bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a path from ROS message to a vector of positions.  <a href="namespacepathing_1_1utilities.html#a658d511069ef5dcdfbade9bf1c4681bd">More...</a><br /></td></tr>
+<tr class="separator:a658d511069ef5dcdfbade9bf1c4681bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="add45b1db5874120e324913322b981dfe"></a>
@@ -119,6 +122,44 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="with__functional__programming_8cpp.html#a6583434986431dcb3f3b55149b7c51e3" title=" " alt="" coords="314,89,369,116"/>
 <area shape="rect" href="structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,5,207,32"/>
 <area shape="rect" href="with__functional__programming_8cpp.html#acec5be9a569c50b53cac514564d1fdf9" title=" " alt="" coords="79,56,133,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a658d511069ef5dcdfbade9bf1c4681bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a658d511069ef5dcdfbade9bf1c4681bd">&#9670;&nbsp;</a></span>parseGeneratedPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="structpathing_1_1Position.html">Position</a> &gt; pathing::utilities::parseGeneratedPath </td>
+          <td>(</td>
+          <td class="paramtype">const std_msgs::msg::UInt8MultiArray &amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a path from ROS message to a vector of positions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>The message to convert </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The path as a vector of positions </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utilities_8cpp_source.html#l00068">68</a> of file <a class="el" href="utilities_8cpp_source.html">utilities.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacepathing_1_1utilities_a658d511069ef5dcdfbade9bf1c4681bd_icgraph.png" border="0" usemap="#anamespacepathing_1_1utilities_a658d511069ef5dcdfbade9bf1c4681bd_icgraph" alt=""/></div>
+<map name="anamespacepathing_1_1utilities_a658d511069ef5dcdfbade9bf1c4681bd_icgraph" id="anamespacepathing_1_1utilities_a658d511069ef5dcdfbade9bf1c4681bd_icgraph">
+<area shape="rect" title="Convert a path from ROS message to a vector of positions." alt="" coords="123,5,285,47"/>
+<area shape="rect" href="with__functional__programming_8cpp.html#a5dc6843f34f926edbc5410fa52af4049" title=" " alt="" coords="5,13,75,39"/>
 </map>
 </div>
 

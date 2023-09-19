@@ -1,0 +1,5 @@
+<map id="make_occupancy_map" name="make_occupancy_map">
+<area shape="rect" id="node1" title="Create a sample occupancy map in a request message." alt="" coords="213,42,384,69"/>
+<area shape="rect" id="node2" href="$structPathManagerFixture.html#aafd4d33c3197829aa5d8fdbb103d3af4" title="Construct a fixture which will set the map and capture the path callback." alt="" coords="5,5,165,47"/>
+<area shape="rect" id="node3" href="$with__functional__programming_8cpp.html#aaccaf2a92c3c5ea815cc69ebe7c9f2e4" title=" " alt="" coords="58,71,113,98"/>
+</map>

@@ -136,11 +136,31 @@ $(function() {
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  }</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordflow">return</span> message;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};  <span class="comment">// namespace pathing::utilities</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="namespacepathing_1_1utilities.html#a658d511069ef5dcdfbade9bf1c4681bd">   68</a></span>&#160;std::vector&lt;Position&gt; <a class="code" href="namespacepathing_1_1utilities.html#a658d511069ef5dcdfbade9bf1c4681bd">parseGeneratedPath</a>(</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">const</span> std_msgs::msg::UInt8MultiArray&amp; msg) {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="comment">// Check the path has an even number of elements</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordflow">if</span> ((msg.data.size() % 2) != 0) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> {};</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordflow">if</span> (msg.data.size() == 0) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> {};</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <a class="code" href="namespacepathing.html#a7d0803c57700af5860c06cde68bdab03">Path</a> path;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> idx = 0; idx &lt; (msg.data.size() - 1); idx += 2) {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    path.push_back({msg.data[idx], msg.data[idx + 1]});</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keywordflow">return</span> path;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};  <span class="comment">// namespace pathing::utilities</span></div>
 <div class="ttc" id="aclassMap_html"><div class="ttname"><a href="classMap.html">Map&lt; unsigned char &gt;</a></div></div>
 <div class="ttc" id="aclassMap_html_a2d26c288c1336257492cf45c954fbdc6"><div class="ttname"><a href="classMap.html#a2d26c288c1336257492cf45c954fbdc6">Map::get_data</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; T &gt; &gt; &amp; get_data()</div><div class="ttdef"><b>Definition:</b> <a href="with__dependency__injection_8cpp_source.html#l00051">with_dependency_injection.cpp:51</a></div></div>
 <div class="ttc" id="aclassMap_html_a9ddfce89a5714e0ba94e0210d749c1f4"><div class="ttname"><a href="classMap.html#a9ddfce89a5714e0ba94e0210d749c1f4">Map::dim</a></div><div class="ttdeci">std::pair&lt; int, int &gt; dim() const</div><div class="ttdef"><b>Definition:</b> <a href="with__parameter__factory_8cpp_source.html#l00036">with_parameter_factory.cpp:36</a></div></div>
 <div class="ttc" id="anamespacepathing_1_1utilities_html"><div class="ttname"><a href="namespacepathing_1_1utilities.html">pathing::utilities</a></div><div class="ttdef"><b>Definition:</b> <a href="utilities_8hpp_source.html#l00010">utilities.hpp:10</a></div></div>
+<div class="ttc" id="anamespacepathing_1_1utilities_html_a658d511069ef5dcdfbade9bf1c4681bd"><div class="ttname"><a href="namespacepathing_1_1utilities.html#a658d511069ef5dcdfbade9bf1c4681bd">pathing::utilities::parseGeneratedPath</a></div><div class="ttdeci">std::vector&lt; Position &gt; parseGeneratedPath(const std_msgs::msg::UInt8MultiArray &amp;msg)</div><div class="ttdoc">Convert a path from ROS message to a vector of positions.</div><div class="ttdef"><b>Definition:</b> <a href="utilities_8cpp_source.html#l00068">utilities.cpp:68</a></div></div>
 <div class="ttc" id="anamespacepathing_1_1utilities_html_add45b1db5874120e324913322b981dfe"><div class="ttname"><a href="namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe">pathing::utilities::createUInt8MultiArrayMessageFromPath</a></div><div class="ttdeci">std_msgs::msg::UInt8MultiArray createUInt8MultiArrayMessageFromPath(Path const &amp;path)</div><div class="ttdoc">Creates a UInt8MultiArray message from a path.</div><div class="ttdef"><b>Definition:</b> <a href="utilities_8cpp_source.html#l00037">utilities.cpp:37</a></div></div>
 <div class="ttc" id="anamespacepathing_1_1utilities_html_afd105d787f6685bba9390425221c15aa"><div class="ttname"><a href="namespacepathing_1_1utilities.html#afd105d787f6685bba9390425221c15aa">pathing::utilities::parseSetMapRequest</a></div><div class="ttdeci">std::optional&lt; Map&lt; unsigned char &gt; &gt; parseSetMapRequest(std::shared_ptr&lt; example_srvs::srv::SetMap::Request &gt; const request)</div><div class="ttdoc">Converts map from message to occupancy map if possible.</div><div class="ttdef"><b>Definition:</b> <a href="utilities_8cpp_source.html#l00010">utilities.cpp:10</a></div></div>
 <div class="ttc" id="anamespacepathing_html_a7d0803c57700af5860c06cde68bdab03"><div class="ttname"><a href="namespacepathing.html#a7d0803c57700af5860c06cde68bdab03">pathing::Path</a></div><div class="ttdeci">std::vector&lt; Position &gt; Path</div><div class="ttdef"><b>Definition:</b> <a href="pathing_8hpp_source.html#l00048">pathing.hpp:48</a></div></div>

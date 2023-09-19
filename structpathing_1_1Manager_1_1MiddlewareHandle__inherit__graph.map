@@ -1,4 +1,5 @@
 <map id="pathing::Manager::MiddlewareHandle" name="pathing::Manager::MiddlewareHandle">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,225,47"/>
-<area shape="rect" id="node2" href="$structRosMiddleware.html" title=" " alt="" coords="54,95,177,121"/>
+<area shape="rect" id="node1" title=" " alt="" coords="71,5,291,47"/>
+<area shape="rect" id="node2" href="$structMockMiddlewareHandle.html" title=" " alt="" coords="5,95,184,121"/>
+<area shape="rect" id="node3" href="$structRosMiddleware.html" title=" " alt="" coords="208,95,331,121"/>
 </map>
