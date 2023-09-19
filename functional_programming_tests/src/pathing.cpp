@@ -27,7 +27,7 @@ bool operator==(Position const& lhs, Position const& rhs) {
 
 std::optional<Path> generate_global_path(
     Position const& start, Position const& goal,
-    Map<unsigned char> const& occupancy_map) {  // Calculation
+    Map<unsigned char> const& occupancy_map, int robot_size) {
   // Pre-checks
   if (occupancy_map.empty()) {
     return std::nullopt;
@@ -82,9 +82,13 @@ std::optional<Path> generate_global_path(
 
   // Fails if there is any obstacle in the way
   // Move horizontally
-  repeat(std::abs(del_x), [&move, &del_x_sign]() { move(del_x_sign, 0); });
+  // x limit is reduced by half of the robot size to prevent the
+  // algorithm from checking collision outside of the map
+  auto const x_limit = std::abs(del_x) - std::floor(robot_size / 2);
+  repeat(x_limit, [&move, &del_x_sign]() { move(del_x_sign, 0); });
   // Move vertically
-  repeat(std::abs(del_y), [&move, &del_y_sign]() { move(0, del_y_sign); });
+  auto const y_limit = std::abs(del_y) - std::floor(robot_size / 2);
+  repeat(y_limit, [&move, &del_y_sign]() { move(0, del_y_sign); });
 
   return path;
 }
@@ -93,7 +97,8 @@ namespace generate_path {
 
 tl::expected<example_srvs::srv::GetPath::Response, error> generate_path(
     std::shared_ptr<example_srvs::srv::GetPath::Request> const request,
-    Map<unsigned char> const& occupancy_map, PathingGenerator path_generator) {
+    Map<unsigned char> const& occupancy_map, int robot_size,
+    PathingGenerator path_generator) {
   if (occupancy_map.get_data().size() == 0) {
     return tl::unexpected(error::EMPTY_OCCUPANCY_MAP);
   }
@@ -109,7 +114,7 @@ tl::expected<example_srvs::srv::GetPath::Response, error> generate_path(
   auto const goal = Position{request->goal.data[0], request->goal.data[1]};
 
   // Generate the path using the path generator function that was input
-  auto const path = path_generator(start, goal, occupancy_map);
+  auto const path = path_generator(start, goal, occupancy_map, robot_size);
   if (!path.has_value()) {
     return tl::unexpected(error::NO_VALID_PATH);
   }

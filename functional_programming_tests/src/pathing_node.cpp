@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
 
   rclcpp::init(argc, argv);
   auto const node = std::make_shared<rclcpp::Node>("PathGenerator");
-  pathing::Manager pm{std::make_unique<RosMiddleware>(node)};
+  pathing::Manager pm{std::make_unique<RosMiddleware>(node), {1}};
 
   rclcpp::spin(node);
   rclcpp::shutdown();

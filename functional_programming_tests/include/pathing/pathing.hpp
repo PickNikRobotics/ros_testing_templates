@@ -54,7 +54,7 @@ std::ostream& operator<<(std::ostream& os, std::vector<Position> const& path);
 bool operator==(Position const& lhs, Position const& rhs);
 
 using PathingGenerator = std::function<std::optional<Path>(
-    Position const&, Position const&, Map<unsigned char> const&)>;
+    Position const&, Position const&, Map<unsigned char> const&, int)>;
 
 /**
  * @brief      Generates a path
@@ -62,12 +62,13 @@ using PathingGenerator = std::function<std::optional<Path>(
  * @param      start position
  * @param      goal position
  * @param      occupancy_map to path through
+ * @param      robot_size in pixels
  *
  * @return     std::optional containing the Path
  */
 std::optional<Path> generate_global_path(
     Position const& start, Position const& goal,
-    Map<unsigned char> const& occupancy_map);
+    Map<unsigned char> const& occupancy_map, int robot_size);
 
 namespace generate_path {
 /**
@@ -97,13 +98,15 @@ std::map<error, std::string> const error_description = {
  *
  * @param[in]  request contains the start and goal positions
  * @param[in]  occupancy_map to path through
+ * @param[in]  robot_size in pixels
  * @param[in]  path_generator algorithm to use for pathing
  *
  * @return     The path if successful, otherwise an error
  */
 tl::expected<example_srvs::srv::GetPath::Response, error> generate_path(
     std::shared_ptr<example_srvs::srv::GetPath::Request> const request,
-    Map<unsigned char> const& occupancy_map, PathingGenerator path_generator);
+    Map<unsigned char> const& occupancy_map, int robot_size,
+    PathingGenerator path_generator);
 
 }  // namespace generate_path
 
