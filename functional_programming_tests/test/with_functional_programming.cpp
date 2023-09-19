@@ -6,6 +6,9 @@
 #include <gtest/gtest.h>
 #include <std_msgs/msg/u_int8_multi_array.hpp>
 
+using SetMap = example_srvs::srv::SetMap;
+using GetPath = example_srvs::srv::GetPath;
+
 /**
  * @brief      Gets the test costmap.
  *
@@ -148,7 +151,7 @@ TEST(GenerateGlobalPath, PathGenerated) {
 
 TEST(PathingUtilitiesParseSetMap, EmptyRequest) {
   // GIVEN a set map request
-  auto const request = std::make_shared<example_srvs::srv::SetMap::Request>();
+  auto const request = std::make_shared<SetMap::Request>();
 
   // WHEN a completely empty request is parsed
   auto const map = pathing::utilities::parseSetMapRequest(request);
@@ -157,8 +160,8 @@ TEST(PathingUtilitiesParseSetMap, EmptyRequest) {
   EXPECT_FALSE(map.has_value());
 }
 
-std::shared_ptr<example_srvs::srv::SetMap::Request> createSetMapRequest() {
-  auto const request = std::make_shared<example_srvs::srv::SetMap::Request>();
+std::shared_ptr<SetMap::Request> createSetMapRequest() {
+  auto const request = std::make_shared<SetMap::Request>();
 
   request->map = std_msgs::msg::UInt8MultiArray();
 
@@ -254,7 +257,7 @@ TEST(GeneratePath, EmptyOccupancyMap) {
   // GIVEN a GetPath request and an empty costmap
   pathing::Map<unsigned char> const sample_occupancy_map;
 
-  auto const request = std::make_shared<example_srvs::srv::GetPath::Request>();
+  auto const request = std::make_shared<GetPath::Request>();
 
   request->start.data = {0, 0};
   request->goal.data = {1, 1};
@@ -272,7 +275,7 @@ TEST(GeneratePath, InvalidStartSize) {
   // GIVEN a GetPath request with an incorrect start field and an occupancy map
   auto const sample_occupancy_map = get_test_occupancy_map();
 
-  auto const request = std::make_shared<example_srvs::srv::GetPath::Request>();
+  auto const request = std::make_shared<GetPath::Request>();
 
   request->start.data = {0, 0, 0};
   request->goal.data = {1, 1};
@@ -341,8 +344,8 @@ TEST(GeneratePath, PathGenerated) {
  * @brief Create a sample occupancy map in a request message
  * @return A shared pointer to the request message with the occupancy map
  */
-std::shared_ptr<example_srvs::srv::SetMap::Request> make_occupancy_map() {
-  auto const request = std::make_shared<example_srvs::srv::SetMap::Request>();
+std::shared_ptr<SetMap::Request> make_occupancy_map() {
+  auto const request = std::make_shared<SetMap::Request>();
 
   request->map = std_msgs::msg::UInt8MultiArray();
 
@@ -404,7 +407,7 @@ TEST(PathManager, SetMap) {
 
   // WHEN the set map service is called
   auto const request = make_occupancy_map();
-  auto response = std::make_shared<example_srvs::srv::SetMap::Response>();
+  auto response = std::make_shared<SetMap::Response>();
   callback(request, response);
 
   // THEN the path generator should successfully set the map
@@ -443,8 +446,7 @@ struct PathManagerFixture : public testing::Test {
     ON_CALL(*mw_, register_set_map_service(testing::_))
         .WillByDefault([&](auto const& map_callback) {
           auto const map_request = make_occupancy_map();
-          auto map_response =
-              std::make_shared<example_srvs::srv::SetMap::Response>();
+          auto map_response = std::make_shared<SetMap::Response>();
           map_callback(map_request, map_response);
         });
 
@@ -462,9 +464,8 @@ TEST_F(PathManagerFixture, NoStartNoGoal) {
   auto const path_generator = pathing::Manager{std::move(mw_)};
 
   // WHEN the generate path service is called,
-  auto const path_request =
-      std::make_shared<example_srvs::srv::GetPath::Request>();
-  auto path_response = std::make_shared<example_srvs::srv::GetPath::Response>();
+  auto const path_request = std::make_shared<GetPath::Request>();
+  auto path_response = std::make_shared<GetPath::Response>();
   path_callback_(path_request, path_response);
 
   // THEN the path generator should fail
@@ -476,10 +477,10 @@ TEST_F(PathManagerFixture, SameStartGoal) {
   auto const path_generator = pathing::Manager{std::move(mw_)};
 
   // WHEN the generate path service is called with the same start and goal
-  auto path_request = std::make_shared<example_srvs::srv::GetPath::Request>();
+  auto path_request = std::make_shared<GetPath::Request>();
   path_request->start.data = {0, 0};
   path_request->goal.data = {0, 0};
-  auto path_response = std::make_shared<example_srvs::srv::GetPath::Response>();
+  auto path_response = std::make_shared<GetPath::Response>();
   path_callback_(path_request, path_response);
 
   // THEN the path generator should succeed
@@ -495,11 +496,11 @@ TEST_F(PathManagerFixture, NoPath) {
   auto const path_generator = pathing::Manager{std::move(mw_)};
 
   // WHEN the generate path service is called with an unreachable goal
-  auto path_request = std::make_shared<example_srvs::srv::GetPath::Request>();
+  auto path_request = std::make_shared<GetPath::Request>();
   path_request->start.data = {2, 2};
   path_request->goal.data = {5, 5};
 
-  auto path_response = std::make_shared<example_srvs::srv::GetPath::Response>();
+  auto path_response = std::make_shared<GetPath::Response>();
   path_callback_(path_request, path_response);
 
   // THEN the path generator should succeed
@@ -515,10 +516,10 @@ TEST_F(PathManagerFixture, PathGenerated) {
   auto const path_generator = pathing::Manager{std::move(mw_)};
 
   // WHEN the generate path service is called with a reachable goal
-  auto path_request = std::make_shared<example_srvs::srv::GetPath::Request>();
+  auto path_request = std::make_shared<GetPath::Request>();
   path_request->start.data = {0, 0};
   path_request->goal.data = {7, 7};
-  auto path_response = std::make_shared<example_srvs::srv::GetPath::Response>();
+  auto path_response = std::make_shared<GetPath::Response>();
   path_callback_(path_request, path_response);
 
   // THEN the path generator should succeed
