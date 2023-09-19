@@ -95,7 +95,7 @@ tl::expected<example_srvs::srv::GetPath::Response, error> generate_path(
     std::shared_ptr<example_srvs::srv::GetPath::Request> const request,
     Map<unsigned char> const& occupancy_map, PathingGenerator path_generator) {
   if (occupancy_map.get_data().size() == 0) {
-    return tl::unexpected(error::NO_OCCUPANCY_MAP);
+    return tl::unexpected(error::EMPTY_OCCUPANCY_MAP);
   }
   // Check to make sure start and goal fields of the request are of size 2
   if (request->start.data.size() != 2) {

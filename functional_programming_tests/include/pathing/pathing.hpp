@@ -74,7 +74,7 @@ namespace generate_path {
  * @brief      Types of errors expected in the generate path callback function
  */
 enum class error {
-  NO_OCCUPANCY_MAP,
+  EMPTY_OCCUPANCY_MAP,
   INVALID_START_SIZE,
   INVALID_GOAL_SIZE,
   NO_VALID_PATH
@@ -84,7 +84,7 @@ enum class error {
  * @brief      Descriptions of the errors
  */
 std::map<error, std::string> const error_description = {
-    {error::NO_OCCUPANCY_MAP, "The Occupancy Map is empty."},
+    {error::EMPTY_OCCUPANCY_MAP, "The Occupancy Map is empty."},
     {error::INVALID_START_SIZE,
      "The start field in the request is not of size 2."},
     {error::INVALID_GOAL_SIZE,
