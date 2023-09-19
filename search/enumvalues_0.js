@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['invalid_5fgoal_5fsize_240',['INVALID_GOAL_SIZE',['../namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2a6716dd09f577258bd26395efaf7a2bf0',1,'pathing::generate_path']]],
-  ['invalid_5fstart_5fsize_241',['INVALID_START_SIZE',['../namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2ae5d1db6ad83302e35344b04d4ade2cf7',1,'pathing::generate_path']]]
+  ['empty_5foccupancy_5fmap_242',['EMPTY_OCCUPANCY_MAP',['../namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2aa0f7eea8dabb7867f1fd7335fef1a9ed',1,'pathing::generate_path']]]
 ];

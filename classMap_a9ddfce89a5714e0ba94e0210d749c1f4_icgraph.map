@@ -2,5 +2,6 @@
 <area shape="rect" id="node1" title=" " alt="" coords="505,35,588,61"/>
 <area shape="rect" id="node2" href="$structCollisionChecker.html#a9ef9f82b98ebbeeeb90ddc4f436ab2a3" title="Checks if the robot is colliding with an obstacle or out of bounds." alt="" coords="255,5,457,32"/>
 <area shape="rect" id="node3" href="$namespacepathing_1_1utilities.html#afd105d787f6685bba9390425221c15aa" title="Converts map from message to occupancy map if possible." alt="" coords="272,57,440,98"/>
-<area shape="rect" id="node4" href="$structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,64,207,91"/>
+<area shape="rect" id="node4" href="$structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,39,207,65"/>
+<area shape="rect" id="node5" href="$with__functional__programming_8cpp.html#aa41e6adcaa45b1e2730b871a8830b72c" title=" " alt="" coords="79,89,133,116"/>
 </map>

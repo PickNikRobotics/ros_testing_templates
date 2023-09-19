@@ -1,9 +1,8 @@
 <map id="Map::at" name="Map::at">
-<area shape="rect" id="node1" title=" " alt="" coords="537,107,608,133"/>
-<area shape="rect" id="node2" href="$with__functional__programming_8cpp.html#ab3969c1538b2265d2c4b64ae1618c3ee" title=" " alt="" coords="298,56,461,83"/>
-<area shape="rect" id="node5" href="$namespacepathing.html#aa5a3c053f4fbb497f3568321995f6d18" title="Generates a path." alt="" coords="269,107,489,133"/>
-<area shape="rect" id="node7" href="$structCollisionChecker.html#a9ef9f82b98ebbeeeb90ddc4f436ab2a3" title="Checks if the robot is colliding with an obstacle or out of bounds." alt="" coords="278,157,481,184"/>
-<area shape="rect" id="node3" href="$structPathGenerator.html#a7ddb86262b7b95dcdd2b235e469e1373" title="Builds paths given a map." alt="" coords="5,5,221,32"/>
-<area shape="rect" id="node4" href="$with__functional__programming_8cpp.html#a5c5d8b847985c1d8132d96c520c7cbd6" title=" " alt="" coords="86,56,141,83"/>
-<area shape="rect" id="node6" href="$structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="13,107,214,133"/>
+<area shape="rect" id="node1" title=" " alt="" coords="537,81,608,108"/>
+<area shape="rect" id="node2" href="$namespacepathing.html#aa5a3c053f4fbb497f3568321995f6d18" title="Generates a path." alt="" coords="269,56,489,83"/>
+<area shape="rect" id="node6" href="$structCollisionChecker.html#a9ef9f82b98ebbeeeb90ddc4f436ab2a3" title="Checks if the robot is colliding with an obstacle or out of bounds." alt="" coords="278,107,481,133"/>
+<area shape="rect" id="node3" href="$structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="13,5,214,32"/>
+<area shape="rect" id="node4" href="$structPathGenerator.html#a7ddb86262b7b95dcdd2b235e469e1373" title="Builds paths given a map." alt="" coords="5,56,221,83"/>
+<area shape="rect" id="node5" href="$with__functional__programming_8cpp.html#a29be34a7d953dc3216abd79b342632a6" title=" " alt="" coords="86,107,141,133"/>
 </map>

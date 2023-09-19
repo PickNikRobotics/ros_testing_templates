@@ -1,4 +1,5 @@
 <map id="pathing::generate_path::generate_path" name="pathing::generate_path::generate_path">
-<area shape="rect" id="node1" title="Converts between types and dispatches to path generator." alt="" coords="255,5,428,47"/>
-<area shape="rect" id="node2" href="$structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,13,207,39"/>
+<area shape="rect" id="node1" title="Converts between types and dispatches to path generator." alt="" coords="255,23,428,65"/>
+<area shape="rect" id="node2" href="$structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,5,207,32"/>
+<area shape="rect" id="node3" href="$with__functional__programming_8cpp.html#acec5be9a569c50b53cac514564d1fdf9" title=" " alt="" coords="79,56,133,83"/>
 </map>

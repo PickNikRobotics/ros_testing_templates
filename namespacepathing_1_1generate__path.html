@@ -77,7 +77,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a5ecef5e5eacb2307220391d1a3c8dab2"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2">error</a> { <a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2a36c6ffecd2dc7eb3a240de99c6568e7e">NO_OCCUPANCY_MAP</a>
+<tr class="memitem:a5ecef5e5eacb2307220391d1a3c8dab2"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2">error</a> { <a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2aa0f7eea8dabb7867f1fd7335fef1a9ed">EMPTY_OCCUPANCY_MAP</a>
 , <a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2ae5d1db6ad83302e35344b04d4ade2cf7">INVALID_START_SIZE</a>
 , <a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2a6716dd09f577258bd26395efaf7a2bf0">INVALID_GOAL_SIZE</a>
 , <a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2adbd8a5cf2e4d4b9eb6e12e48f8d4e36d">NO_VALID_PATH</a>
@@ -120,7 +120,7 @@ Variables</h2></td></tr>
 
 <p>Types of errors expected in the generate path callback function. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5ecef5e5eacb2307220391d1a3c8dab2a36c6ffecd2dc7eb3a240de99c6568e7e"></a>NO_OCCUPANCY_MAP&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5ecef5e5eacb2307220391d1a3c8dab2aa0f7eea8dabb7867f1fd7335fef1a9ed"></a>EMPTY_OCCUPANCY_MAP&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a5ecef5e5eacb2307220391d1a3c8dab2ae5d1db6ad83302e35344b04d4ade2cf7"></a>INVALID_START_SIZE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a5ecef5e5eacb2307220391d1a3c8dab2a6716dd09f577258bd26395efaf7a2bf0"></a>INVALID_GOAL_SIZE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a5ecef5e5eacb2307220391d1a3c8dab2adbd8a5cf2e4d4b9eb6e12e48f8d4e36d"></a>NO_VALID_PATH&#160;</td><td class="fielddoc"></td></tr>
@@ -190,8 +190,9 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacepathing_1_1generate__path_a981d5c06081b8c6de51ffa8d569d4591_icgraph.png" border="0" usemap="#anamespacepathing_1_1generate__path_a981d5c06081b8c6de51ffa8d569d4591_icgraph" alt=""/></div>
 <map name="anamespacepathing_1_1generate__path_a981d5c06081b8c6de51ffa8d569d4591_icgraph" id="anamespacepathing_1_1generate__path_a981d5c06081b8c6de51ffa8d569d4591_icgraph">
-<area shape="rect" title="Converts between types and dispatches to path generator." alt="" coords="255,5,428,47"/>
-<area shape="rect" href="structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,13,207,39"/>
+<area shape="rect" title="Converts between types and dispatches to path generator." alt="" coords="255,23,428,65"/>
+<area shape="rect" href="structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,5,207,32"/>
+<area shape="rect" href="with__functional__programming_8cpp.html#acec5be9a569c50b53cac514564d1fdf9" title=" " alt="" coords="79,56,133,83"/>
 </map>
 </div>
 
@@ -210,7 +211,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    {error::NO_OCCUPANCY_MAP, <span class="stringliteral">&quot;The Occupancy Map is empty.&quot;</span>},</div>
+<div class="line">    {error::EMPTY_OCCUPANCY_MAP, <span class="stringliteral">&quot;The Occupancy Map is empty.&quot;</span>},</div>
 <div class="line">    {error::INVALID_START_SIZE,</div>
 <div class="line">     <span class="stringliteral">&quot;The start field in the request is not of size 2.&quot;</span>},</div>
 <div class="line">    {error::INVALID_GOAL_SIZE,</div>
