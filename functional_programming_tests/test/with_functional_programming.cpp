@@ -6,6 +6,9 @@
 #include <gtest/gtest.h>
 #include <std_msgs/msg/u_int8_multi_array.hpp>
 
+using SetMap = example_srvs::srv::SetMap;
+using GetPath = example_srvs::srv::GetPath;
+
 /**
  * @brief      Gets the test costmap.
  *
@@ -148,7 +151,7 @@ TEST(GenerateGlobalPath, PathGenerated) {
 
 TEST(PathingUtilitiesParseSetMap, EmptyRequest) {
   // GIVEN a set map request
-  auto const request = std::make_shared<example_srvs::srv::SetMap::Request>();
+  auto const request = std::make_shared<SetMap::Request>();
 
   // WHEN a completely empty request is parsed
   auto const map = pathing::utilities::parseSetMapRequest(request);
@@ -157,8 +160,8 @@ TEST(PathingUtilitiesParseSetMap, EmptyRequest) {
   EXPECT_FALSE(map.has_value());
 }
 
-std::shared_ptr<example_srvs::srv::SetMap::Request> createSetMapRequest() {
-  auto const request = std::make_shared<example_srvs::srv::SetMap::Request>();
+std::shared_ptr<SetMap::Request> createSetMapRequest() {
+  auto const request = std::make_shared<SetMap::Request>();
 
   request->map = std_msgs::msg::UInt8MultiArray();
 
@@ -254,7 +257,7 @@ TEST(GeneratePath, EmptyOccupancyMap) {
   // GIVEN a GetPath request and an empty costmap
   pathing::Map<unsigned char> const sample_occupancy_map;
 
-  auto const request = std::make_shared<example_srvs::srv::GetPath::Request>();
+  auto const request = std::make_shared<GetPath::Request>();
 
   request->start.data = {0, 0};
   request->goal.data = {1, 1};
@@ -272,7 +275,7 @@ TEST(GeneratePath, InvalidStartSize) {
   // GIVEN a GetPath request with an incorrect start field and an occupancy map
   auto const sample_occupancy_map = get_test_occupancy_map();
 
-  auto const request = std::make_shared<example_srvs::srv::GetPath::Request>();
+  auto const request = std::make_shared<GetPath::Request>();
 
   request->start.data = {0, 0, 0};
   request->goal.data = {1, 1};
@@ -336,6 +339,199 @@ TEST(GeneratePath, PathGenerated) {
   // THEN there should no errors
   EXPECT_TRUE(response.has_value());
 }
+
+/**
+ * @brief Create a sample occupancy map in a request message
+ * @return A shared pointer to the request message with the occupancy map
+ */
+std::shared_ptr<SetMap::Request> make_occupancy_map() {
+  auto const request = std::make_shared<SetMap::Request>();
+
+  request->map = std_msgs::msg::UInt8MultiArray();
+
+  request->map.layout.dim.resize(3, std_msgs::msg::MultiArrayDimension());
+
+  request->map.layout.dim[0].label = "rows";
+  request->map.layout.dim[0].size = 8;
+  request->map.layout.dim[0].stride = 64;
+
+  request->map.layout.dim[1].label = "columns";
+  request->map.layout.dim[1].size = 8;
+  request->map.layout.dim[1].stride = 1;
+
+  request->map.layout.dim[2].label = "channel";
+  request->map.layout.dim[2].size = 1;
+  request->map.layout.dim[2].stride = 1;
+
+  request->map.data = {0, 0, 0,   0,   0,   0,   0, 0,  //
+                       0, 0, 0,   255, 0,   0,   0, 0,  //
+                       0, 0, 0,   255, 0,   0,   0, 0,  //
+                       0, 0, 255, 255, 255, 0,   0, 0,  //
+                       0, 0, 255, 0,   255, 255, 0, 0,  //
+                       0, 0, 255, 0,   0,   0,   0, 0,  //
+                       0, 0, 0,   0,   0,   0,   0, 0,  //
+                       0, 0, 0,   0,   0,   0,   0, 0};
+  return request;
+}
+
+// Create mock middleware handle
+struct MockMiddlewareHandle : public pathing::Manager::MiddlewareHandle {
+  MOCK_METHOD(void, register_set_map_service, (SetMapCallback), (override));
+  MOCK_METHOD(void, register_generate_path_service, (GeneratePathCallback),
+              (override));
+  MOCK_METHOD(void, log_info, (std::string const&), (override));
+  MOCK_METHOD(void, log_error, (std::string const&), (override));
+};
+
+TEST(PathManager, Ctor) {
+  // GIVEN a mock middleware handle
+  auto mw = std::make_unique<MockMiddlewareHandle>();
+
+  // THEN it should register the services
+  EXPECT_CALL(*mw, register_set_map_service(testing::_)).Times(1);
+  EXPECT_CALL(*mw, register_generate_path_service(testing::_)).Times(1);
+
+  // WHEN the path generator is constructed
+  auto const path_generator = pathing::Manager{std::move(mw)};
+}
+
+TEST(PathManager, SetMap) {
+  // GIVEN a path generator
+  auto mw = std::make_unique<MockMiddlewareHandle>();
+  // Capture the callback so it can be called later
+  pathing::Manager::MiddlewareHandle::SetMapCallback callback;
+  ON_CALL(*mw, register_set_map_service(testing::_))
+      .WillByDefault(testing::SaveArg<0>(&callback));
+
+  auto const path_generator = pathing::Manager{std::move(mw)};
+
+  // WHEN the set map service is called
+  auto const request = make_occupancy_map();
+  auto response = std::make_shared<SetMap::Response>();
+  callback(request, response);
+
+  // THEN the path generator should successfully set the map
+  EXPECT_TRUE(response->success.data);
+}
+
+TEST(PathManager, NoCostmap) {
+  // GIVEN a path generator with a costmap
+  auto mw = std::make_unique<MockMiddlewareHandle>();
+  // Capture the path callback so it can be called later
+  pathing::Manager::MiddlewareHandle::GeneratePathCallback path_callback;
+  ON_CALL(*mw, register_generate_path_service(testing::_))
+      .WillByDefault(testing::SaveArg<0>(&path_callback));
+
+  auto const path_generator = pathing::Manager{std::move(mw)};
+
+  // WHEN the generate path service is called without a costmap
+  auto path_request = std::make_shared<example_srvs::srv::GetPath::Request>();
+  path_request->start.data = {0, 0};
+  path_request->goal.data = {0, 0};
+
+  auto path_response = std::make_shared<example_srvs::srv::GetPath::Response>();
+  path_callback(path_request, path_response);
+
+  // THEN the path generator should fail
+  EXPECT_FALSE(path_response->success.data);
+}
+
+struct PathManagerFixture : public testing::Test {
+  /**
+   * @brief Construct a fixture which will set the map and capture the path
+   * callback
+   */
+  PathManagerFixture() : mw_{std::make_unique<MockMiddlewareHandle>()} {
+    // When the map callback is called, set the costmap
+    ON_CALL(*mw_, register_set_map_service(testing::_))
+        .WillByDefault([&](auto const& map_callback) {
+          auto const map_request = make_occupancy_map();
+          auto map_response = std::make_shared<SetMap::Response>();
+          map_callback(map_request, map_response);
+        });
+
+    // Capture the path callback so it can be called later
+    ON_CALL(*mw_, register_generate_path_service(testing::_))
+        .WillByDefault(testing::SaveArg<0>(&path_callback_));
+  }
+
+  std::unique_ptr<MockMiddlewareHandle> mw_;
+  pathing::Manager::MiddlewareHandle::GeneratePathCallback path_callback_;
+};
+
+TEST_F(PathManagerFixture, NoStartNoGoal) {
+  // GIVEN a path generator with a costmap
+  auto const path_generator = pathing::Manager{std::move(mw_)};
+
+  // WHEN the generate path service is called,
+  auto const path_request = std::make_shared<GetPath::Request>();
+  auto path_response = std::make_shared<GetPath::Response>();
+  path_callback_(path_request, path_response);
+
+  // THEN the path generator should fail
+  EXPECT_FALSE(path_response->success.data);
+}
+
+TEST_F(PathManagerFixture, SameStartGoal) {
+  // GIVEN a path generator with a costmap
+  auto const path_generator = pathing::Manager{std::move(mw_)};
+
+  // WHEN the generate path service is called with the same start and goal
+  auto path_request = std::make_shared<GetPath::Request>();
+  path_request->start.data = {0, 0};
+  path_request->goal.data = {0, 0};
+  auto path_response = std::make_shared<GetPath::Response>();
+  path_callback_(path_request, path_response);
+
+  // THEN the path generator should succeed
+  EXPECT_TRUE(path_response->success.data);
+  auto const expected = pathing::Path{{0, 0}};
+  // AND the path should be the same as the start
+  EXPECT_EQ(pathing::utilities::parseGeneratedPath(path_response->path),
+            expected);
+}
+
+TEST_F(PathManagerFixture, NoPath) {
+  // GIVEN a path generator with a costmap
+  auto const path_generator = pathing::Manager{std::move(mw_)};
+
+  // WHEN the generate path service is called with an unreachable goal
+  auto path_request = std::make_shared<GetPath::Request>();
+  path_request->start.data = {2, 2};
+  path_request->goal.data = {5, 5};
+
+  auto path_response = std::make_shared<GetPath::Response>();
+  path_callback_(path_request, path_response);
+
+  // THEN the path generator should succeed
+  EXPECT_FALSE(path_response->success.data);
+  auto const expected = pathing::Path{};
+  // AND the path should be empty
+  EXPECT_EQ(pathing::utilities::parseGeneratedPath(path_response->path),
+            expected);
+}
+
+TEST_F(PathManagerFixture, PathGenerated) {
+  // GIVEN a path generator with a costmap
+  auto const path_generator = pathing::Manager{std::move(mw_)};
+
+  // WHEN the generate path service is called with a reachable goal
+  auto path_request = std::make_shared<GetPath::Request>();
+  path_request->start.data = {0, 0};
+  path_request->goal.data = {7, 7};
+  auto path_response = std::make_shared<GetPath::Response>();
+  path_callback_(path_request, path_response);
+
+  // THEN the path generator should succeed
+  EXPECT_TRUE(path_response->success.data);
+  auto const expected = pathing::Path{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},
+                                      {5, 0}, {6, 0}, {7, 0}, {7, 1}, {7, 2},
+                                      {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}};
+  // AND the path should be the same as the start
+  EXPECT_EQ(pathing::utilities::parseGeneratedPath(path_response->path),
+            expected);
+}
+
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

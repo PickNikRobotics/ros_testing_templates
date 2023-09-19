@@ -64,4 +64,23 @@ std_msgs::msg::UInt8MultiArray createUInt8MultiArrayMessageFromPath(
   }
   return message;
 }
+
+std::vector<Position> parseGeneratedPath(
+    const std_msgs::msg::UInt8MultiArray& msg) {
+  // Check the path has an even number of elements
+  if ((msg.data.size() % 2) != 0) {
+    return {};
+  }
+  if (msg.data.size() == 0) {
+    return {};
+  }
+  Path path;
+
+  for (size_t idx = 0; idx < (msg.data.size() - 1); idx += 2) {
+    path.push_back({msg.data[idx], msg.data[idx + 1]});
+  }
+
+  return path;
+}
+
 };  // namespace pathing::utilities

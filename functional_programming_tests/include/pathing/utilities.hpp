@@ -27,4 +27,12 @@ std::optional<Map<unsigned char>> parseSetMapRequest(
  */
 std_msgs::msg::UInt8MultiArray createUInt8MultiArrayMessageFromPath(
     Path const& path);
+
+/**
+ * @brief Convert a path from ROS message to a vector of positions
+ * @param msg The message to convert
+ * @return The path as a vector of positions
+ */
+std::vector<Position> parseGeneratedPath(
+    const std_msgs::msg::UInt8MultiArray& msg);
 }  // namespace pathing::utilities
