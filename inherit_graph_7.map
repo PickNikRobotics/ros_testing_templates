@@ -2,5 +2,5 @@
 <area shape="rect" id="node1" href="$structPathGenerator_1_1MiddlewareHandle.html" title=" " alt="" coords="16,5,215,47"/>
 <area shape="rect" id="node2" href="$structMockMiddlewareHandle.html" title=" " alt="" coords="273,17,452,43"/>
 <area shape="rect" id="node3" href="$structRosMiddleware.html" title=" " alt="" coords="301,71,424,98"/>
-<area shape="rect" id="node4" href="$structpathing_1_1Manager_1_1MiddlewareHandle.html" title=" " alt="" coords="5,71,225,112"/>
+<area shape="rect" id="node4" href="$structpathing_1_1Manager_1_1MiddlewareHandle.html" title="Interface for interacting with ros services." alt="" coords="5,71,225,112"/>
 </map>

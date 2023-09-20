@@ -80,20 +80,24 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpathing_1_1Manager_1_1MiddlewareHandle.html">MiddlewareHandle</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for interacting with ros services.  <a href="structpathing_1_1Manager_1_1MiddlewareHandle.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpathing_1_1Manager_1_1Parameters.html">Parameters</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structpathing_1_1Manager_1_1Parameters.html" title="Parameters for the path manager.">Parameters</a> for the path manager.  <a href="structpathing_1_1Manager_1_1Parameters.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aac82376635720015d502cbdb34436cc4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4">Manager</a> (std::unique_ptr&lt; <a class="el" href="structpathing_1_1Manager_1_1MiddlewareHandle.html">MiddlewareHandle</a> &gt; mw)</td></tr>
-<tr class="memdesc:aac82376635720015d502cbdb34436cc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages occupancy_map and path generation for the pathing node.  <a href="structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4">More...</a><br /></td></tr>
-<tr class="separator:aac82376635720015d502cbdb34436cc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ee90f04d65ae81897642593a3090f0c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpathing_1_1Manager.html#a8ee90f04d65ae81897642593a3090f0c">Manager</a> (std::unique_ptr&lt; <a class="el" href="structpathing_1_1Manager_1_1MiddlewareHandle.html">MiddlewareHandle</a> &gt; mw, <a class="el" href="structpathing_1_1Manager_1_1Parameters.html">Parameters</a> params)</td></tr>
+<tr class="memdesc:a8ee90f04d65ae81897642593a3090f0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages occupancy_map and path generation for the pathing node.  <a href="structpathing_1_1Manager.html#a8ee90f04d65ae81897642593a3090f0c">More...</a><br /></td></tr>
+<tr class="separator:a8ee90f04d65ae81897642593a3090f0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="pathing__manager_8hpp_source.html#l00016">16</a> of file <a class="el" href="pathing__manager_8hpp_source.html">pathing_manager.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aac82376635720015d502cbdb34436cc4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac82376635720015d502cbdb34436cc4">&#9670;&nbsp;</a></span>Manager()</h2>
+<a id="a8ee90f04d65ae81897642593a3090f0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ee90f04d65ae81897642593a3090f0c">&#9670;&nbsp;</a></span>Manager()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -102,8 +106,18 @@ Public Member Functions</h2></td></tr>
           <td class="memname">pathing::Manager::Manager </td>
           <td>(</td>
           <td class="paramtype">std::unique_ptr&lt; <a class="el" href="structpathing_1_1Manager_1_1MiddlewareHandle.html">MiddlewareHandle</a> &gt;&#160;</td>
-          <td class="paramname"><em>mw</em></td><td>)</td>
+          <td class="paramname"><em>mw</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="structpathing_1_1Manager_1_1Parameters.html">Parameters</a>&#160;</td>
+          <td class="paramname"><em>params</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -112,6 +126,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mw</td><td>The middleware handle for interacting with services </td></tr>
+    <tr><td class="paramname">params</td><td>for manager configuration </td></tr>
   </table>
   </dd>
 </dl>
@@ -120,11 +135,11 @@ Public Member Functions</h2></td></tr>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="structpathing_1_1Manager_aac82376635720015d502cbdb34436cc4_cgraph.png" border="0" usemap="#astructpathing_1_1Manager_aac82376635720015d502cbdb34436cc4_cgraph" alt=""/></div>
-<map name="astructpathing_1_1Manager_aac82376635720015d502cbdb34436cc4_cgraph" id="astructpathing_1_1Manager_aac82376635720015d502cbdb34436cc4_cgraph">
+<div class="center"><img src="structpathing_1_1Manager_a8ee90f04d65ae81897642593a3090f0c_cgraph.png" border="0" usemap="#astructpathing_1_1Manager_a8ee90f04d65ae81897642593a3090f0c_cgraph" alt=""/></div>
+<map name="astructpathing_1_1Manager_a8ee90f04d65ae81897642593a3090f0c_cgraph" id="astructpathing_1_1Manager_a8ee90f04d65ae81897642593a3090f0c_cgraph">
 <area shape="rect" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,71,207,97"/>
-<area shape="rect" href="namespacepathing.html#aa5a3c053f4fbb497f3568321995f6d18" title="Generates a path." alt="" coords="255,9,475,36"/>
-<area shape="rect" href="namespacepathing_1_1generate__path.html#a981d5c06081b8c6de51ffa8d569d4591" title="Converts between types and dispatches to path generator." alt="" coords="278,63,451,105"/>
+<area shape="rect" href="namespacepathing.html#a3e497e3a46ade6c4d78acae24cd4b1a1" title="Generates a path." alt="" coords="255,9,475,36"/>
+<area shape="rect" href="namespacepathing_1_1generate__path.html#acde4e42ecacfb803cafc59e0a81b1f87" title="Converts between types and dispatches to path generator." alt="" coords="278,63,451,105"/>
 <area shape="rect" href="namespacepathing_1_1utilities.html#afd105d787f6685bba9390425221c15aa" title="Converts map from message to occupancy map if possible." alt="" coords="281,129,449,170"/>
 <area shape="rect" href="classMap.html#aa413a560ed38b04073317ef9370c4bf8" title=" " alt="" coords="603,5,674,32"/>
 <area shape="rect" href="namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe" title="Creates a UInt8MultiArray message from a path." alt="" coords="523,56,755,112"/>

@@ -87,9 +87,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a981d5c06081b8c6de51ffa8d569d4591"><td class="memItemLeft" align="right" valign="top">tl::expected&lt; example_srvs::srv::GetPath::Response, <a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2">error</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1generate__path.html#a981d5c06081b8c6de51ffa8d569d4591">generate_path</a> (std::shared_ptr&lt; example_srvs::srv::GetPath::Request &gt; const request, <a class="el" href="classpathing_1_1Map.html">Map</a>&lt; unsigned char &gt; const &amp;occupancy_map, <a class="el" href="namespacepathing.html#a03e90a5d8a22623c181571ac9fc37028">PathingGenerator</a> path_generator)</td></tr>
-<tr class="memdesc:a981d5c06081b8c6de51ffa8d569d4591"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts between types and dispatches to path generator.  <a href="namespacepathing_1_1generate__path.html#a981d5c06081b8c6de51ffa8d569d4591">More...</a><br /></td></tr>
-<tr class="separator:a981d5c06081b8c6de51ffa8d569d4591"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acde4e42ecacfb803cafc59e0a81b1f87"><td class="memItemLeft" align="right" valign="top">tl::expected&lt; example_srvs::srv::GetPath::Response, <a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2">error</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1generate__path.html#acde4e42ecacfb803cafc59e0a81b1f87">generate_path</a> (std::shared_ptr&lt; example_srvs::srv::GetPath::Request &gt; const request, <a class="el" href="classpathing_1_1Map.html">Map</a>&lt; unsigned char &gt; const &amp;occupancy_map, int robot_size, <a class="el" href="namespacepathing.html#aea7651ce6a6f5fb20bb7ce130d0fd782">PathingGenerator</a> path_generator)</td></tr>
+<tr class="memdesc:acde4e42ecacfb803cafc59e0a81b1f87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts between types and dispatches to path generator.  <a href="namespacepathing_1_1generate__path.html#acde4e42ecacfb803cafc59e0a81b1f87">More...</a><br /></td></tr>
+<tr class="separator:acde4e42ecacfb803cafc59e0a81b1f87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -126,13 +126,13 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a5ecef5e5eacb2307220391d1a3c8dab2adbd8a5cf2e4d4b9eb6e12e48f8d4e36d"></a>NO_VALID_PATH&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="pathing_8hpp_source.html#l00076">76</a> of file <a class="el" href="pathing_8hpp_source.html">pathing.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pathing_8hpp_source.html#l00077">77</a> of file <a class="el" href="pathing_8hpp_source.html">pathing.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a981d5c06081b8c6de51ffa8d569d4591"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a981d5c06081b8c6de51ffa8d569d4591">&#9670;&nbsp;</a></span>generate_path()</h2>
+<a id="acde4e42ecacfb803cafc59e0a81b1f87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acde4e42ecacfb803cafc59e0a81b1f87">&#9670;&nbsp;</a></span>generate_path()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -152,7 +152,13 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacepathing.html#a03e90a5d8a22623c181571ac9fc37028">PathingGenerator</a>&#160;</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>robot_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepathing.html#aea7651ce6a6f5fb20bb7ce130d0fd782">PathingGenerator</a>&#160;</td>
           <td class="paramname"><em>path_generator</em>&#160;</td>
         </tr>
         <tr>
@@ -168,18 +174,19 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">request</td><td>contains the start and goal positions </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">occupancy_map</td><td>to path through </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">robot_size</td><td>in pixels </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">path_generator</td><td>algorithm to use for pathing</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The path if successful, otherwise an error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="pathing_8cpp_source.html#l00094">94</a> of file <a class="el" href="pathing_8cpp_source.html">pathing.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pathing_8cpp_source.html#l00098">98</a> of file <a class="el" href="pathing_8cpp_source.html">pathing.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacepathing_1_1generate__path_a981d5c06081b8c6de51ffa8d569d4591_cgraph.png" border="0" usemap="#anamespacepathing_1_1generate__path_a981d5c06081b8c6de51ffa8d569d4591_cgraph" alt=""/></div>
-<map name="anamespacepathing_1_1generate__path_a981d5c06081b8c6de51ffa8d569d4591_cgraph" id="anamespacepathing_1_1generate__path_a981d5c06081b8c6de51ffa8d569d4591_cgraph">
+<div class="center"><img src="namespacepathing_1_1generate__path_acde4e42ecacfb803cafc59e0a81b1f87_cgraph.png" border="0" usemap="#anamespacepathing_1_1generate__path_acde4e42ecacfb803cafc59e0a81b1f87_cgraph" alt=""/></div>
+<map name="anamespacepathing_1_1generate__path_acde4e42ecacfb803cafc59e0a81b1f87_cgraph" id="anamespacepathing_1_1generate__path_acde4e42ecacfb803cafc59e0a81b1f87_cgraph">
 <area shape="rect" title="Converts between types and dispatches to path generator." alt="" coords="5,46,179,87"/>
 <area shape="rect" href="namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe" title="Creates a UInt8MultiArray message from a path." alt="" coords="227,5,459,61"/>
 <area shape="rect" href="classMap.html#a2d26c288c1336257492cf45c954fbdc6" title=" " alt="" coords="285,85,400,112"/>
@@ -188,10 +195,10 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacepathing_1_1generate__path_a981d5c06081b8c6de51ffa8d569d4591_icgraph.png" border="0" usemap="#anamespacepathing_1_1generate__path_a981d5c06081b8c6de51ffa8d569d4591_icgraph" alt=""/></div>
-<map name="anamespacepathing_1_1generate__path_a981d5c06081b8c6de51ffa8d569d4591_icgraph" id="anamespacepathing_1_1generate__path_a981d5c06081b8c6de51ffa8d569d4591_icgraph">
+<div class="center"><img src="namespacepathing_1_1generate__path_acde4e42ecacfb803cafc59e0a81b1f87_icgraph.png" border="0" usemap="#anamespacepathing_1_1generate__path_acde4e42ecacfb803cafc59e0a81b1f87_icgraph" alt=""/></div>
+<map name="anamespacepathing_1_1generate__path_acde4e42ecacfb803cafc59e0a81b1f87_icgraph" id="anamespacepathing_1_1generate__path_acde4e42ecacfb803cafc59e0a81b1f87_icgraph">
 <area shape="rect" title="Converts between types and dispatches to path generator." alt="" coords="255,23,428,65"/>
-<area shape="rect" href="structpathing_1_1Manager.html#aac82376635720015d502cbdb34436cc4" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,5,207,32"/>
+<area shape="rect" href="structpathing_1_1Manager.html#a8ee90f04d65ae81897642593a3090f0c" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,5,207,32"/>
 <area shape="rect" href="with__functional__programming_8cpp.html#acec5be9a569c50b53cac514564d1fdf9" title=" " alt="" coords="79,56,133,83"/>
 </map>
 </div>
@@ -221,7 +228,7 @@ Here is the caller graph for this function:</div>
 </div><!-- fragment -->
 <p>Descriptions of the errors. </p>
 
-<p class="definition">Definition at line <a class="el" href="pathing_8hpp_source.html#l00086">86</a> of file <a class="el" href="pathing_8hpp_source.html">pathing.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pathing_8hpp_source.html#l00087">87</a> of file <a class="el" href="pathing_8hpp_source.html">pathing.hpp</a>.</p>
 
 </div>
 </div>

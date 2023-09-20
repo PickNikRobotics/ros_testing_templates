@@ -106,14 +106,15 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="pathing_8hpp__dep__incl.png" border="0" usemap="#afunctional__programming__tests_2include_2pathing_2pathing_8hppdep" alt=""/></div>
 <map name="afunctional__programming__tests_2include_2pathing_2pathing_8hppdep" id="afunctional__programming__tests_2include_2pathing_2pathing_8hppdep">
-<area shape="rect" title=" " alt="" coords="539,5,721,61"/>
-<area shape="rect" href="pathing__manager_8hpp.html" title=" " alt="" coords="268,109,451,165"/>
-<area shape="rect" href="pathing__manager_8cpp.html" title=" " alt="" coords="5,221,233,262"/>
-<area shape="rect" href="with__functional__programming_8cpp.html" title=" " alt="" coords="485,213,679,269"/>
-<area shape="rect" href="utilities_8hpp.html" title=" " alt="" coords="475,109,657,165"/>
-<area shape="rect" href="pathing_8cpp.html" title=" " alt="" coords="704,221,887,262"/>
-<area shape="rect" href="utilities_8cpp.html" title=" " alt="" coords="784,117,967,158"/>
-<area shape="rect" href="pathing__node_8cpp.html" title=" " alt="" coords="258,221,461,262"/>
+<area shape="rect" title=" " alt="" coords="435,5,618,61"/>
+<area shape="rect" href="collision__checking_8hpp.html" title=" " alt="" coords="49,109,231,165"/>
+<area shape="rect" href="pathing__manager_8hpp.html" title=" " alt="" coords="255,109,438,165"/>
+<area shape="rect" href="pathing__manager_8cpp.html" title=" " alt="" coords="233,221,461,262"/>
+<area shape="rect" href="with__functional__programming_8cpp.html" title=" " alt="" coords="485,213,680,269"/>
+<area shape="rect" href="utilities_8hpp.html" title=" " alt="" coords="565,109,747,165"/>
+<area shape="rect" href="pathing_8cpp.html" title=" " alt="" coords="705,221,887,262"/>
+<area shape="rect" href="utilities_8cpp.html" title=" " alt="" coords="823,117,1006,158"/>
+<area shape="rect" href="pathing__node_8cpp.html" title=" " alt="" coords="5,221,208,262"/>
 </map>
 </div>
 </div>
@@ -137,8 +138,8 @@ Namespaces</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:a7d0803c57700af5860c06cde68bdab03"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#a7d0803c57700af5860c06cde68bdab03">pathing::Path</a> = std::vector&lt; <a class="el" href="structPosition.html">Position</a> &gt;</td></tr>
 <tr class="separator:a7d0803c57700af5860c06cde68bdab03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03e90a5d8a22623c181571ac9fc37028"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#a03e90a5d8a22623c181571ac9fc37028">pathing::PathingGenerator</a> = std::function&lt; std::optional&lt; <a class="el" href="with__dependency__injection_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> &gt;(<a class="el" href="structPosition.html">Position</a> const  &amp;, <a class="el" href="structPosition.html">Position</a> const  &amp;, <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; const  &amp;)&gt;</td></tr>
-<tr class="separator:a03e90a5d8a22623c181571ac9fc37028"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea7651ce6a6f5fb20bb7ce130d0fd782"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#aea7651ce6a6f5fb20bb7ce130d0fd782">pathing::PathingGenerator</a> = std::function&lt; std::optional&lt; <a class="el" href="with__dependency__injection_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> &gt;(<a class="el" href="structPosition.html">Position</a> const  &amp;, <a class="el" href="structPosition.html">Position</a> const  &amp;, <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; const  &amp;, int)&gt;</td></tr>
+<tr class="separator:aea7651ce6a6f5fb20bb7ce130d0fd782"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -156,12 +157,12 @@ Functions</h2></td></tr>
 <tr class="separator:afde373754dd7a03cc725f7859043bafb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57b45b9568e2e6985acee77ae91ce44a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#a57b45b9568e2e6985acee77ae91ce44a">pathing::operator==</a> (<a class="el" href="structPosition.html">Position</a> const &amp;lhs, <a class="el" href="structPosition.html">Position</a> const &amp;rhs)</td></tr>
 <tr class="separator:a57b45b9568e2e6985acee77ae91ce44a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5a3c053f4fbb497f3568321995f6d18"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="with__dependency__injection_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#aa5a3c053f4fbb497f3568321995f6d18">pathing::generate_global_path</a> (<a class="el" href="structPosition.html">Position</a> const &amp;start, <a class="el" href="structPosition.html">Position</a> const &amp;goal, <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; const &amp;occupancy_map)</td></tr>
-<tr class="memdesc:aa5a3c053f4fbb497f3568321995f6d18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a path.  <a href="namespacepathing.html#aa5a3c053f4fbb497f3568321995f6d18">More...</a><br /></td></tr>
-<tr class="separator:aa5a3c053f4fbb497f3568321995f6d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a981d5c06081b8c6de51ffa8d569d4591"><td class="memItemLeft" align="right" valign="top">tl::expected&lt; example_srvs::srv::GetPath::Response, error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1generate__path.html#a981d5c06081b8c6de51ffa8d569d4591">pathing::generate_path::generate_path</a> (std::shared_ptr&lt; example_srvs::srv::GetPath::Request &gt; const request, <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; const &amp;occupancy_map, PathingGenerator path_generator)</td></tr>
-<tr class="memdesc:a981d5c06081b8c6de51ffa8d569d4591"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts between types and dispatches to path generator.  <a href="namespacepathing_1_1generate__path.html#a981d5c06081b8c6de51ffa8d569d4591">More...</a><br /></td></tr>
-<tr class="separator:a981d5c06081b8c6de51ffa8d569d4591"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e497e3a46ade6c4d78acae24cd4b1a1"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="with__dependency__injection_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing.html#a3e497e3a46ade6c4d78acae24cd4b1a1">pathing::generate_global_path</a> (<a class="el" href="structPosition.html">Position</a> const &amp;start, <a class="el" href="structPosition.html">Position</a> const &amp;goal, <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; const &amp;occupancy_map, int robot_size)</td></tr>
+<tr class="memdesc:a3e497e3a46ade6c4d78acae24cd4b1a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a path.  <a href="namespacepathing.html#a3e497e3a46ade6c4d78acae24cd4b1a1">More...</a><br /></td></tr>
+<tr class="separator:a3e497e3a46ade6c4d78acae24cd4b1a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acde4e42ecacfb803cafc59e0a81b1f87"><td class="memItemLeft" align="right" valign="top">tl::expected&lt; example_srvs::srv::GetPath::Response, error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1generate__path.html#acde4e42ecacfb803cafc59e0a81b1f87">pathing::generate_path::generate_path</a> (std::shared_ptr&lt; example_srvs::srv::GetPath::Request &gt; const request, <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; const &amp;occupancy_map, int robot_size, PathingGenerator path_generator)</td></tr>
+<tr class="memdesc:acde4e42ecacfb803cafc59e0a81b1f87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts between types and dispatches to path generator.  <a href="namespacepathing_1_1generate__path.html#acde4e42ecacfb803cafc59e0a81b1f87">More...</a><br /></td></tr>
+<tr class="separator:acde4e42ecacfb803cafc59e0a81b1f87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>

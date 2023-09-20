@@ -1,4 +1,5 @@
 <map id="TEST_F" name="TEST_F">
-<area shape="rect" id="node1" title=" " alt="" coords="5,13,75,39"/>
-<area shape="rect" id="node2" href="$namespacepathing_1_1utilities.html#a658d511069ef5dcdfbade9bf1c4681bd" title="Convert a path from ROS message to a vector of positions." alt="" coords="123,5,285,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,35,75,61"/>
+<area shape="rect" id="node2" href="$with__functional__programming_8cpp.html#a10d57359df2f68a52d3c64dc9ada0dde" title="Create the default parameters for path planning." alt="" coords="147,5,261,32"/>
+<area shape="rect" id="node3" href="$namespacepathing_1_1utilities.html#a658d511069ef5dcdfbade9bf1c4681bd" title="Convert a path from ROS message to a vector of positions." alt="" coords="123,57,285,98"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="pathing::Manager::Manager" name="pathing::Manager::Manager">
 <area shape="rect" id="node1" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,71,207,97"/>
-<area shape="rect" id="node2" href="$namespacepathing.html#aa5a3c053f4fbb497f3568321995f6d18" title="Generates a path." alt="" coords="255,9,475,36"/>
-<area shape="rect" id="node4" href="$namespacepathing_1_1generate__path.html#a981d5c06081b8c6de51ffa8d569d4591" title="Converts between types and dispatches to path generator." alt="" coords="278,63,451,105"/>
+<area shape="rect" id="node2" href="$namespacepathing.html#a3e497e3a46ade6c4d78acae24cd4b1a1" title="Generates a path." alt="" coords="255,9,475,36"/>
+<area shape="rect" id="node4" href="$namespacepathing_1_1generate__path.html#acde4e42ecacfb803cafc59e0a81b1f87" title="Converts between types and dispatches to path generator." alt="" coords="278,63,451,105"/>
 <area shape="rect" id="node7" href="$namespacepathing_1_1utilities.html#afd105d787f6685bba9390425221c15aa" title="Converts map from message to occupancy map if possible." alt="" coords="281,129,449,170"/>
 <area shape="rect" id="node3" href="$classMap.html#aa413a560ed38b04073317ef9370c4bf8" title=" " alt="" coords="603,5,674,32"/>
 <area shape="rect" id="node5" href="$namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe" title="Creates a UInt8MultiArray message from a path." alt="" coords="523,56,755,112"/>
