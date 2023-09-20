@@ -4,10 +4,30 @@
 #include <memory>
 #include <optional>
 
+#include <tl_expected/expected.hpp>
+
 #include <example_srvs/srv/set_map.hpp>
 #include <std_msgs/msg/u_int8_multi_array.hpp>
 
 namespace pathing::utilities {
+/**
+ * @brief      Types of errors expected in parsing the set map request
+ */
+enum class parsing_set_map_error {
+  EMPTY_REQUEST = 1,
+  DIMENSION_AND_STRIDE_MISMATCH = 2,
+  LENGTH_AND_STRIDE_MISMATCH = 3,
+};
+/**
+ * @brief      Descriptions of the errors
+ */
+std::map<parsing_set_map_error, std::string> const parsing_set_map_error_description = {
+    {parsing_set_map_error::EMPTY_REQUEST,
+     "REQUEST DATA FIELD IS EMPTY!!"},
+    {parsing_set_map_error::DIMENSION_AND_STRIDE_MISMATCH,
+     "OCCUPANCY MAP DIMENSIONS AND STRIDE INCONSISTENT!!"},
+    {parsing_set_map_error::LENGTH_AND_STRIDE_MISMATCH,
+     "OCCUPANCY MAP LENGTH AND STRIDE INCONSISTENT!!"}};
 /**
  * @brief      Converts map from message to occupancy map if possible
  *
@@ -15,7 +35,7 @@ namespace pathing::utilities {
  *
  * @return     std::optional containing the occupancy map
  */
-std::optional<Map<unsigned char>> parseSetMapRequest(
+tl::expected<Map<unsigned char>,parsing_set_map_error> parseSetMapRequest(
     std::shared_ptr<example_srvs::srv::SetMap::Request> const request);
 
 /**

@@ -5,6 +5,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <std_msgs/msg/u_int8_multi_array.hpp>
+#include <example_srvs/msg/set_map_codes.hpp>
 
 using SetMap = example_srvs::srv::SetMap;
 using GetPath = example_srvs::srv::GetPath;
@@ -167,6 +168,7 @@ TEST(PathingUtilitiesParseSetMap, EmptyRequest) {
 
   // THEN there should be no map generated
   EXPECT_FALSE(map.has_value());
+  EXPECT_EQ(map.error(), pathing::utilities::parsing_set_map_error::EMPTY_REQUEST);
 }
 
 std::shared_ptr<SetMap::Request> createSetMapRequest() {
@@ -207,6 +209,7 @@ TEST(PathingUtilitiesParseSetMap, MapRequestWrongStride) {
 
   // THEN there should be no map generated
   EXPECT_FALSE(map.has_value());
+  EXPECT_EQ(map.error(), pathing::utilities::parsing_set_map_error::DIMENSION_AND_STRIDE_MISMATCH);
 }
 
 TEST(PathingUtilitiesParseSetMap, MapRequestWrongDimSize) {
@@ -220,6 +223,7 @@ TEST(PathingUtilitiesParseSetMap, MapRequestWrongDimSize) {
 
   // THEN there should be no map generated
   EXPECT_FALSE(map.has_value());
+  EXPECT_EQ(map.error(), pathing::utilities::parsing_set_map_error::DIMENSION_AND_STRIDE_MISMATCH);
 }
 
 TEST(PathingUtilitiesParseSetMap, ValidMapRequest) {
@@ -434,7 +438,7 @@ TEST(PathManager, SetMap) {
   callback(request, response);
 
   // THEN the path generator should successfully set the map
-  EXPECT_TRUE(response->success.data);
+  EXPECT_EQ(response->code.code,example_srvs::msg::SetMapCodes::SUCCESS);
 }
 
 TEST(PathManager, NoCostmap) {
@@ -456,7 +460,7 @@ TEST(PathManager, NoCostmap) {
   path_callback(path_request, path_response);
 
   // THEN the path generator should fail
-  EXPECT_FALSE(path_response->success.data);
+  EXPECT_EQ(path_response->code.code,example_srvs::msg::GetPathCodes::EMPTY_OCCUPANCY_MAP);
 }
 
 struct PathManagerFixture : public testing::Test {
@@ -492,7 +496,7 @@ TEST_F(PathManagerFixture, NoStartNoGoal) {
   path_callback_(path_request, path_response);
 
   // THEN the path generator should fail
-  EXPECT_FALSE(path_response->success.data);
+  EXPECT_EQ(path_response->code.code, example_srvs::msg::GetPathCodes::START_POSITION_INVALID_SIZE);
 }
 
 TEST_F(PathManagerFixture, SameStartGoal) {
@@ -507,7 +511,7 @@ TEST_F(PathManagerFixture, SameStartGoal) {
   path_callback_(path_request, path_response);
 
   // THEN the path generator should succeed
-  EXPECT_TRUE(path_response->success.data);
+  EXPECT_EQ(path_response->code.code, example_srvs::msg::GetPathCodes::SUCCESS);
   auto const expected = pathing::Path{{0, 0}};
   // AND the path should be the same as the start
   EXPECT_EQ(pathing::utilities::parseGeneratedPath(path_response->path),
@@ -527,7 +531,7 @@ TEST_F(PathManagerFixture, NoPath) {
   path_callback_(path_request, path_response);
 
   // THEN the path generator should succeed
-  EXPECT_FALSE(path_response->success.data);
+  EXPECT_EQ(path_response->code.code, example_srvs::msg::GetPathCodes::NO_VALID_PATH);
   auto const expected = pathing::Path{};
   // AND the path should be empty
   EXPECT_EQ(pathing::utilities::parseGeneratedPath(path_response->path),
@@ -546,7 +550,7 @@ TEST_F(PathManagerFixture, PathGenerated) {
   path_callback_(path_request, path_response);
 
   // THEN the path generator should succeed
-  EXPECT_TRUE(path_response->success.data);
+  EXPECT_EQ(path_response->code.code, example_srvs::msg::GetPathCodes::SUCCESS);
   auto const expected = pathing::Path{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},
                                       {5, 0}, {6, 0}, {7, 0}, {7, 1}, {7, 2},
                                       {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}};

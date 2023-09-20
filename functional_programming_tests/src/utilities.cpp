@@ -1,24 +1,27 @@
 #include "pathing/pathing.hpp"
+#include "pathing/utilities.hpp"
 
 #include <memory>
 #include <optional>
+
+#include <tl_expected/expected.hpp>
 
 #include <example_srvs/srv/set_map.hpp>
 #include <std_msgs/msg/u_int8_multi_array.hpp>
 
 namespace pathing::utilities {
-std::optional<Map<unsigned char>> parseSetMapRequest(
+tl::expected<Map<unsigned char>,parsing_set_map_error> parseSetMapRequest(
     std::shared_ptr<example_srvs::srv::SetMap::Request> const request) {
   if (request->map.layout.dim.empty() || request->map.data.empty()) {
-    return std::nullopt;
+    return tl::unexpected(parsing_set_map_error::EMPTY_REQUEST);
   }
   // Check that map layout makes sense
   if ((request->map.layout.dim[0].size * request->map.layout.dim[1].size) !=
       request->map.layout.dim[0].stride) {
-    return std::nullopt;
+    return tl::unexpected(parsing_set_map_error::DIMENSION_AND_STRIDE_MISMATCH);
   }
   if (request->map.layout.dim[0].stride != request->map.data.size()) {
-    return std::nullopt;
+    return tl::unexpected(parsing_set_map_error::LENGTH_AND_STRIDE_MISMATCH);
   }
 
   auto const occupancy_map = request->map;

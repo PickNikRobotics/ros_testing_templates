@@ -1,5 +1,5 @@
 std_msgs/UInt8MultiArray start
 std_msgs/UInt8MultiArray goal
 ---
-std_msgs/Bool success
+example_srvs/GetPathCodes code
 std_msgs/UInt8MultiArray path

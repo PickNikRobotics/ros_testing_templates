@@ -75,10 +75,10 @@ namespace generate_path {
  * @brief      Types of errors expected in the generate path callback function
  */
 enum class error {
-  EMPTY_OCCUPANCY_MAP,
-  INVALID_START_SIZE,
-  INVALID_GOAL_SIZE,
-  NO_VALID_PATH
+  EMPTY_OCCUPANCY_MAP = 1,
+  INVALID_START_SIZE = 2,
+  INVALID_GOAL_SIZE = 3,
+  NO_VALID_PATH = 4
 };
 
 /**

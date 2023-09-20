@@ -120,7 +120,7 @@ tl::expected<example_srvs::srv::GetPath::Response, error> generate_path(
   }
 
   auto response = example_srvs::srv::GetPath::Response{};
-  response.success.data = path.has_value();
+  response.code.code = 0;
   response.path = utilities::createUInt8MultiArrayMessageFromPath(path.value());
 
   return response;
