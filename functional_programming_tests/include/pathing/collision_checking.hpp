@@ -45,5 +45,3 @@ struct CollisionChecker {
  private:
   int robot_size_;
 };
-
-
