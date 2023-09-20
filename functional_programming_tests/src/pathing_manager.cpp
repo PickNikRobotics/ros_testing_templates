@@ -14,8 +14,9 @@ using SetMap = example_srvs::srv::SetMap;
 using GetPath = example_srvs::srv::GetPath;
 
 namespace pathing {
-Manager::Manager(std::unique_ptr<Manager::MiddlewareHandle> mw)
-    : mw_{std::move(mw)} {
+Manager::Manager(std::unique_ptr<Manager::MiddlewareHandle> mw,
+                 Parameters params)
+    : mw_{std::move(mw)}, params_{std::move(params)} {
   mw_->register_set_map_service(
       [this](auto const request, auto response) -> void {
         auto const path = utilities::parseSetMapRequest(request);
@@ -41,7 +42,8 @@ Manager::Manager(std::unique_ptr<Manager::MiddlewareHandle> mw)
       return generate_path::error_description.at(error);
     };
     *response =
-        generate_path::generate_path(request, this->map_, generate_global_path)
+        generate_path::generate_path(
+            request, this->map_, this->params_.robot_size, generate_global_path)
             .map_error(stringify_error)
             .or_else(print_error)
             .or_else(return_empty_response)

@@ -31,10 +31,11 @@ TEST(PathingGenerateGlobalPath, EmptyOccupancyMap) {
 
   pathing::Position const start{0, 0};
   pathing::Position const goal{1, 1};
+  int const robot_size = 1;
 
   // WHEN the global path is produced
-  auto const path =
-      pathing::generate_global_path(start, goal, sample_occupancy_map);
+  auto const path = pathing::generate_global_path(
+      start, goal, sample_occupancy_map, robot_size);
 
   // THEN the path should be empty
   EXPECT_FALSE(path.has_value()) << path.value();
@@ -46,10 +47,11 @@ TEST(PathingGenerateGlobalPath, StartXOutOfBound) {
 
   pathing::Position const start{10, 0};
   pathing::Position const goal{1, 1};
+  int const robot_size = 1;
 
   // WHEN the global path is produced
-  auto const path =
-      pathing::generate_global_path(start, goal, sample_occupancy_map);
+  auto const path = pathing::generate_global_path(
+      start, goal, sample_occupancy_map, robot_size);
 
   // THEN the path should be empty
   EXPECT_FALSE(path.has_value()) << path.value();
@@ -61,10 +63,11 @@ TEST(PathingGenerateGlobalPath, StartYOutOfBound) {
 
   pathing::Position const start{0, 10};
   pathing::Position const goal{1, 1};
+  int const robot_size = 1;
 
   // WHEN the global path is produced
-  auto const path =
-      pathing::generate_global_path(start, goal, sample_occupancy_map);
+  auto const path = pathing::generate_global_path(
+      start, goal, sample_occupancy_map, robot_size);
 
   // THEN the path should be empty
   EXPECT_FALSE(path.has_value()) << path.value();
@@ -76,10 +79,11 @@ TEST(PathingGenerateGlobalPath, GoalXOutOfBound) {
 
   pathing::Position const start{0, 0};
   pathing::Position const goal{10, 1};
+  int const robot_size = 1;
 
   // WHEN the global path is produced
-  auto const path =
-      pathing::generate_global_path(start, goal, sample_occupancy_map);
+  auto const path = pathing::generate_global_path(
+      start, goal, sample_occupancy_map, robot_size);
 
   // THEN the path should be empty
   EXPECT_FALSE(path.has_value()) << path.value();
@@ -91,10 +95,11 @@ TEST(PathingGenerateGlobalPath, GoalYOutOfBound) {
 
   pathing::Position const start{0, 0};
   pathing::Position const goal{1, 10};
+  int const robot_size = 1;
 
   // WHEN the global path is produced
-  auto const path =
-      pathing::generate_global_path(start, goal, sample_occupancy_map);
+  auto const path = pathing::generate_global_path(
+      start, goal, sample_occupancy_map, robot_size);
 
   // THEN the path should be empty
   EXPECT_FALSE(path.has_value()) << path.value();
@@ -106,10 +111,11 @@ TEST(GenerateGlobalPath, SameStartAndGoal) {
 
   pathing::Position const start{0, 0};
   pathing::Position const goal{0, 0};
+  int const robot_size = 1;
 
   // WHEN the global path is produced
-  auto const path =
-      pathing::generate_global_path(start, goal, sample_occupancy_map);
+  auto const path = pathing::generate_global_path(
+      start, goal, sample_occupancy_map, robot_size);
 
   // THEN the path should have one element, which is the start/goal position
   pathing::Path expected{{0, 0}};
@@ -122,10 +128,11 @@ TEST(GenerateGlobalPath, NoPath) {
 
   pathing::Position const start{2, 2};
   pathing::Position const goal{5, 5};
+  int const robot_size = 1;
 
   // WHEN the global path is produced
-  auto const path =
-      pathing::generate_global_path(start, goal, sample_occupancy_map);
+  auto const path = pathing::generate_global_path(
+      start, goal, sample_occupancy_map, robot_size);
 
   // THEN the path should not have been generated
   EXPECT_FALSE(path.has_value()) << path.value();
@@ -137,10 +144,12 @@ TEST(GenerateGlobalPath, PathGenerated) {
 
   pathing::Position const start{0, 0};
   pathing::Position const goal{7, 7};
+  int const robot_size = 1;
 
-  // WHEN the global path is produced
-  auto const path =
-      pathing::generate_global_path(start, goal, sample_occupancy_map);
+  // WHEN the global path is
+  // producedhttps://www.yelp.com/menu/all-star-pizza-bar-cambridge
+  auto const path = pathing::generate_global_path(
+      start, goal, sample_occupancy_map, robot_size);
 
   // THEN the path should have a valid path from start to the goal
   pathing::Path expected{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},
@@ -261,10 +270,11 @@ TEST(GeneratePath, EmptyOccupancyMap) {
 
   request->start.data = {0, 0};
   request->goal.data = {1, 1};
+  int const robot_size = 1;
 
   // WHEN the path is requested
   auto const response = pathing::generate_path::generate_path(
-      request, sample_occupancy_map, pathing::generate_global_path);
+      request, sample_occupancy_map, robot_size, pathing::generate_global_path);
 
   // THEN there should be an error with the error::EMPTY_OCCUPANCY_MAP type
   EXPECT_EQ(response.error(),
@@ -279,10 +289,11 @@ TEST(GeneratePath, InvalidStartSize) {
 
   request->start.data = {0, 0, 0};
   request->goal.data = {1, 1};
+  int const robot_size = 1;
 
   // WHEN the path is requested
   auto const response = pathing::generate_path::generate_path(
-      request, sample_occupancy_map, pathing::generate_global_path);
+      request, sample_occupancy_map, robot_size, pathing::generate_global_path);
 
   // THEN there should be an error with the error::INVALID_START_SIZE type
   EXPECT_EQ(response.error(),
@@ -297,10 +308,11 @@ TEST(GeneratePath, InvalidGoalSize) {
 
   request->start.data = {0, 0};
   request->goal.data = {1, 1, 1};
+  int const robot_size = 1;
 
   // WHEN the path is requested
   auto const response = pathing::generate_path::generate_path(
-      request, sample_occupancy_map, pathing::generate_global_path);
+      request, sample_occupancy_map, robot_size, pathing::generate_global_path);
 
   // THEN there should be an error with the error::INVALID_GOAL_SIZE type
   EXPECT_EQ(response.error(), pathing::generate_path::error::INVALID_GOAL_SIZE);
@@ -314,10 +326,11 @@ TEST(GeneratePath, NoValidPath) {
 
   request->start.data = {2, 2};
   request->goal.data = {5, 5};
+  int const robot_size = 1;
 
   // WHEN the path is requested
   auto const response = pathing::generate_path::generate_path(
-      request, sample_occupancy_map, pathing::generate_global_path);
+      request, sample_occupancy_map, robot_size, pathing::generate_global_path);
 
   // THEN there should be an error with the error::NO_VALID_PATH type
   EXPECT_EQ(response.error(), pathing::generate_path::error::NO_VALID_PATH);
@@ -331,10 +344,11 @@ TEST(GeneratePath, PathGenerated) {
 
   request->start.data = {0, 0};
   request->goal.data = {7, 7};
+  int const robot_size = 1;
 
   // WHEN the path is requested
   auto const response = pathing::generate_path::generate_path(
-      request, sample_occupancy_map, pathing::generate_global_path);
+      request, sample_occupancy_map, robot_size, pathing::generate_global_path);
 
   // THEN there should no errors
   EXPECT_TRUE(response.has_value());
@@ -374,6 +388,15 @@ std::shared_ptr<SetMap::Request> make_occupancy_map() {
   return request;
 }
 
+/**
+ * @brief Create the default parameters for path planning
+ */
+pathing::Manager::Parameters make_params() {
+  pathing::Manager::Parameters params;
+  params.robot_size = 1;
+  return params;
+}
+
 // Create mock middleware handle
 struct MockMiddlewareHandle : public pathing::Manager::MiddlewareHandle {
   MOCK_METHOD(void, register_set_map_service, (SetMapCallback), (override));
@@ -392,7 +415,7 @@ TEST(PathManager, Ctor) {
   EXPECT_CALL(*mw, register_generate_path_service(testing::_)).Times(1);
 
   // WHEN the path generator is constructed
-  auto const path_generator = pathing::Manager{std::move(mw)};
+  auto const path_generator = pathing::Manager{std::move(mw), make_params()};
 }
 
 TEST(PathManager, SetMap) {
@@ -403,7 +426,7 @@ TEST(PathManager, SetMap) {
   ON_CALL(*mw, register_set_map_service(testing::_))
       .WillByDefault(testing::SaveArg<0>(&callback));
 
-  auto const path_generator = pathing::Manager{std::move(mw)};
+  auto const path_generator = pathing::Manager{std::move(mw), make_params()};
 
   // WHEN the set map service is called
   auto const request = make_occupancy_map();
@@ -422,7 +445,7 @@ TEST(PathManager, NoCostmap) {
   ON_CALL(*mw, register_generate_path_service(testing::_))
       .WillByDefault(testing::SaveArg<0>(&path_callback));
 
-  auto const path_generator = pathing::Manager{std::move(mw)};
+  auto const path_generator = pathing::Manager{std::move(mw), make_params()};
 
   // WHEN the generate path service is called without a costmap
   auto path_request = std::make_shared<example_srvs::srv::GetPath::Request>();
@@ -461,7 +484,7 @@ struct PathManagerFixture : public testing::Test {
 
 TEST_F(PathManagerFixture, NoStartNoGoal) {
   // GIVEN a path generator with a costmap
-  auto const path_generator = pathing::Manager{std::move(mw_)};
+  auto const path_generator = pathing::Manager{std::move(mw_), make_params()};
 
   // WHEN the generate path service is called,
   auto const path_request = std::make_shared<GetPath::Request>();
@@ -474,7 +497,7 @@ TEST_F(PathManagerFixture, NoStartNoGoal) {
 
 TEST_F(PathManagerFixture, SameStartGoal) {
   // GIVEN a path generator with a costmap
-  auto const path_generator = pathing::Manager{std::move(mw_)};
+  auto const path_generator = pathing::Manager{std::move(mw_), make_params()};
 
   // WHEN the generate path service is called with the same start and goal
   auto path_request = std::make_shared<GetPath::Request>();
@@ -493,7 +516,7 @@ TEST_F(PathManagerFixture, SameStartGoal) {
 
 TEST_F(PathManagerFixture, NoPath) {
   // GIVEN a path generator with a costmap
-  auto const path_generator = pathing::Manager{std::move(mw_)};
+  auto const path_generator = pathing::Manager{std::move(mw_), make_params()};
 
   // WHEN the generate path service is called with an unreachable goal
   auto path_request = std::make_shared<GetPath::Request>();
@@ -513,7 +536,7 @@ TEST_F(PathManagerFixture, NoPath) {
 
 TEST_F(PathManagerFixture, PathGenerated) {
   // GIVEN a path generator with a costmap
-  auto const path_generator = pathing::Manager{std::move(mw_)};
+  auto const path_generator = pathing::Manager{std::move(mw_), make_params()};
 
   // WHEN the generate path service is called with a reachable goal
   auto path_request = std::make_shared<GetPath::Request>();

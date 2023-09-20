@@ -14,6 +14,21 @@ using GetPath = example_srvs::srv::GetPath;
 namespace pathing {
 
 struct Manager {
+  /**
+   * @brief Parameters for the path manager
+   */
+  struct Parameters {
+    /**
+     * @brief The size of the robot in pixels
+     * @note This is a toy description of robot size as a square
+     *       centered at the robot's upper left hand corner
+     */
+    int robot_size;
+  };
+
+  /**
+   * @brief Interface for interacting with ros services
+   */
   struct MiddlewareHandle {
     // Define map service callback type
     using SetMapCallback = std::function<void(
@@ -60,14 +75,20 @@ struct Manager {
   /**
    * @brief Manages occupancy_map and path generation for the pathing node
    * @param mw The middleware handle for interacting with services
+   * @param params for manager configuration
    */
-  Manager(std::unique_ptr<MiddlewareHandle> mw);
+  Manager(std::unique_ptr<MiddlewareHandle> mw, Parameters params);
 
  private:
   /**
    * @brief Middleware handle for interacting with services
    */
   std::unique_ptr<MiddlewareHandle> mw_;
+
+  /**
+   * @brief Parameters for the path manager
+   */
+  Parameters params_;
 
   /**
    * @brief Occupancy map to path through
