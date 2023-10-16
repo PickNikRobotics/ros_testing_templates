@@ -213,7 +213,21 @@ ccache cannot compile</h4>
 <div class="line">  is not able to compile a simple test program.</div>
 </div><!-- fragment --><p> Likely, the host ccache directory in your <a href="#ccache">home directory</a> was not created properly. Ensure that the directory is created and owned by the host user. </p><div class="fragment"><div class="line">mkdir -p ~/.${REPO}/ccache</div>
 <div class="line">sudo chown -R $(id -u):$(id -g) ~/.${REPO}/ccache</div>
-</div><!-- fragment --> </div></div><!-- PageDoc -->
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md23"></a>
+Additional Information</h1>
+<h2><a class="anchor" id="autotoc_md24"></a>
+CppCon 2023 Slides</h2>
+<p>The code in <code>functional_programming_tests</code> was presented at CppCon 2023 and ROSCon 2023. The abstract of the presentation is:</p>
+<div class="fragment"><div class="line">In the field of robotics, Robot Operating System (ROS) is the de facto middleware of choice across academia and industry.</div>
+<div class="line">As most code examples in ROS utilize an object-oriented approach, challenges can arise when writing tests for production code due to the algorithmic code being inextricably tied to the code that interacts with the middleware, often leading to unexpected bugs or flaky tests.</div>
+<div class="line">This talk explores ways to mitigate those issues by using a functional programming approach.</div>
+<div class="line">By adopting this approach, we can minimize the impact that ROS or other middleware has on your code, preventing it from becoming tightly coupled and brittle.</div>
+<div class="line">Attendees can expect an overview of ROS 2 and the conventional programming approach typically associated with it.</div>
+<div class="line">We&#39;ll delve into how tests are usually constructed and pinpoint potential sources of bugs and flakiness.</div>
+<div class="line">Following this, we will introduce a functional approach to writing test code.</div>
+<div class="line">By the end of this talk, attendees will learn an alternative method of architecting their ROS 2 code and also understand how this approach can lead to more robust, maintainable, and testable code.</div>
+</div><!-- fragment --><p>The slides are located in <code>doc</code>. </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
