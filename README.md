@@ -219,7 +219,7 @@ sudo chown -R $(id -u):$(id -g) ~/.${REPO}/ccache
 # Additional Information
 ## CppCon 2023 Slides
 
-The code in `functional_programming_tests` was actually presented at CppCon 2023 and ROSCon 2023. The abstract of the presentation is: 
+The code in `functional_programming_tests` was presented at CppCon 2023 and ROSCon 2023. The abstract of the presentation is: 
 
 ```
 In the field of robotics, Robot Operating System (ROS) is the de facto middleware of choice across academia and industry.
