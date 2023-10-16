@@ -215,3 +215,21 @@ Ensure that the directory is created and owned by the host user.
 mkdir -p ~/.${REPO}/ccache
 sudo chown -R $(id -u):$(id -g) ~/.${REPO}/ccache
 ```
+
+# Additional Information
+## CppCon 2023 Slides
+
+The code in `functional_programming_tests` was actually presented at CppCon 2023 and ROSCon 2023. The abstract of the presentation is: 
+
+```
+In the field of robotics, Robot Operating System (ROS) is the de facto middleware of choice across academia and industry.
+As most code examples in ROS utilize an object-oriented approach, challenges can arise when writing tests for production code due to the boilerplate code ROS introduces, often leading to unexpected bugs or flaky tests.
+This talk explores ways to mitigate those issues by using a functional approach.
+By adopting this approach, we can minimize the impact that ROS or other middleware has on your code, preventing it from becoming tightly coupled and brittle.
+Attendees can expect an overview of ROS 2 and the conventional programming approach typically associated with it.
+We'll delve into how tests are usually constructed and pinpoint potential sources of bugs and flakiness.
+Following this, we will introduce a functional approach to writing test code.
+By the end of this talk, attendees will learn an alternative method of architecting their ROS 2 code and also understand how this approach can lead to more robust, maintainable, and testable code.
+```
+
+The slides are located in `doc`.
