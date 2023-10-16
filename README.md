@@ -223,7 +223,7 @@ The code in `functional_programming_tests` was presented at CppCon 2023 and ROSC
 
 ```
 In the field of robotics, Robot Operating System (ROS) is the de facto middleware of choice across academia and industry.
-As most code examples in ROS utilize an object-oriented approach, challenges can arise when writing tests for production code due to the boilerplate code ROS introduces, often leading to unexpected bugs or flaky tests.
+As most code examples in ROS utilize an object-oriented approach, challenges can arise when writing tests for production code due to the algorithmic code being inextricably tied to the code that interacts with the middleware, often leading to unexpected bugs or flaky tests.
 This talk explores ways to mitigate those issues by using a functional programming approach.
 By adopting this approach, we can minimize the impact that ROS or other middleware has on your code, preventing it from becoming tightly coupled and brittle.
 Attendees can expect an overview of ROS 2 and the conventional programming approach typically associated with it.
