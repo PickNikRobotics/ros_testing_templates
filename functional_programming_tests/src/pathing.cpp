@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include <example_srvs/msg/get_path_codes.hpp>
 #include <example_srvs/srv/get_path.hpp>
 #include <tl_expected/expected.hpp>
 
@@ -120,7 +121,7 @@ tl::expected<example_srvs::srv::GetPath::Response, error> generate_path(
   }
 
   auto response = example_srvs::srv::GetPath::Response{};
-  response.code.code = 0;
+  response.result.code = example_srvs::msg::GetPathCodes::SUCCESS;
   response.path = utilities::createUInt8MultiArrayMessageFromPath(path.value());
 
   return response;

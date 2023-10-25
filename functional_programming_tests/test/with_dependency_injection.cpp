@@ -7,10 +7,10 @@
 
 #include <rclcpp/rclcpp.hpp>
 
-#include <example_srvs/srv/set_map.hpp>
-#include <example_srvs/srv/get_path.hpp>
-#include <example_srvs/msg/set_map_codes.hpp>
 #include <example_srvs/msg/get_path_codes.hpp>
+#include <example_srvs/msg/set_map_codes.hpp>
+#include <example_srvs/srv/get_path.hpp>
+#include <example_srvs/srv/set_map.hpp>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <std_msgs/msg/u_int8_multi_array.hpp>
@@ -111,7 +111,7 @@ struct PathGenerator {
             std::shared_ptr<example_srvs::srv::SetMap::Request> const request,
             std::shared_ptr<example_srvs::srv::SetMap::Response> response) {
           // Set the map to generate the path from
-          response->code.code = costmap_setter(request->map);
+          response->result.code = costmap_setter(request->map);
         });
     // Register the generate path service
     mw_->register_generate_path_service(  // Trivial comment to enfore params on
@@ -121,7 +121,8 @@ struct PathGenerator {
             std::shared_ptr<example_srvs::srv::GetPath::Response> response) {
           if (map_.get_data().size() == 0) {
             mw_->log_error("MAP IS EMPTY!!");
-            response->code.code = example_srvs::msg::GetPathCodes::EMPTY_OCCUPANCY_MAP;
+            response->result.code =
+                example_srvs::msg::GetPathCodes::EMPTY_OCCUPANCY_MAP;
             response->path = std_msgs::msg::UInt8MultiArray();
             return;
           }
@@ -129,13 +130,15 @@ struct PathGenerator {
           // size 2
           if (request->start.data.size() != 2) {
             mw_->log_error("START POSITION MUST CONTAIN TWO ELEMENTS!!");
-            response->code.code = example_srvs::msg::GetPathCodes::START_POSITION_INVALID_SIZE;
+            response->result.code =
+                example_srvs::msg::GetPathCodes::START_POSITION_INVALID_SIZE;
             response->path = std_msgs::msg::UInt8MultiArray();
             return;
           }
           if (request->goal.data.size() != 2) {
             mw_->log_error("GOAL POSITION MUST CONTAIN TWO ELEMENTS!!");
-            response->code.code = example_srvs::msg::GetPathCodes::GOAL_POSITION_INVALID_SIZE;
+            response->result.code =
+                example_srvs::msg::GetPathCodes::GOAL_POSITION_INVALID_SIZE;
             response->path = std_msgs::msg::UInt8MultiArray();
             return;
           }
@@ -175,7 +178,9 @@ struct PathGenerator {
             }
           }
 
-          response->code.code = path.has_value() ? example_srvs::msg::GetPathCodes::SUCCESS : example_srvs::msg::GetPathCodes::NO_VALID_PATH;
+          response->result.code =
+              path.has_value() ? example_srvs::msg::GetPathCodes::SUCCESS
+                               : example_srvs::msg::GetPathCodes::NO_VALID_PATH;
           response->path = response_path;
         });
   }
@@ -401,7 +406,7 @@ TEST(PathGenerator, SetMap) {
   callback(request, response);
 
   // THEN the path generator should successfully set the map
-  EXPECT_EQ(response->code.code, example_srvs::msg::SetMapCodes::SUCCESS);
+  EXPECT_EQ(response->result.code, example_srvs::msg::SetMapCodes::SUCCESS);
 }
 
 TEST(PathGenerator, NoCostmap) {
@@ -423,7 +428,8 @@ TEST(PathGenerator, NoCostmap) {
   path_callback(path_request, path_response);
 
   // THEN the path generator should fail
-  EXPECT_EQ(path_response->code.code, example_srvs::msg::GetPathCodes::EMPTY_OCCUPANCY_MAP);
+  EXPECT_EQ(path_response->result.code,
+            example_srvs::msg::GetPathCodes::EMPTY_OCCUPANCY_MAP);
 }
 
 struct PathGeneratorFixture : public testing::Test {
@@ -461,7 +467,8 @@ TEST_F(PathGeneratorFixture, NoStartNoGoal) {
   path_callback_(path_request, path_response);
 
   // THEN the path generator should fail
-  EXPECT_EQ(path_response->code.code, example_srvs::msg::GetPathCodes::START_POSITION_INVALID_SIZE);
+  EXPECT_EQ(path_response->result.code,
+            example_srvs::msg::GetPathCodes::START_POSITION_INVALID_SIZE);
 }
 
 TEST_F(PathGeneratorFixture, SameStartGoal) {
@@ -476,7 +483,8 @@ TEST_F(PathGeneratorFixture, SameStartGoal) {
   path_callback_(path_request, path_response);
 
   // THEN the path generator should succeed
-  EXPECT_EQ(path_response->code.code, example_srvs::msg::GetPathCodes::SUCCESS);
+  EXPECT_EQ(path_response->result.code,
+            example_srvs::msg::GetPathCodes::SUCCESS);
   auto const expected = std::vector<Position>{{0, 0}};
   // AND the path should be the same as the start
   EXPECT_EQ(parseGeneratedPath(path_response->path), expected);
@@ -495,7 +503,8 @@ TEST_F(PathGeneratorFixture, NoPath) {
   path_callback_(path_request, path_response);
 
   // THEN the path generator should succeed
-  EXPECT_EQ(path_response->code.code, example_srvs::msg::GetPathCodes::NO_VALID_PATH);
+  EXPECT_EQ(path_response->result.code,
+            example_srvs::msg::GetPathCodes::NO_VALID_PATH);
   auto const expected = std::vector<Position>{};
   // AND the path should be empty
   EXPECT_EQ(parseGeneratedPath(path_response->path), expected);
@@ -513,7 +522,8 @@ TEST_F(PathGeneratorFixture, PathGenerated) {
   path_callback_(path_request, path_response);
 
   // THEN the path generator should succeed
-  EXPECT_EQ(path_response->code.code, example_srvs::msg::GetPathCodes::SUCCESS);
+  EXPECT_EQ(path_response->result.code,
+            example_srvs::msg::GetPathCodes::SUCCESS);
   auto const expected = std::vector<Position>{
       {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0},
       {7, 1}, {7, 2}, {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}};

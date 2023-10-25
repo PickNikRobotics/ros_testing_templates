@@ -68,7 +68,7 @@ class PathGenerator : public rclcpp::Node {
       const std::shared_ptr<example_srvs::srv::SetMap::Request> request,
       std::shared_ptr<example_srvs::srv::SetMap::Response> response) {
     // Set the map to generate the path from
-    response->code.code = set_costmap(request->map);
+    response->result.code = set_costmap(request->map);
   }
 
   void generate_path_service(
@@ -76,7 +76,8 @@ class PathGenerator : public rclcpp::Node {
       std::shared_ptr<example_srvs::srv::GetPath::Response> response) {
     if (map_.get_data().size() == 0) {
       RCLCPP_ERROR_STREAM(this->get_logger(), "MAP IS EMPTY!!");
-      response->code.code = example_srvs::msg::GetPathCodes::EMPTY_OCCUPANCY_MAP;
+      response->result.code =
+          example_srvs::msg::GetPathCodes::EMPTY_OCCUPANCY_MAP;
       response->path = std_msgs::msg::UInt8MultiArray();
       return;
     }
@@ -84,14 +85,16 @@ class PathGenerator : public rclcpp::Node {
     if (request->start.data.size() != 2) {
       RCLCPP_ERROR_STREAM(this->get_logger(),
                           "START POSITION MUST CONTAIN TWO ELEMENTS!!");
-      response->code.code = example_srvs::msg::GetPathCodes::START_POSITION_INVALID_SIZE;
+      response->result.code =
+          example_srvs::msg::GetPathCodes::START_POSITION_INVALID_SIZE;
       response->path = std_msgs::msg::UInt8MultiArray();
       return;
     }
     if (request->goal.data.size() != 2) {
       RCLCPP_ERROR_STREAM(this->get_logger(),
                           "GOAL POSITION MUST CONTAIN TWO ELEMENTS!!");
-      response->code.code = example_srvs::msg::GetPathCodes::GOAL_POSITION_INVALID_SIZE;
+      response->result.code =
+          example_srvs::msg::GetPathCodes::GOAL_POSITION_INVALID_SIZE;
       response->path = std_msgs::msg::UInt8MultiArray();
       return;
     }
@@ -126,21 +129,26 @@ class PathGenerator : public rclcpp::Node {
       }
     }
 
-    response->code.code = !path.empty() ? example_srvs::msg::GetPathCodes::SUCCESS : example_srvs::msg::GetPathCodes::NO_VALID_PATH;
+    response->result.code =
+        !path.empty() ? example_srvs::msg::GetPathCodes::SUCCESS
+                      : example_srvs::msg::GetPathCodes::NO_VALID_PATH;
     response->path = response_path;
   }
 
   // Function that sets costmap
-  unsigned char set_costmap(const std_msgs::msg::UInt8MultiArray& costmap) {  // Action
+  unsigned char set_costmap(
+      const std_msgs::msg::UInt8MultiArray& costmap) {  // Action
     // Get the costmap from a ros topic
     // Check that map layout makes sense
     if ((costmap.layout.dim[0].size * costmap.layout.dim[1].size) !=
         costmap.layout.dim[0].stride) {
-      RCLCPP_ERROR_STREAM(this->get_logger(), "COSTMAP DIMENSIONS AND STRIDE INCONSISTENT!!");
+      RCLCPP_ERROR_STREAM(this->get_logger(),
+                          "COSTMAP DIMENSIONS AND STRIDE INCONSISTENT!!");
       return example_srvs::msg::SetMapCodes::DIMENSION_AND_STRIDE_MISMATCH;
     }
     if (costmap.layout.dim[0].stride != costmap.data.size()) {
-      RCLCPP_ERROR_STREAM(this->get_logger(), "COSTMAP LENGTH AND STRIDE INCONSISTENT!!");
+      RCLCPP_ERROR_STREAM(this->get_logger(),
+                          "COSTMAP LENGTH AND STRIDE INCONSISTENT!!");
       return example_srvs::msg::SetMapCodes::LENGTH_AND_STRIDE_MISMATCH;
     }
     auto const begin = std::begin(costmap.data);
@@ -336,7 +344,8 @@ TEST_F(TaskPlanningFixture, same_start_and_goal) {
       << "Generating path failed";
 
   std::vector<Position> const expected{{0, 0}};
-  EXPECT_EQ(result.first->code.code, example_srvs::msg::GetPathCodes::SUCCESS);
+  EXPECT_EQ(result.first->result.code,
+            example_srvs::msg::GetPathCodes::SUCCESS);
   EXPECT_EQ(parseGeneratedPath(result.first->path), expected)
       << parseGeneratedPath(result.first->path);
 
@@ -374,7 +383,8 @@ TEST_F(TaskPlanningFixture, no_path) {
   // THEN the global path produced should have one element, which is the
   // start/goal position
   std::vector<Position> const expected{};
-  EXPECT_EQ(result.first->code.code, example_srvs::msg::GetPathCodes::NO_VALID_PATH);
+  EXPECT_EQ(result.first->result.code,
+            example_srvs::msg::GetPathCodes::NO_VALID_PATH);
   EXPECT_EQ(parseGeneratedPath(result.first->path), expected)
       << parseGeneratedPath(result.first->path);
 
@@ -414,7 +424,8 @@ TEST_F(TaskPlanningFixture, path_generated) {
   std::vector<Position> const expected{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},
                                        {5, 0}, {6, 0}, {7, 0}, {7, 1}, {7, 2},
                                        {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}};
-  EXPECT_EQ(result.first->code.code, example_srvs::msg::GetPathCodes::SUCCESS);
+  EXPECT_EQ(result.first->result.code,
+            example_srvs::msg::GetPathCodes::SUCCESS);
   EXPECT_EQ(parseGeneratedPath(result.first->path), expected)
       << parseGeneratedPath(result.first->path);
 

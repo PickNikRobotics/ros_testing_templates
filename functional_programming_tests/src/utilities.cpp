@@ -1,16 +1,16 @@
-#include "pathing/pathing.hpp"
 #include "pathing/utilities.hpp"
+
+#include "pathing/pathing.hpp"
 
 #include <memory>
 #include <optional>
 
-#include <tl_expected/expected.hpp>
-
 #include <example_srvs/srv/set_map.hpp>
 #include <std_msgs/msg/u_int8_multi_array.hpp>
+#include <tl_expected/expected.hpp>
 
 namespace pathing::utilities {
-tl::expected<Map<unsigned char>,parsing_set_map_error> parseSetMapRequest(
+tl::expected<Map<unsigned char>, parsing_set_map_error> parseSetMapRequest(
     std::shared_ptr<example_srvs::srv::SetMap::Request> const request) {
   if (request->map.layout.dim.empty() || request->map.data.empty()) {
     return tl::unexpected(parsing_set_map_error::EMPTY_REQUEST);

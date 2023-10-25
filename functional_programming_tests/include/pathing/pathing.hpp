@@ -6,6 +6,7 @@
 #include <utility>
 #include <vector>
 
+#include <example_srvs/msg/get_path_codes.hpp>
 #include <example_srvs/srv/get_path.hpp>
 #include <tl_expected/expected.hpp>
 
@@ -75,10 +76,12 @@ namespace generate_path {
  * @brief      Types of errors expected in the generate path callback function
  */
 enum class error {
-  EMPTY_OCCUPANCY_MAP = 1,
-  INVALID_START_SIZE = 2,
-  INVALID_GOAL_SIZE = 3,
-  NO_VALID_PATH = 4
+  EMPTY_OCCUPANCY_MAP = example_srvs::msg::GetPathCodes::EMPTY_OCCUPANCY_MAP,
+  INVALID_START_SIZE =
+      example_srvs::msg::GetPathCodes::START_POSITION_INVALID_SIZE,
+  INVALID_GOAL_SIZE =
+      example_srvs::msg::GetPathCodes::GOAL_POSITION_INVALID_SIZE,
+  NO_VALID_PATH = example_srvs::msg::GetPathCodes::NO_VALID_PATH
 };
 
 /**
