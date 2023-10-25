@@ -12,8 +12,10 @@ find_package(std_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "srv/GetPath.srv"
+  "msg/SetMapCodes.msg"
+  "msg/GetPathCodes.msg"
   "srv/SetMap.srv"
+  "srv/GetPath.srv"
   DEPENDENCIES std_msgs
 )
 

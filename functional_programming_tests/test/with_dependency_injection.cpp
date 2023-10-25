@@ -7,6 +7,8 @@
 
 #include <rclcpp/rclcpp.hpp>
 
+#include <example_srvs/msg/get_path_codes.hpp>
+#include <example_srvs/msg/set_map_codes.hpp>
 #include <example_srvs/srv/get_path.hpp>
 #include <example_srvs/srv/set_map.hpp>
 #include <gmock/gmock.h>
@@ -109,7 +111,7 @@ struct PathGenerator {
             std::shared_ptr<example_srvs::srv::SetMap::Request> const request,
             std::shared_ptr<example_srvs::srv::SetMap::Response> response) {
           // Set the map to generate the path from
-          response->success.data = costmap_setter(request->map);
+          response->result.code = costmap_setter(request->map);
         });
     // Register the generate path service
     mw_->register_generate_path_service(  // Trivial comment to enfore params on
@@ -119,7 +121,8 @@ struct PathGenerator {
             std::shared_ptr<example_srvs::srv::GetPath::Response> response) {
           if (map_.get_data().size() == 0) {
             mw_->log_error("MAP IS EMPTY!!");
-            response->success.data = false;
+            response->result.code =
+                example_srvs::msg::GetPathCodes::EMPTY_OCCUPANCY_MAP;
             response->path = std_msgs::msg::UInt8MultiArray();
             return;
           }
@@ -127,13 +130,15 @@ struct PathGenerator {
           // size 2
           if (request->start.data.size() != 2) {
             mw_->log_error("START POSITION MUST CONTAIN TWO ELEMENTS!!");
-            response->success.data = false;
+            response->result.code =
+                example_srvs::msg::GetPathCodes::START_POSITION_INVALID_SIZE;
             response->path = std_msgs::msg::UInt8MultiArray();
             return;
           }
           if (request->goal.data.size() != 2) {
             mw_->log_error("GOAL POSITION MUST CONTAIN TWO ELEMENTS!!");
-            response->success.data = false;
+            response->result.code =
+                example_srvs::msg::GetPathCodes::GOAL_POSITION_INVALID_SIZE;
             response->path = std_msgs::msg::UInt8MultiArray();
             return;
           }
@@ -173,7 +178,9 @@ struct PathGenerator {
             }
           }
 
-          response->success.data = path.has_value();
+          response->result.code =
+              path.has_value() ? example_srvs::msg::GetPathCodes::SUCCESS
+                               : example_srvs::msg::GetPathCodes::NO_VALID_PATH;
           response->path = response_path;
         });
   }
@@ -184,18 +191,18 @@ struct PathGenerator {
    * @param costmap The costmap message
    * @return True if the costmap was set successfully, false otherwise
    */
-  bool costmap_setter(
+  unsigned char costmap_setter(
       std_msgs::msg::UInt8MultiArray const& costmap) {  // Action
     // Get the costmap from a ros topic
     // Check that map layout makes sense
     if ((costmap.layout.dim[0].size * costmap.layout.dim[1].size) !=
         costmap.layout.dim[0].stride) {
       mw_->log_error("COSTMAP DIMENSIONS AND STRIDE INCONSISTENT!!");
-      return false;
+      return example_srvs::msg::SetMapCodes::DIMENSION_AND_STRIDE_MISMATCH;
     }
     if (costmap.layout.dim[0].stride != costmap.data.size()) {
       mw_->log_error("COSTMAP LENGTH AND STRIDE INCONSISTENT!!");
-      return false;
+      return example_srvs::msg::SetMapCodes::LENGTH_AND_STRIDE_MISMATCH;
     }
     auto const begin = std::begin(costmap.data);
     // Populate the map
@@ -204,7 +211,7 @@ struct PathGenerator {
           {begin + row * costmap.layout.dim[1].size,
            begin + (row + 1) * costmap.layout.dim[1].size});
     }
-    return true;
+    return example_srvs::msg::SetMapCodes::SUCCESS;
   }
 
   /**
@@ -331,7 +338,7 @@ std::vector<Position> parseGeneratedPath(
  * @brief Create a sample cost map in a request message
  * @return A shared pointer to the request message with the cost map
  */
-std::shared_ptr<example_srvs::srv::SetMap::Request> make_costmap() {
+std::shared_ptr<example_srvs::srv::SetMap::Request> make_occupancy_map() {
   auto const request = std::make_shared<example_srvs::srv::SetMap::Request>();
 
   request->map = std_msgs::msg::UInt8MultiArray();
@@ -394,12 +401,12 @@ TEST(PathGenerator, SetMap) {
   auto const path_generator = PathGenerator{std::move(mw)};
 
   // WHEN the set map service is called
-  auto const request = make_costmap();
+  auto const request = make_occupancy_map();
   auto response = std::make_shared<example_srvs::srv::SetMap::Response>();
   callback(request, response);
 
   // THEN the path generator should successfully set the map
-  EXPECT_TRUE(response->success.data);
+  EXPECT_EQ(response->result.code, example_srvs::msg::SetMapCodes::SUCCESS);
 }
 
 TEST(PathGenerator, NoCostmap) {
@@ -421,7 +428,8 @@ TEST(PathGenerator, NoCostmap) {
   path_callback(path_request, path_response);
 
   // THEN the path generator should fail
-  EXPECT_FALSE(path_response->success.data);
+  EXPECT_EQ(path_response->result.code,
+            example_srvs::msg::GetPathCodes::EMPTY_OCCUPANCY_MAP);
 }
 
 struct PathGeneratorFixture : public testing::Test {
@@ -433,7 +441,7 @@ struct PathGeneratorFixture : public testing::Test {
     // When the map callback is called, set the costmap
     ON_CALL(*mw_, register_set_map_service(testing::_))
         .WillByDefault([&](auto const& map_callback) {
-          auto const map_request = make_costmap();
+          auto const map_request = make_occupancy_map();
           auto map_response =
               std::make_shared<example_srvs::srv::SetMap::Response>();
           map_callback(map_request, map_response);
@@ -459,7 +467,8 @@ TEST_F(PathGeneratorFixture, NoStartNoGoal) {
   path_callback_(path_request, path_response);
 
   // THEN the path generator should fail
-  EXPECT_FALSE(path_response->success.data);
+  EXPECT_EQ(path_response->result.code,
+            example_srvs::msg::GetPathCodes::START_POSITION_INVALID_SIZE);
 }
 
 TEST_F(PathGeneratorFixture, SameStartGoal) {
@@ -474,7 +483,8 @@ TEST_F(PathGeneratorFixture, SameStartGoal) {
   path_callback_(path_request, path_response);
 
   // THEN the path generator should succeed
-  EXPECT_TRUE(path_response->success.data);
+  EXPECT_EQ(path_response->result.code,
+            example_srvs::msg::GetPathCodes::SUCCESS);
   auto const expected = std::vector<Position>{{0, 0}};
   // AND the path should be the same as the start
   EXPECT_EQ(parseGeneratedPath(path_response->path), expected);
@@ -493,7 +503,8 @@ TEST_F(PathGeneratorFixture, NoPath) {
   path_callback_(path_request, path_response);
 
   // THEN the path generator should succeed
-  EXPECT_FALSE(path_response->success.data);
+  EXPECT_EQ(path_response->result.code,
+            example_srvs::msg::GetPathCodes::NO_VALID_PATH);
   auto const expected = std::vector<Position>{};
   // AND the path should be empty
   EXPECT_EQ(parseGeneratedPath(path_response->path), expected);
@@ -511,7 +522,8 @@ TEST_F(PathGeneratorFixture, PathGenerated) {
   path_callback_(path_request, path_response);
 
   // THEN the path generator should succeed
-  EXPECT_TRUE(path_response->success.data);
+  EXPECT_EQ(path_response->result.code,
+            example_srvs::msg::GetPathCodes::SUCCESS);
   auto const expected = std::vector<Position>{
       {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0},
       {7, 1}, {7, 2}, {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7}};

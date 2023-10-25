@@ -1,3 +1,3 @@
 std_msgs/UInt8MultiArray map
 ---
-std_msgs/Bool success
+example_srvs/SetMapCodes result
