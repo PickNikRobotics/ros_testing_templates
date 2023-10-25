@@ -19,10 +19,9 @@ namespace pathing {
 Manager::Manager(std::unique_ptr<Manager::MiddlewareHandle> mw,
                  Parameters params)
     : mw_{std::move(mw)}, params_{std::move(params)} {
-  mw_->register_set_map_service(
-      [this](auto const request, auto response) -> void {
-
-        auto const set_map = [this](Map<unsigned char> const map)
+  mw_->register_set_map_service([this](auto const request,
+                                       auto response) -> void {
+    auto const set_map = [this](Map<unsigned char> const map)
         -> tl::expected<Map<unsigned char>, utilities::parsing_set_map_error> {
       this->map_ = map;
       return map;
