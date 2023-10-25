@@ -68,7 +68,9 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">utilities.hpp File Reference</div>  </div>
 </div><!--header-->
@@ -78,23 +80,25 @@ $(function() {
 <code>#include &lt;optional&gt;</code><br />
 <code>#include &lt;example_srvs/srv/set_map.hpp&gt;</code><br />
 <code>#include &lt;std_msgs/msg/u_int8_multi_array.hpp&gt;</code><br />
+<code>#include &lt;tl_expected/expected.hpp&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for utilities.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="utilities_8hpp__incl.png" border="0" usemap="#afunctional__programming__tests_2include_2pathing_2utilities_8hpp" alt=""/></div>
 <map name="afunctional__programming__tests_2include_2pathing_2utilities_8hpp" id="afunctional__programming__tests_2include_2pathing_2utilities_8hpp">
-<area shape="rect" title=" " alt="" coords="230,5,413,61"/>
-<area shape="rect" href="pathing_8hpp.html" title=" " alt="" coords="245,117,397,143"/>
+<area shape="rect" title=" " alt="" coords="438,5,621,61"/>
+<area shape="rect" href="pathing_8hpp.html" title=" " alt="" coords="397,117,549,143"/>
 <area shape="rect" title=" " alt="" coords="5,206,83,233"/>
 <area shape="rect" title=" " alt="" coords="107,206,181,233"/>
-<area shape="rect" title=" " alt="" coords="422,109,583,151"/>
-<area shape="rect" title=" " alt="" coords="608,109,768,151"/>
-<area shape="rect" title=" " alt="" coords="206,206,293,233"/>
-<area shape="rect" title=" " alt="" coords="317,206,368,233"/>
-<area shape="rect" title=" " alt="" coords="393,206,453,233"/>
-<area shape="rect" title=" " alt="" coords="477,206,539,233"/>
-<area shape="rect" title=" " alt="" coords="564,199,727,240"/>
-<area shape="rect" title=" " alt="" coords="751,206,942,233"/>
+<area shape="rect" title=" " alt="" coords="946,206,1137,233"/>
+<area shape="rect" title=" " alt="" coords="625,109,786,151"/>
+<area shape="rect" title=" " alt="" coords="811,109,971,151"/>
+<area shape="rect" title=" " alt="" coords="675,206,762,233"/>
+<area shape="rect" title=" " alt="" coords="787,206,837,233"/>
+<area shape="rect" title=" " alt="" coords="862,206,922,233"/>
+<area shape="rect" title=" " alt="" coords="206,206,269,233"/>
+<area shape="rect" title=" " alt="" coords="293,199,464,240"/>
+<area shape="rect" title=" " alt="" coords="488,199,651,240"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -102,10 +106,11 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="utilities_8hpp__dep__incl.png" border="0" usemap="#afunctional__programming__tests_2include_2pathing_2utilities_8hppdep" alt=""/></div>
 <map name="afunctional__programming__tests_2include_2pathing_2utilities_8hppdep" id="afunctional__programming__tests_2include_2pathing_2utilities_8hppdep">
-<area shape="rect" title=" " alt="" coords="235,5,417,61"/>
+<area shape="rect" title=" " alt="" coords="349,5,532,61"/>
 <area shape="rect" href="pathing_8cpp.html" title=" " alt="" coords="5,117,188,158"/>
 <area shape="rect" href="pathing__manager_8cpp.html" title=" " alt="" coords="212,117,440,158"/>
-<area shape="rect" href="with__functional__programming_8cpp.html" title=" " alt="" coords="465,109,659,165"/>
+<area shape="rect" href="utilities_8cpp.html" title=" " alt="" coords="464,117,647,158"/>
+<area shape="rect" href="with__functional__programming_8cpp.html" title=" " alt="" coords="671,109,866,165"/>
 </map>
 </div>
 </div>
@@ -118,17 +123,32 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespacepathing_1_1utilities"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html">pathing::utilities</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:aac5e434fb2d0295007e90598827b7d42"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42">pathing::utilities::parsing_set_map_error</a> { <a class="el" href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42ad59dd2f22bf0f89ad3cb6cf9f5ad01a4">pathing::utilities::EMPTY_REQUEST</a> = 1
+, <a class="el" href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42abe2e112e6ba5590209462a916d8ebb3c">pathing::utilities::DIMENSION_AND_STRIDE_MISMATCH</a> = 2
+, <a class="el" href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42a5dc6aee42632b89e4b229f9e32afeb9b">pathing::utilities::LENGTH_AND_STRIDE_MISMATCH</a> = 3
+ }</td></tr>
+<tr class="memdesc:aac5e434fb2d0295007e90598827b7d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of errors expected in parsing the set map request.  <a href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42">More...</a><br /></td></tr>
+<tr class="separator:aac5e434fb2d0295007e90598827b7d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afd105d787f6685bba9390425221c15aa"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#afd105d787f6685bba9390425221c15aa">pathing::utilities::parseSetMapRequest</a> (std::shared_ptr&lt; example_srvs::srv::SetMap::Request &gt; const request)</td></tr>
-<tr class="memdesc:afd105d787f6685bba9390425221c15aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts map from message to occupancy map if possible.  <a href="namespacepathing_1_1utilities.html#afd105d787f6685bba9390425221c15aa">More...</a><br /></td></tr>
-<tr class="separator:afd105d787f6685bba9390425221c15aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9be4e914b42735ca65629d2993e5b866"><td class="memItemLeft" align="right" valign="top">tl::expected&lt; <a class="el" href="classMap.html">Map</a>&lt; unsigned char &gt;, parsing_set_map_error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#a9be4e914b42735ca65629d2993e5b866">pathing::utilities::parseSetMapRequest</a> (std::shared_ptr&lt; example_srvs::srv::SetMap::Request &gt; const request)</td></tr>
+<tr class="memdesc:a9be4e914b42735ca65629d2993e5b866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts map from message to occupancy map if possible.  <a href="namespacepathing_1_1utilities.html#a9be4e914b42735ca65629d2993e5b866">More...</a><br /></td></tr>
+<tr class="separator:a9be4e914b42735ca65629d2993e5b866"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add45b1db5874120e324913322b981dfe"><td class="memItemLeft" align="right" valign="top">std_msgs::msg::UInt8MultiArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe">pathing::utilities::createUInt8MultiArrayMessageFromPath</a> (<a class="el" href="with__dependency__injection_8cpp.html#a60848628ff9c6842db4263d71f931f2d">Path</a> const &amp;path)</td></tr>
 <tr class="memdesc:add45b1db5874120e324913322b981dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a UInt8MultiArray message from a path.  <a href="namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe">More...</a><br /></td></tr>
 <tr class="separator:add45b1db5874120e324913322b981dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a658d511069ef5dcdfbade9bf1c4681bd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structPosition.html">Position</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#a658d511069ef5dcdfbade9bf1c4681bd">pathing::utilities::parseGeneratedPath</a> (const std_msgs::msg::UInt8MultiArray &amp;msg)</td></tr>
 <tr class="memdesc:a658d511069ef5dcdfbade9bf1c4681bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a path from ROS message to a vector of positions.  <a href="namespacepathing_1_1utilities.html#a658d511069ef5dcdfbade9bf1c4681bd">More...</a><br /></td></tr>
 <tr class="separator:a658d511069ef5dcdfbade9bf1c4681bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a6e0c8f3d8dc70c2eaa7f3de1e884a1f5"><td class="memItemLeft" align="right" valign="top">std::map&lt; parsing_set_map_error, std::string &gt; const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#a6e0c8f3d8dc70c2eaa7f3de1e884a1f5">pathing::utilities::parsing_set_map_error_description</a></td></tr>
+<tr class="memdesc:a6e0c8f3d8dc70c2eaa7f3de1e884a1f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Descriptions of the errors.  <a href="namespacepathing_1_1utilities.html#a6e0c8f3d8dc70c2eaa7f3de1e884a1f5">More...</a><br /></td></tr>
+<tr class="separator:a6e0c8f3d8dc70c2eaa7f3de1e884a1f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

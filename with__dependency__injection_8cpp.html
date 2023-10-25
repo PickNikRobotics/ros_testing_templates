@@ -81,6 +81,8 @@ $(function() {
 <code>#include &lt;optional&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;rclcpp/rclcpp.hpp&gt;</code><br />
+<code>#include &lt;example_srvs/msg/get_path_codes.hpp&gt;</code><br />
+<code>#include &lt;example_srvs/msg/set_map_codes.hpp&gt;</code><br />
 <code>#include &lt;example_srvs/srv/get_path.hpp&gt;</code><br />
 <code>#include &lt;example_srvs/srv/set_map.hpp&gt;</code><br />
 <code>#include &lt;gmock/gmock.h&gt;</code><br />
@@ -91,7 +93,7 @@ Include dependency graph for with_dependency_injection.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="with__dependency__injection_8cpp__incl.png" border="0" usemap="#afunctional__programming__tests_2test_2with__dependency__injection_8cpp" alt=""/></div>
 <map name="afunctional__programming__tests_2test_2with__dependency__injection_8cpp" id="afunctional__programming__tests_2test_2with__dependency__injection_8cpp">
-<area shape="rect" title=" " alt="" coords="476,5,684,61"/>
+<area shape="rect" title=" " alt="" coords="625,5,833,61"/>
 <area shape="rect" title=" " alt="" coords="5,117,72,143"/>
 <area shape="rect" title=" " alt="" coords="97,117,159,143"/>
 <area shape="rect" title=" " alt="" coords="184,117,264,143"/>
@@ -99,11 +101,13 @@ Include dependency graph for with_dependency_injection.cpp:</div>
 <area shape="rect" title=" " alt="" coords="389,117,464,143"/>
 <area shape="rect" title=" " alt="" coords="489,117,551,143"/>
 <area shape="rect" title=" " alt="" coords="575,117,707,143"/>
-<area shape="rect" title=" " alt="" coords="732,109,895,151"/>
-<area shape="rect" title=" " alt="" coords="919,109,1081,151"/>
-<area shape="rect" title=" " alt="" coords="1105,117,1231,143"/>
-<area shape="rect" title=" " alt="" coords="1256,117,1360,143"/>
-<area shape="rect" title=" " alt="" coords="1384,109,1544,151"/>
+<area shape="rect" title=" " alt="" coords="732,109,903,151"/>
+<area shape="rect" title=" " alt="" coords="927,109,1097,151"/>
+<area shape="rect" title=" " alt="" coords="1121,109,1284,151"/>
+<area shape="rect" title=" " alt="" coords="1309,109,1470,151"/>
+<area shape="rect" title=" " alt="" coords="1494,117,1621,143"/>
+<area shape="rect" title=" " alt="" coords="1645,117,1749,143"/>
+<area shape="rect" title=" " alt="" coords="1773,109,1933,151"/>
 </map>
 </div>
 </div>
@@ -141,9 +145,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a4d5e91d1668c76391e266753856a638d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structPosition.html">Position</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="with__dependency__injection_8cpp.html#a4d5e91d1668c76391e266753856a638d">parseGeneratedPath</a> (const std_msgs::msg::UInt8MultiArray &amp;msg)</td></tr>
 <tr class="memdesc:a4d5e91d1668c76391e266753856a638d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a path from ROS message to a vector of positions.  <a href="with__dependency__injection_8cpp.html#a4d5e91d1668c76391e266753856a638d">More...</a><br /></td></tr>
 <tr class="separator:a4d5e91d1668c76391e266753856a638d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a597dc7f17d2d620efab3587b53afd71f"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; example_srvs::srv::SetMap::Request &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="with__dependency__injection_8cpp.html#a597dc7f17d2d620efab3587b53afd71f">make_costmap</a> ()</td></tr>
-<tr class="memdesc:a597dc7f17d2d620efab3587b53afd71f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sample cost map in a request message.  <a href="with__dependency__injection_8cpp.html#a597dc7f17d2d620efab3587b53afd71f">More...</a><br /></td></tr>
-<tr class="separator:a597dc7f17d2d620efab3587b53afd71f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab36b1cd7a212ace00e17202d52e23921"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; example_srvs::srv::SetMap::Request &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="with__dependency__injection_8cpp.html#ab36b1cd7a212ace00e17202d52e23921">make_occupancy_map</a> ()</td></tr>
+<tr class="memdesc:ab36b1cd7a212ace00e17202d52e23921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sample cost map in a request message.  <a href="with__dependency__injection_8cpp.html#ab36b1cd7a212ace00e17202d52e23921">More...</a><br /></td></tr>
+<tr class="separator:ab36b1cd7a212ace00e17202d52e23921"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a127d81777ddbacee35e20e877d9b72b9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="with__dependency__injection_8cpp.html#a127d81777ddbacee35e20e877d9b72b9">TEST</a> (<a class="el" href="structPathGenerator.html">PathGenerator</a>, Ctor)</td></tr>
 <tr class="separator:a127d81777ddbacee35e20e877d9b72b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07ced520814e7cc067a3cace9214dda6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="with__dependency__injection_8cpp.html#a07ced520814e7cc067a3cace9214dda6">TEST</a> (<a class="el" href="structPathGenerator.html">PathGenerator</a>, <a class="el" href="pathing__manager_8hpp.html#af15c72120c6d44d1aaaba2dc44ce4602">SetMap</a>)</td></tr>
@@ -174,7 +178,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00031">31</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00033">33</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
 
 </div>
 </div>
@@ -205,18 +209,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00522">522</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00534">534</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a597dc7f17d2d620efab3587b53afd71f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a597dc7f17d2d620efab3587b53afd71f">&#9670;&nbsp;</a></span>make_costmap()</h2>
+<a id="ab36b1cd7a212ace00e17202d52e23921"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab36b1cd7a212ace00e17202d52e23921">&#9670;&nbsp;</a></span>make_occupancy_map()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;example_srvs::srv::SetMap::Request&gt; make_costmap </td>
+          <td class="memname">std::shared_ptr&lt;example_srvs::srv::SetMap::Request&gt; make_occupancy_map </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -227,13 +231,13 @@ Functions</h2></td></tr>
 <p>Create a sample cost map in a request message. </p>
 <dl class="section return"><dt>Returns</dt><dd>A shared pointer to the request message with the cost map </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00334">334</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00341">341</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="with__dependency__injection_8cpp_a597dc7f17d2d620efab3587b53afd71f_icgraph.png" border="0" usemap="#awith__dependency__injection_8cpp_a597dc7f17d2d620efab3587b53afd71f_icgraph" alt=""/></div>
-<map name="awith__dependency__injection_8cpp_a597dc7f17d2d620efab3587b53afd71f_icgraph" id="awith__dependency__injection_8cpp_a597dc7f17d2d620efab3587b53afd71f_icgraph">
-<area shape="rect" title="Create a sample cost map in a request message." alt="" coords="221,42,343,69"/>
+<div class="center"><img src="with__dependency__injection_8cpp_ab36b1cd7a212ace00e17202d52e23921_icgraph.png" border="0" usemap="#awith__dependency__injection_8cpp_ab36b1cd7a212ace00e17202d52e23921_icgraph" alt=""/></div>
+<map name="awith__dependency__injection_8cpp_ab36b1cd7a212ace00e17202d52e23921_icgraph" id="awith__dependency__injection_8cpp_ab36b1cd7a212ace00e17202d52e23921_icgraph">
+<area shape="rect" title="Create a sample cost map in a request message." alt="" coords="221,42,392,69"/>
 <area shape="rect" href="structPathGeneratorFixture.html#a877fa8a4c8764c239e44070eebbb62fc" title="Construct a fixture which will set the map and capture the path callback." alt="" coords="5,5,173,47"/>
 <area shape="rect" href="with__dependency__injection_8cpp.html#a07ced520814e7cc067a3cace9214dda6" title=" " alt="" coords="62,71,117,98"/>
 </map>
@@ -267,7 +271,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00034">34</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00036">36</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
 
 </div>
 </div>
@@ -297,7 +301,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00027">27</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00029">29</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
 
 </div>
 </div>
@@ -326,7 +330,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The path as a vector of positions </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00312">312</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00319">319</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -365,7 +369,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00374">374</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00381">381</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
 
 </div>
 </div>
@@ -395,7 +399,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00405">405</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00412">412</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
 
 </div>
 </div>
@@ -425,14 +429,14 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00386">386</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00393">393</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="with__dependency__injection_8cpp_a07ced520814e7cc067a3cace9214dda6_cgraph.png" border="0" usemap="#awith__dependency__injection_8cpp_a07ced520814e7cc067a3cace9214dda6_cgraph" alt=""/></div>
 <map name="awith__dependency__injection_8cpp_a07ced520814e7cc067a3cace9214dda6_cgraph" id="awith__dependency__injection_8cpp_a07ced520814e7cc067a3cace9214dda6_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,60,32"/>
-<area shape="rect" href="with__dependency__injection_8cpp.html#a597dc7f17d2d620efab3587b53afd71f" title="Create a sample cost map in a request message." alt="" coords="108,5,229,32"/>
+<area shape="rect" href="with__dependency__injection_8cpp.html#ab36b1cd7a212ace00e17202d52e23921" title="Create a sample cost map in a request message." alt="" coords="108,5,279,32"/>
 </map>
 </div>
 
@@ -464,7 +468,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00483">483</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00493">493</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -503,7 +507,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00451">451</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00459">459</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
 
 </div>
 </div>
@@ -533,7 +537,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00502">502</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00513">513</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -572,7 +576,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00465">465</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="with__dependency__injection_8cpp_source.html#l00474">474</a> of file <a class="el" href="with__dependency__injection_8cpp_source.html">with_dependency_injection.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">

@@ -83,6 +83,7 @@ $(function() {
 <code>#include &lt;optional&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;example_srvs/msg/get_path_codes.hpp&gt;</code><br />
 <code>#include &lt;example_srvs/srv/get_path.hpp&gt;</code><br />
 <code>#include &lt;tl_expected/expected.hpp&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -90,15 +91,16 @@ Include dependency graph for pathing.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="pathing_8hpp__incl.png" border="0" usemap="#afunctional__programming__tests_2include_2pathing_2pathing_8hpp" alt=""/></div>
 <map name="afunctional__programming__tests_2include_2pathing_2pathing_8hpp" id="afunctional__programming__tests_2include_2pathing_2pathing_8hpp">
-<area shape="rect" title=" " alt="" coords="284,5,467,61"/>
+<area shape="rect" title=" " alt="" coords="331,5,513,61"/>
 <area shape="rect" title=" " alt="" coords="5,117,92,143"/>
 <area shape="rect" title=" " alt="" coords="117,117,167,143"/>
 <area shape="rect" title=" " alt="" coords="191,117,269,143"/>
 <area shape="rect" title=" " alt="" coords="293,117,367,143"/>
 <area shape="rect" title=" " alt="" coords="392,117,452,143"/>
 <area shape="rect" title=" " alt="" coords="476,117,539,143"/>
-<area shape="rect" title=" " alt="" coords="563,109,726,151"/>
-<area shape="rect" title=" " alt="" coords="751,117,941,143"/>
+<area shape="rect" title=" " alt="" coords="563,109,734,151"/>
+<area shape="rect" title=" " alt="" coords="758,109,921,151"/>
+<area shape="rect" title=" " alt="" coords="945,117,1136,143"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -106,15 +108,15 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="pathing_8hpp__dep__incl.png" border="0" usemap="#afunctional__programming__tests_2include_2pathing_2pathing_8hppdep" alt=""/></div>
 <map name="afunctional__programming__tests_2include_2pathing_2pathing_8hppdep" id="afunctional__programming__tests_2include_2pathing_2pathing_8hppdep">
-<area shape="rect" title=" " alt="" coords="435,5,618,61"/>
-<area shape="rect" href="collision__checking_8hpp.html" title=" " alt="" coords="49,109,231,165"/>
-<area shape="rect" href="pathing__manager_8hpp.html" title=" " alt="" coords="255,109,438,165"/>
-<area shape="rect" href="pathing__manager_8cpp.html" title=" " alt="" coords="233,221,461,262"/>
-<area shape="rect" href="with__functional__programming_8cpp.html" title=" " alt="" coords="485,213,680,269"/>
-<area shape="rect" href="utilities_8hpp.html" title=" " alt="" coords="565,109,747,165"/>
-<area shape="rect" href="pathing_8cpp.html" title=" " alt="" coords="705,221,887,262"/>
-<area shape="rect" href="utilities_8cpp.html" title=" " alt="" coords="823,117,1006,158"/>
-<area shape="rect" href="pathing__node_8cpp.html" title=" " alt="" coords="5,221,208,262"/>
+<area shape="rect" title=" " alt="" coords="445,5,628,61"/>
+<area shape="rect" href="collision__checking_8hpp.html" title=" " alt="" coords="57,109,240,165"/>
+<area shape="rect" href="pathing__manager_8hpp.html" title=" " alt="" coords="316,109,499,165"/>
+<area shape="rect" href="pathing__manager_8cpp.html" title=" " alt="" coords="5,221,233,262"/>
+<area shape="rect" href="with__functional__programming_8cpp.html" title=" " alt="" coords="485,213,679,269"/>
+<area shape="rect" href="utilities_8hpp.html" title=" " alt="" coords="575,109,757,165"/>
+<area shape="rect" href="pathing_8cpp.html" title=" " alt="" coords="704,221,887,262"/>
+<area shape="rect" href="utilities_8cpp.html" title=" " alt="" coords="911,221,1093,262"/>
+<area shape="rect" href="pathing__node_8cpp.html" title=" " alt="" coords="258,221,461,262"/>
 </map>
 </div>
 </div>
@@ -143,10 +145,10 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a5ecef5e5eacb2307220391d1a3c8dab2"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2">pathing::generate_path::error</a> { <a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2aa0f7eea8dabb7867f1fd7335fef1a9ed">pathing::generate_path::EMPTY_OCCUPANCY_MAP</a>
+<tr class="memitem:a5ecef5e5eacb2307220391d1a3c8dab2"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2">pathing::generate_path::error</a> { <a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2aa0f7eea8dabb7867f1fd7335fef1a9ed">pathing::generate_path::EMPTY_OCCUPANCY_MAP</a> = example_srvs::msg::GetPathCodes::EMPTY_OCCUPANCY_MAP
 , <a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2ae5d1db6ad83302e35344b04d4ade2cf7">pathing::generate_path::INVALID_START_SIZE</a>
 , <a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2a6716dd09f577258bd26395efaf7a2bf0">pathing::generate_path::INVALID_GOAL_SIZE</a>
-, <a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2adbd8a5cf2e4d4b9eb6e12e48f8d4e36d">pathing::generate_path::NO_VALID_PATH</a>
+, <a class="el" href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2adbd8a5cf2e4d4b9eb6e12e48f8d4e36d">pathing::generate_path::NO_VALID_PATH</a> = example_srvs::msg::GetPathCodes::NO_VALID_PATH
  }</td></tr>
 <tr class="memdesc:a5ecef5e5eacb2307220391d1a3c8dab2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of errors expected in the generate path callback function.  <a href="namespacepathing_1_1generate__path.html#a5ecef5e5eacb2307220391d1a3c8dab2">More...</a><br /></td></tr>
 <tr class="separator:a5ecef5e5eacb2307220391d1a3c8dab2"><td class="memSeparator" colspan="2">&#160;</td></tr>

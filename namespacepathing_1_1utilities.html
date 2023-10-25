@@ -67,24 +67,73 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">pathing::utilities Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:aac5e434fb2d0295007e90598827b7d42"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42">parsing_set_map_error</a> { <a class="el" href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42ad59dd2f22bf0f89ad3cb6cf9f5ad01a4">EMPTY_REQUEST</a> = 1
+, <a class="el" href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42abe2e112e6ba5590209462a916d8ebb3c">DIMENSION_AND_STRIDE_MISMATCH</a> = 2
+, <a class="el" href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42a5dc6aee42632b89e4b229f9e32afeb9b">LENGTH_AND_STRIDE_MISMATCH</a> = 3
+ }</td></tr>
+<tr class="memdesc:aac5e434fb2d0295007e90598827b7d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of errors expected in parsing the set map request.  <a href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42">More...</a><br /></td></tr>
+<tr class="separator:aac5e434fb2d0295007e90598827b7d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afd105d787f6685bba9390425221c15aa"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classpathing_1_1Map.html">Map</a>&lt; unsigned char &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#afd105d787f6685bba9390425221c15aa">parseSetMapRequest</a> (std::shared_ptr&lt; example_srvs::srv::SetMap::Request &gt; const request)</td></tr>
-<tr class="memdesc:afd105d787f6685bba9390425221c15aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts map from message to occupancy map if possible.  <a href="namespacepathing_1_1utilities.html#afd105d787f6685bba9390425221c15aa">More...</a><br /></td></tr>
-<tr class="separator:afd105d787f6685bba9390425221c15aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9be4e914b42735ca65629d2993e5b866"><td class="memItemLeft" align="right" valign="top">tl::expected&lt; <a class="el" href="classpathing_1_1Map.html">Map</a>&lt; unsigned char &gt;, <a class="el" href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42">parsing_set_map_error</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#a9be4e914b42735ca65629d2993e5b866">parseSetMapRequest</a> (std::shared_ptr&lt; example_srvs::srv::SetMap::Request &gt; const request)</td></tr>
+<tr class="memdesc:a9be4e914b42735ca65629d2993e5b866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts map from message to occupancy map if possible.  <a href="namespacepathing_1_1utilities.html#a9be4e914b42735ca65629d2993e5b866">More...</a><br /></td></tr>
+<tr class="separator:a9be4e914b42735ca65629d2993e5b866"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add45b1db5874120e324913322b981dfe"><td class="memItemLeft" align="right" valign="top">std_msgs::msg::UInt8MultiArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe">createUInt8MultiArrayMessageFromPath</a> (<a class="el" href="namespacepathing.html#a7d0803c57700af5860c06cde68bdab03">Path</a> const &amp;path)</td></tr>
 <tr class="memdesc:add45b1db5874120e324913322b981dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a UInt8MultiArray message from a path.  <a href="namespacepathing_1_1utilities.html#add45b1db5874120e324913322b981dfe">More...</a><br /></td></tr>
 <tr class="separator:add45b1db5874120e324913322b981dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a658d511069ef5dcdfbade9bf1c4681bd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structpathing_1_1Position.html">Position</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#a658d511069ef5dcdfbade9bf1c4681bd">parseGeneratedPath</a> (const std_msgs::msg::UInt8MultiArray &amp;msg)</td></tr>
 <tr class="memdesc:a658d511069ef5dcdfbade9bf1c4681bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a path from ROS message to a vector of positions.  <a href="namespacepathing_1_1utilities.html#a658d511069ef5dcdfbade9bf1c4681bd">More...</a><br /></td></tr>
 <tr class="separator:a658d511069ef5dcdfbade9bf1c4681bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a6e0c8f3d8dc70c2eaa7f3de1e884a1f5"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42">parsing_set_map_error</a>, std::string &gt; const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepathing_1_1utilities.html#a6e0c8f3d8dc70c2eaa7f3de1e884a1f5">parsing_set_map_error_description</a></td></tr>
+<tr class="memdesc:a6e0c8f3d8dc70c2eaa7f3de1e884a1f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Descriptions of the errors.  <a href="namespacepathing_1_1utilities.html#a6e0c8f3d8dc70c2eaa7f3de1e884a1f5">More...</a><br /></td></tr>
+<tr class="separator:a6e0c8f3d8dc70c2eaa7f3de1e884a1f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="aac5e434fb2d0295007e90598827b7d42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac5e434fb2d0295007e90598827b7d42">&#9670;&nbsp;</a></span>parsing_set_map_error</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42">pathing::utilities::parsing_set_map_error</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Types of errors expected in parsing the set map request. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aac5e434fb2d0295007e90598827b7d42ad59dd2f22bf0f89ad3cb6cf9f5ad01a4"></a>EMPTY_REQUEST&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aac5e434fb2d0295007e90598827b7d42abe2e112e6ba5590209462a916d8ebb3c"></a>DIMENSION_AND_STRIDE_MISMATCH&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aac5e434fb2d0295007e90598827b7d42a5dc6aee42632b89e4b229f9e32afeb9b"></a>LENGTH_AND_STRIDE_MISMATCH&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="utilities_8hpp_source.html#l00015">15</a> of file <a class="el" href="utilities_8hpp_source.html">utilities.hpp</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="add45b1db5874120e324913322b981dfe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#add45b1db5874120e324913322b981dfe">&#9670;&nbsp;</a></span>createUInt8MultiArrayMessageFromPath()</h2>
@@ -111,7 +160,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The UInt8MultiArray message </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cpp_source.html#l00037">37</a> of file <a class="el" href="utilities_8cpp_source.html">utilities.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cpp_source.html#l00040">40</a> of file <a class="el" href="utilities_8cpp_source.html">utilities.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -152,7 +201,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The path as a vector of positions </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cpp_source.html#l00068">68</a> of file <a class="el" href="utilities_8cpp_source.html">utilities.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cpp_source.html#l00071">71</a> of file <a class="el" href="utilities_8cpp_source.html">utilities.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -165,14 +214,14 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="afd105d787f6685bba9390425221c15aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd105d787f6685bba9390425221c15aa">&#9670;&nbsp;</a></span>parseSetMapRequest()</h2>
+<a id="a9be4e914b42735ca65629d2993e5b866"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9be4e914b42735ca65629d2993e5b866">&#9670;&nbsp;</a></span>parseSetMapRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::optional&lt; <a class="el" href="classpathing_1_1Map.html">Map</a>&lt; unsigned char &gt; &gt; pathing::utilities::parseSetMapRequest </td>
+          <td class="memname">tl::expected&lt; <a class="el" href="classpathing_1_1Map.html">Map</a>&lt; unsigned char &gt;, <a class="el" href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42">parsing_set_map_error</a> &gt; pathing::utilities::parseSetMapRequest </td>
           <td>(</td>
           <td class="paramtype">std::shared_ptr&lt; example_srvs::srv::SetMap::Request &gt; const&#160;</td>
           <td class="paramname"><em>request</em></td><td>)</td>
@@ -190,12 +239,12 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::optional containing the occupancy map </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utilities_8cpp_source.html#l00010">10</a> of file <a class="el" href="utilities_8cpp_source.html">utilities.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utilities_8cpp_source.html#l00013">13</a> of file <a class="el" href="utilities_8cpp_source.html">utilities.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacepathing_1_1utilities_afd105d787f6685bba9390425221c15aa_cgraph.png" border="0" usemap="#anamespacepathing_1_1utilities_afd105d787f6685bba9390425221c15aa_cgraph" alt=""/></div>
-<map name="anamespacepathing_1_1utilities_afd105d787f6685bba9390425221c15aa_cgraph" id="anamespacepathing_1_1utilities_afd105d787f6685bba9390425221c15aa_cgraph">
+<div class="center"><img src="namespacepathing_1_1utilities_a9be4e914b42735ca65629d2993e5b866_cgraph.png" border="0" usemap="#anamespacepathing_1_1utilities_a9be4e914b42735ca65629d2993e5b866_cgraph" alt=""/></div>
+<map name="anamespacepathing_1_1utilities_a9be4e914b42735ca65629d2993e5b866_cgraph" id="anamespacepathing_1_1utilities_a9be4e914b42735ca65629d2993e5b866_cgraph">
 <area shape="rect" title="Converts map from message to occupancy map if possible." alt="" coords="5,23,173,65"/>
 <area shape="rect" href="classMap.html#a9ddfce89a5714e0ba94e0210d749c1f4" title=" " alt="" coords="237,5,320,32"/>
 <area shape="rect" href="classMap.html#a2d26c288c1336257492cf45c954fbdc6" title=" " alt="" coords="221,56,336,83"/>
@@ -204,13 +253,38 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacepathing_1_1utilities_afd105d787f6685bba9390425221c15aa_icgraph.png" border="0" usemap="#anamespacepathing_1_1utilities_afd105d787f6685bba9390425221c15aa_icgraph" alt=""/></div>
-<map name="anamespacepathing_1_1utilities_afd105d787f6685bba9390425221c15aa_icgraph" id="anamespacepathing_1_1utilities_afd105d787f6685bba9390425221c15aa_icgraph">
+<div class="center"><img src="namespacepathing_1_1utilities_a9be4e914b42735ca65629d2993e5b866_icgraph.png" border="0" usemap="#anamespacepathing_1_1utilities_a9be4e914b42735ca65629d2993e5b866_icgraph" alt=""/></div>
+<map name="anamespacepathing_1_1utilities_a9be4e914b42735ca65629d2993e5b866_icgraph" id="anamespacepathing_1_1utilities_a9be4e914b42735ca65629d2993e5b866_icgraph">
 <area shape="rect" title="Converts map from message to occupancy map if possible." alt="" coords="255,23,423,65"/>
 <area shape="rect" href="structpathing_1_1Manager.html#a8ee90f04d65ae81897642593a3090f0c" title="Manages occupancy_map and path generation for the pathing node." alt="" coords="5,5,207,32"/>
 <area shape="rect" href="with__functional__programming_8cpp.html#aa41e6adcaa45b1e2730b871a8830b72c" title=" " alt="" coords="79,56,133,83"/>
 </map>
 </div>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a6e0c8f3d8dc70c2eaa7f3de1e884a1f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e0c8f3d8dc70c2eaa7f3de1e884a1f5">&#9670;&nbsp;</a></span>parsing_set_map_error_description</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;<a class="el" href="namespacepathing_1_1utilities.html#aac5e434fb2d0295007e90598827b7d42">parsing_set_map_error</a>, std::string&gt; const pathing::utilities::parsing_set_map_error_description</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">        {parsing_set_map_error::EMPTY_REQUEST, <span class="stringliteral">&quot;REQUEST DATA FIELD IS EMPTY!!&quot;</span>},</div>
+<div class="line">        {parsing_set_map_error::DIMENSION_AND_STRIDE_MISMATCH,</div>
+<div class="line">         <span class="stringliteral">&quot;OCCUPANCY MAP DIMENSIONS AND STRIDE INCONSISTENT!!&quot;</span>},</div>
+<div class="line">        {parsing_set_map_error::LENGTH_AND_STRIDE_MISMATCH,</div>
+<div class="line">         <span class="stringliteral">&quot;OCCUPANCY MAP LENGTH AND STRIDE INCONSISTENT!!&quot;</span>}}</div>
+</div><!-- fragment -->
+<p>Descriptions of the errors. </p>
+
+<p class="definition">Definition at line <a class="el" href="utilities_8hpp_source.html#l00024">24</a> of file <a class="el" href="utilities_8hpp_source.html">utilities.hpp</a>.</p>
 
 </div>
 </div>

@@ -1,5 +1,5 @@
-<map id="make_costmap" name="make_costmap">
-<area shape="rect" id="node1" title="Create a sample cost map in a request message." alt="" coords="221,42,343,69"/>
+<map id="make_occupancy_map" name="make_occupancy_map">
+<area shape="rect" id="node1" title="Create a sample cost map in a request message." alt="" coords="221,42,392,69"/>
 <area shape="rect" id="node2" href="$structPathGeneratorFixture.html#a877fa8a4c8764c239e44070eebbb62fc" title="Construct a fixture which will set the map and capture the path callback." alt="" coords="5,5,173,47"/>
 <area shape="rect" id="node3" href="$with__dependency__injection_8cpp.html#a07ced520814e7cc067a3cace9214dda6" title=" " alt="" coords="62,71,117,98"/>
 </map>
