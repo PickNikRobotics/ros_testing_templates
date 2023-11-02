@@ -200,8 +200,8 @@ nvidia-docker</h2>
 </ul>
 <h1><a class="anchor" id="autotoc_md20"></a>
 Alias</h1>
-<p>While developing a tool on top of another tool can come with challenges, some may prefer to at least have some simple aliases to reduce the typing boilerplate. </p><div class="fragment"><div class="line">alias builddev=&quot;export UIDGID=$(id -u):$(id -g); docker compose -f compose.dev.yml build&quot;</div>
-<div class="line">alias rundev=&quot;export UIDGID=$(id -u):$(id -g); docker compose -f compose.dev.yml run development&quot;</div>
+<p>While developing a tool on top of another tool can come with challenges, some may prefer to at least have some simple aliases to reduce the typing boilerplate. </p><div class="fragment"><div class="line">alias builddev=&quot;export UID=$(id -u) export GID=$(id -g); docker compose -f compose.dev.yml build&quot;</div>
+<div class="line">alias rundev=&quot;export UID=$(id -u) export GID=$(id -g); docker compose -f compose.dev.yml run development&quot;</div>
 </div><!-- fragment --><p>As an aside, a handy way to find a previous command is </p><div class="fragment"><div class="line">history | grep keyword</div>
 </div><!-- fragment --><p> to rerun the command using the offset number given from <code>history</code> </p><div class="fragment"><div class="line">!offsetnumber</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md21"></a>
