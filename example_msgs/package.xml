@@ -8,7 +8,7 @@
     <author>Griswald Brooks</author>
     <maintainer email="griswald.brooks@picknik.ai">Griswald Brooks</maintainer>
 
-    <license>Prorietary</license>
+    <license>MIT</license>
 
     <url type="bugtracker">https://github.com/PickNikRobotics/ros_testing_templates/issues</url>
     <url type="repository">https://github.com/PickNikRobotics/ros_testing_templates</url>
